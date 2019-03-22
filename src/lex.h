@@ -2,6 +2,7 @@
 
 #include <map>
 #include <string>
+#include <vector>
 
 enum TokenType
 {
@@ -40,5 +41,5 @@ class Lexer
   private:
     std::map<TokenType, std::string> rules; // 规则
   public:
-    j' parser(std::string raw); // 解析
+    std::vector<TokenType> parser(std::string raw); // 解析
 };
