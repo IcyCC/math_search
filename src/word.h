@@ -8,6 +8,7 @@
 class ExpNode
 {
   std::string value;
+  Token &token;
   ExpNode &left_node;
   ExpNode &right_node;
   ExpNode &parent_node;
