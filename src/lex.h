@@ -4,6 +4,12 @@
 #include <string>
 #include <vector>
 
+enum TokenMeta
+{
+    VAR,
+    OP,
+};
+
 enum TokenType
 {
     ADD,
