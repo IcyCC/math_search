@@ -39,6 +39,7 @@ class Token
 {
   public:
     TokenType type;    //类型
+    TokenMeta meta;    //元类型
     std::string value; //值
 };
 
@@ -47,5 +48,5 @@ class Lexer
   private:
     std::map<TokenType, std::string> rules; // 规则
   public:
-    std::vector<TokenType> parser(std::string raw); // 解析
+    std::vector<Token> parser(std::string raw); // 解析
 };

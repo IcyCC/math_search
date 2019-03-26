@@ -5,12 +5,23 @@
 #include <vector>
 #include "lex.h"
 
+enum TreeNodeType
+{
+  ROOT,
+  NORMAL,
+  EMPTY,
+};
+
 class ExpNode
 {
+public:
+  int id;
   std::string value;
-  ExpNode &left_node;
-  ExpNode &right_node;
-  ExpNode &parent_node;
+  Token *token;
+  ExpNode *left_node;
+  ExpNode *right_node;
+  ExpNode *parent_node;
+  TreeNodeType type;
 };
 
 class WordStack
