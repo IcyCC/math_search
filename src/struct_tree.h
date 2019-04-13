@@ -75,9 +75,10 @@ inline void InitRightTreeAndLeftTree()
 	sz_right[shead_right]->left_node = NULL;
 }
 
-inline ExpNode *GetTree(Token a[], int len) //这只能识别如 a+b = c 或者 a+b 只有一个符号作为连接左右两个式子的公式变为树 ，如果有多个 连接符，比如 a>b>c这样是无法识别的
+inline ExpNode *GetTree(vector<Token> a) //这只能识别如 a+b = c 或者 a+b 只有一个符号作为连接左右两个式子的公式变为树 ，如果有多个 连接符，比如 a>b>c这样是无法识别的
 {
 
+	int len = a.size();
 	int flag = 0;				//表示一开始为 ‘=’ 的左子树
 	InitRightTreeAndLeftTree(); //初始化第0个栈，防止溢出
 
@@ -197,7 +198,8 @@ inline ExpNode *GetTree(Token a[], int len) //这只能识别如 a+b = c 或者 
 	{
 		mathRight(fz_right[fhead_right]);
 	}
-	if (flag == 0)
+	
+	if (flag == 0)   //若没有左子树的时候直接将根节点拼上去
 	{
 		root->left_node = sz_left[shead_left];
 	}
