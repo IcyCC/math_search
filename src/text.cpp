@@ -18,7 +18,5 @@ std::vector<TextBlock> ParseFromLatex(std::string filepath)
     infile.open(filepath);
     std::string raw;
     infile >> raw;
-
-    std::regex pattern_exercise("\\begin\{exercise\}([\s\S]*?)\\end\{exercise\}", std::regex::icase);
-    std::regex pattern_exercise("\\begin\{Nature\}([\s\S]*?)\\end\{exercise\}", std::regex::icase);
+    return std::vector<TextBlock>();
 }

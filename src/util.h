@@ -1,9 +1,10 @@
-#pragma once
+#ifndef UTIL_H
+#define UTIL_H
 #include <fstream>
 #include <iostream>
 #include <sstream>
 
-int WriteString2FileAppend(const std::string &file_string, const std::string str)
+inline int WriteString2FileAppend(const std::string &file_string, const std::string str)
 {
     std::ofstream OsWrite(file_string, std::ofstream::app);
     OsWrite << str;
@@ -12,7 +13,7 @@ int WriteString2FileAppend(const std::string &file_string, const std::string str
     return 0;
 }
 
-int WriteString2File(const std::string &file_string, const std::string str)
+inline int WriteString2File(const std::string &file_string, const std::string str)
 {
     std::ofstream OsWrite(file_string, std::ofstream::app);
     OsWrite << str;
@@ -21,7 +22,7 @@ int WriteString2File(const std::string &file_string, const std::string str)
     return 0;
 }
 
-std::string Int2String(int a)
+inline std::string Int2String(int a)
 {
     std::string res;
     std::stringstream ss;
@@ -29,3 +30,5 @@ std::string Int2String(int a)
     ss >> res;
     return res;
 }
+
+#endif

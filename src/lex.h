@@ -7,7 +7,7 @@
 enum TokenMeta
 {
   VAR,
-  OP,
+  OP
 };
 
 enum TokenType
@@ -32,7 +32,7 @@ enum TokenType
 
   FUNC,
 
-  VAR,
+  VVAR,
 };
 
 class Token
@@ -41,6 +41,13 @@ public:
   TokenType type;    //类型
   TokenMeta meta;    //元类型
   std::string value; //值
+
+  Token(TokenType _type, TokenMeta _meta, std::string _value)
+  {
+    type = _type;
+    meta = _meta;
+    value = _value;
+  };
 };
 
 class Lexer
@@ -48,5 +55,5 @@ class Lexer
 private:
   std::map<TokenType, std::string> rules; // 规则
 public:
-  std::vector<Token> parser(std::string raw); // 解析
+  std::vector<Token> parser(std::string raw){}; // 解析
 };
