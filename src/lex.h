@@ -6,13 +6,13 @@
 
 enum TokenMeta
 {
-  VAR,
+  VAR=0,
   OP
 };
 
 enum TokenType
 {
-  ADD,
+  ADD=0,
   SUB,
   MUL,
   DIV,
@@ -30,9 +30,11 @@ enum TokenType
   LBRACKET,
   RBRACKET,
 
-  FUNC,
-
-  VVAR,
+  ABS,
+	INV,
+	
+	
+	VAR
 };
 
 class Token
