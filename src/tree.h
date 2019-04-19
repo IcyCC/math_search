@@ -100,7 +100,7 @@ inline std::string OuputTree(ExpNode *node)
 {
     if (node == NULL)
     {
-        return "";
+        return "##";
     }
     std::string res;
     res = res + OuputTree(node->left_node);
