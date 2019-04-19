@@ -29,11 +29,13 @@ inline void mathRight(string f) // 从数字栈中取出栈顶的两个数字 �
 	Right->value = sz_right[shead_right + 1]->value;
 	Right->left_node = sz_right[shead_right + 1]->left_node;
 	Right->right_node = sz_right[shead_right + 1]->right_node;
-
+	
 	sz_right[shead_right]->left_node = Left;
 	sz_right[shead_right]->right_node = Right;
 	sz_right[shead_right]->value = f;
-
+	Right-> parent_node = sz_right[shead_right];
+	Left->  parent_node = sz_right[shead_right];
+	
 	--fhead_right;
 	sz_right[shead_right + 1]->value = "";
 	sz_right[shead_right + 1]->left_node = NULL;
@@ -58,6 +60,8 @@ inline void mathLeft(string f) // 从数字栈中取出栈顶的两个数字 进
 	sz_left[shead_left]->left_node = Left;
 	sz_left[shead_left]->right_node = Right;
 	sz_left[shead_left]->value = f;
+	Right-> parent_node = sz_right[shead_left];
+	Left->  parent_node = sz_right[shead_left];
 
 	--fhead_left;
 	sz_left[shead_left + 1]->value = "";
@@ -148,7 +152,8 @@ inline ExpNode *GetTree(vector<Token> a) //这只能识别如 a+b = c 或者 a+b
 			}
 
 			root->left_node = sz_left[shead_left];
-
+			sz_left[shead_left]->parent_node = root;
+			
 			root->value = a[i].value;
 
 			flag = 1;
@@ -202,10 +207,12 @@ inline ExpNode *GetTree(vector<Token> a) //这只能识别如 a+b = c 或者 a+b
 	if (flag == 0)   //若没有左子树的时候直接将根节点拼上去
 	{
 		root->left_node = sz_left[shead_left];
+		sz_left[shead_left]->parent_node = root;
 	}
 	else
 	{
 		root->right_node = sz_right[shead_right];
+		sz_left[shead_right]->parent_node = root;
 	}
 
 	// 当栈中仅有一个数字的时候 运算式的答案就是它啦
