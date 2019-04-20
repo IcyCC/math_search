@@ -16,11 +16,12 @@ int main()
     tokens.push_back(Token(TokenType::ADD, TokenMeta::OP, "+"));
     tokens.push_back(Token(TokenType::VVAR, TokenMeta::VAR, "0"));
 
+
     std::cout<<"TOKENS: "<<std::endl;
     for (auto it = tokens.begin(); it != tokens.end();it++){
         std::cout<< "token: "<< it->value<<std::endl;
     }
     auto node = GetTree(tokens);
-
+    // StdTree(node);
     std::cout << OuputTree(node) <<std::endl;
 }
