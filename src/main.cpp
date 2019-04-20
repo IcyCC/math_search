@@ -26,13 +26,15 @@ int main()
     // // StdTree(node);
     // std::cout << OuputTree(node) <<std::endl;
     
-    auto blocks1 = ParseFromLatex("/Users/suchang/Code/homework/math_search/LaTexDoc/book31-35.tex");
-    for (auto b : blocks1){
-        std::cout<<b.Dumps()<<std::endl; 
-    }
+    // auto blocks1 = ParseFromLatex("/Users/suchang/Code/homework/math_search/LaTexDoc/book31-35.tex");
+    // for (auto b : blocks1){
+    //     std::cout<<b.Dumps()<<std::endl; 
+    // }
 
-    auto blocks2 = ParseFromLatex("/Users/suchang/Code/homework/math_search/LaTexDoc/book86-90.tex");
-    for (auto b : blocks2){
-        std::cout<<b.Dumps()<<std::endl; 
-    }
+    // auto blocks2 = ParseFromLatex("/Users/suchang/Code/homework/math_search/LaTexDoc/book86-90.tex");
+    // for (auto b : blocks2){
+    //     std::cout<<b.Dumps()<<std::endl; 
+    // }
+
+    WriteString2File("./test.d", "hellow");
 }
