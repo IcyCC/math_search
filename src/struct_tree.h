@@ -78,7 +78,7 @@ inline void InitRightTreeAndLeftTree()
 inline ExpNode *GetTree(vector<Token> a) //这只能识别如 a+b = c 或者 a+b 只有一个符号作为连接左右两个式子的公式变为树 ，如果有多个 连接符，比如 a>b>c这样是无法识别的
 {
 
-	int len = a.size();
+	int len = a.size() + 1;
 	int flag = 0;				//表示一开始为 ‘=’ 的左子树
 	InitRightTreeAndLeftTree(); //初始化第0个栈，防止溢出
 
