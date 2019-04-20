@@ -102,6 +102,8 @@ inline void StdTree(ExpNode *node)
     StdTree(node->right_node);
 }
 
+
+
 inline std::string OuputTree(ExpNode *node)
 {
     if (node == NULL)
