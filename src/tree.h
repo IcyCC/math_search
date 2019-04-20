@@ -11,7 +11,7 @@ enum TreeType
 };
 
 inline bool CompareExpNode(ExpNode *a, ExpNode *b)
-{
+{   
     if (a == NULL)
     {
         return false;
@@ -44,9 +44,12 @@ inline TreeType GetNodeRelation(ExpNode *r, ExpNode *a)
 }
 
 inline bool SwapTreeNode(ExpNode *a, ExpNode *b)
-{
+{   
     TreeType a_type = GetNodeRelation(a->parent_node, a);
     TreeType b_type = GetNodeRelation(b->parent_node, b);
+    if (a->parent_node->value == "/" || a->parent_node->value == "÷"){
+        return true;
+    }
     if (a_type == TreeType::LEFT_NODE && b_type == TreeType::LEFT_NODE)
     {
         a->parent_node->left_node = b;
@@ -87,6 +90,9 @@ inline bool SwapTreeNode(ExpNode *a, ExpNode *b)
 
 inline void StdTree(ExpNode *node)
 {
+    if(node == NULL){
+        return;
+    }
     // 按大于标准化树
     if (!CompareExpNode(node->left_node, node->right_node))
     {
@@ -100,11 +106,17 @@ inline std::string OuputTree(ExpNode *node)
 {
     if (node == NULL)
     {
-        return "##";
+        return "";
     }
     std::string res;
+    if (node->left_node != NULL || node->right_node != NULL){
+        res = "(";
+    }
     res = res + OuputTree(node->left_node);
     res = res + node->value;
     res = res + OuputTree(node->right_node);
+    if (node->left_node != NULL || node->right_node != NULL){
+        res = res + ")";
+    }
     return res;
 }
