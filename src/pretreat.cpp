@@ -1,10 +1,17 @@
 #include "lex.h"
+
+#include <string>
+#include <iostream>
+#include <cstring>
+
 #define NUM_DROP 6
 #define NUM_NORMAL 23
 #define NUM_SPECI 2
 #define SIZE 10
 
-string drop[NUM_DROP] = {"$$", "$", "\!", "\,", "\quad", " "};
+using namespace std;
+
+string drop[NUM_DROP] = {"$$", "$", "\\!", "\\,", "\\quad", " "};
 
 /*
 \neq,\ne=>neq
@@ -14,8 +21,8 @@ string drop[NUM_DROP] = {"$$", "$", "\!", "\,", "\quad", " "};
 \vert=>|
 \approx=>appr
 */ 
-string normal[NUM_NORMAL]={"-", "+", "<", ">", "=", "\neq", "\leq", "\le", "\geq", "\ge", "\times", "^", "\approx", "\div", "\frac", "\cdot", "\pi", "\vert", "|", "{", "}", "(", ")"};
-string speci[NUM_SPECI]={".", "\%"};
+string normal[NUM_NORMAL]={"-", "+", "<", ">", "=", "\neq", "\\leq", "\\le", "\\geq", "\\ge", "\\times", "^", "\\approx", "\\div", "\\frac", "\\cdot", "\\pi", "\\vert", "|", "{", "}", "(", ")"};
+string speci[NUM_SPECI]={".", "\\%"};
 /*
 some rules:
 val+frac => val
@@ -41,7 +48,7 @@ call HandleString(string s, vector<Token> &vec);
 */
 int main(){
 	vector<Token> vec;
- 	string test="$$ 1.2 + 50\% +a\cdotb +mn + \pi \div1 +5\frac{\frac{1}{2}}{11}  a\leqb$$ a^5 a(ab)c"; 
+ 	string test="$$ 1.2 + 50\\% +a\\cdotb +mn + \\pi \\div1 +5\frac{\\frac{1}{2}}{11}  a\\leqb$$ a^5 a(ab)c";
 //	string test="a(ab)c";
  	HandleString(test,vec);
 	for(int i=0;i<vec.size() ;i++){
@@ -54,7 +61,7 @@ int main(){
 //drop one-type useless
 void DropAllMark(string &s, const string &mark){
     size_t nSize = mark.size();
-    while(1){
+    while(true){
         size_t pos = s.find(mark);
         if(pos == string::npos) //dont't find
         {

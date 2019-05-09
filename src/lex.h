@@ -6,7 +6,7 @@
 
 enum TokenMeta
 {
-  VAR=0,
+  VAL = 0,
   OP
 };
 
@@ -40,6 +40,7 @@ enum TokenType
 class Token
 {
 public:
+  Token() = default;
   TokenType type;    //类型
   TokenMeta meta;    //元类型
   std::string value; //值
