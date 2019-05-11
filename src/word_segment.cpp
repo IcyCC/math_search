@@ -97,13 +97,10 @@ void WordSegment::SetWordCount(std::map<std::u32string, std::size_t> &&word_coun
 }
 
 std::vector<WordSegment::WordInfo>
-WordSegment::DoSegment() const
+WordSegment::DoSegment(const std::u32string& content, bool is_article) const
 {
     std::vector<WordSegment::WordInfo> result;
     size_t begin = 0, i;
-    assert(!IsDividedChar((*content_)[0]));
-
-    const auto& content = *content_;
 
     for (i = 1; i < content_->size(); )
     {
@@ -117,7 +114,7 @@ WordSegment::DoSegment() const
             ++i;
             std::u32string formula(content, start, i-start);
             auto all_formulas = GetAllStdFormulaWithSub(utf::to_utf8(formula));
-            if (is_article_)
+            if (is_article)
             {
                 for (const auto& f: all_formulas)
                 {
