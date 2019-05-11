@@ -1,37 +1,39 @@
-#pragma once
-
+#include <iostream>
 #include <map>
 #include <string>
 #include <vector>
+#include <string.h>
+using namespace std;
+using std::string;
 
 enum TokenMeta
 {
-  VAL = 0,
-  OP
+    VAL=0,
+    OP,
 };
 
 enum TokenType
 {
-  ADD=0,
-  SUB,
-  MUL,
-  DIV,
-  MOD,
+    ADD=0,
+    SUB,
+    MUL,
+    DIV,
 
-  LT,
-  GT,
-  EQ,
-  LTE,
-  GTE,
-  NEQ,
+    LT,
+    GT,
+    EQ,
+    LTE,
+    GTE,
+    NEQ,
+    APPROX,
 
-  LPAREN,
-  RPAREN,
-  LBRACKET,
-  RBRACKET,
+    LPAREN,// (
+    RPAREN,
+    LBRACKET,// {
+    RBRACKET,
 
-  ABS,
-	INV,
+	ABS,// |
+	INV,// ^
 	
 	
 	VAR
@@ -39,24 +41,16 @@ enum TokenType
 
 class Token
 {
-public:
-  Token() = default;
-  TokenType type;    //Á±ªÂûã
-  TokenMeta meta;    //ÂÖÉÁ±ªÂûã
-  std::string value; //ÂÄº
-
-  Token(TokenType _type, TokenMeta _meta, std::string _value)
-  {
-    type = _type;
-    meta = _meta;
-    value = _value;
-  };
+  public:
+    TokenType type;    //¿‡–Õ
+    TokenMeta meta;    //‘™¿‡–Õ
+    std::string value; //÷µ
 };
 
 class Lexer
 {
-private:
-  std::map<TokenType, std::string> rules; // ËßÑÂàô
-public:
-  std::vector<Token> parser(std::string raw){}; // Ëß£Êûê
+  private:
+    	std::map<TokenType, std::string> rules; // πÊ‘Ú
+  public:
+    	std::vector<Token> parser(std::string raw); // Ω‚Œˆ
 };
