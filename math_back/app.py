@@ -4,7 +4,7 @@ so = ctypes.CDLL('./sum.so')
 
 app = Flask(__name__)
 
-@app.route("/search", methods=[POST])
+@app.route("/search", methods=["POST"])
 def r_search():
     pass
 
