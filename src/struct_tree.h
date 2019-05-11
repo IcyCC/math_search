@@ -33,6 +33,8 @@ inline void mathRight(string f) // 从数字栈中取出栈顶的两个数字 �
 	sz_right[shead_right]->left_node = Left;
 	sz_right[shead_right]->right_node = Right;
 	sz_right[shead_right]->value = f;
+	Right-> parent_node = sz_right[shead_right];
+	Left->  parent_node = sz_right[shead_right];
 
 	--fhead_right;
 	sz_right[shead_right + 1]->value = "";
@@ -58,7 +60,9 @@ inline void mathLeft(string f) // 从数字栈中取出栈顶的两个数字 进
 	sz_left[shead_left]->left_node = Left;
 	sz_left[shead_left]->right_node = Right;
 	sz_left[shead_left]->value = f;
-
+	Right-> parent_node = sz_right[shead_left];
+	Left->  parent_node = sz_right[shead_left];
+	
 	--fhead_left;
 	sz_left[shead_left + 1]->value = "";
 	sz_left[shead_left + 1]->left_node = NULL;
@@ -126,6 +130,7 @@ inline ExpNode *GetTree(vector<Token> a) //这只能识别如 a+b = c 或者 a+b
 				sz_left[shead_left] = new ExpNode();
 				sz_left[shead_left]->left_node = NULL;
 				sz_left[shead_left]->right_node = NULL;
+				sz_left[shead_left]->parent_node = NULL;
 				sz_left[shead_left]->value = a[i].value;
 			}
 			else
@@ -134,12 +139,13 @@ inline ExpNode *GetTree(vector<Token> a) //这只能识别如 a+b = c 或者 a+b
 				sz_right[shead_right] = new ExpNode();
 				sz_right[shead_right]->left_node = NULL;
 				sz_right[shead_right]->right_node = NULL;
+				sz_right[shead_right]->parent_node = NULL;
 				sz_right[shead_right]->value = a[i].value;
 			}
 
 			continue;
 		}
-		else if (a[i].value == "=" || a[i].value == "<" || a[i].value == ">" || a[i].value == "\neq" || a[i].value == "\approx")
+		else if (a[i].value == "=" || a[i].value == "<" || a[i].value == ">" || a[i].value == "neq" || a[i].value == "appr" || a[i].value == "le" || a[i].value == "ge")
 		{
 
 			while (fhead_left != 0)
@@ -156,7 +162,7 @@ inline ExpNode *GetTree(vector<Token> a) //这只能识别如 a+b = c 或者 a+b
 		else
 		{
 
-			if (a[i].value == "*" || a[i].value == "/")
+			if (a[i].value == "*" || a[i].value == "/" || a[i].value == "^")
 			{
 				// 如果读到 "/" 或 "*"  直接放在符号栈栈顶
 				if (flag == 0)
@@ -170,10 +176,10 @@ inline ExpNode *GetTree(vector<Token> a) //这只能识别如 a+b = c 或者 a+b
 
 				if (flag == 0)
 				{
-					while (fz_left[fhead_left] == "*" || fz_left[fhead_left] == "/" || fz_left[fhead_left] == a[i].value)
+					while (fz_left[fhead_left] == "*" || fz_left[fhead_left] == "/" || fz_left[fhead_left] == "^" || fz_left[fhead_left] == a[i].value)
 					{
 						// 如果读到 "+" 或 "-"
-						// 则将栈顶跟自己一样的符号和 "/"  "*" 全部弹出
+						// 则将栈顶跟自己一样的符号和 "/"  "*" "^"全部弹出
 						// 这个可以手动列几个式子体会一下 (^-^)
 						mathLeft(fz_left[fhead_left]);
 					}
@@ -181,7 +187,7 @@ inline ExpNode *GetTree(vector<Token> a) //这只能识别如 a+b = c 或者 a+b
 				}
 				else //右子树
 				{
-					while (fz_right[fhead_right] == "*" || fz_right[fhead_right] == "/" || fz_right[fhead_right] == a[i].value)
+					while (fz_right[fhead_right] == "*" || fz_right[fhead_right] == "/"|| fz_right[fhead_right] == "^" || fz_right[fhead_right] == a[i].value)
 					{
 						mathRight(fz_right[fhead_right]);
 					}
@@ -208,7 +214,7 @@ inline ExpNode *GetTree(vector<Token> a) //这只能识别如 a+b = c 或者 a+b
 		root->right_node = sz_right[shead_right];
 	}
 
-	// 当栈中仅有一个数字的时候 运算式的答案就是它啦
+	// 当栈中仅有一个value的时候 运算式的答案就是它啦
 
 	return root;
 }

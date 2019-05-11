@@ -6,13 +6,13 @@
 
 enum TokenMeta
 {
-  VAR,
+  VAL = 0,
   OP
 };
 
 enum TokenType
 {
-  ADD,
+  ADD=0,
   SUB,
   MUL,
   DIV,
@@ -30,14 +30,17 @@ enum TokenType
   LBRACKET,
   RBRACKET,
 
-  FUNC,
-
-  VVAR,
+  ABS,
+	INV,
+	
+	
+	VAR
 };
 
 class Token
 {
 public:
+  Token() = default;
   TokenType type;    //类型
   TokenMeta meta;    //元类型
   std::string value; //值
