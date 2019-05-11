@@ -3,7 +3,8 @@
 #define NUM_NORMAL 23
 #define NUM_SPECI 2
 #define SIZE 10
-
+#include <iostream>
+using namespace std;
 string drop[NUM_DROP] = {"$$", "$", "\!", "\,", "\quad", " "};
 
 /*

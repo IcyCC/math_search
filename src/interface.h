@@ -3,7 +3,7 @@
 #include"query_result.h"
 
 enum QueryType {
-
+	
 };
 
 // 获取公式以及其子公式
