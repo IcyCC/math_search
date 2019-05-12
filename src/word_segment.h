@@ -17,7 +17,7 @@ class WordSegment
 
     struct WordInfo
     {
-        WordInfo() = default;
+        WordInfo() : index(0) { }
 
         template<typename T>
         WordInfo(T&& w, std::size_t i)
@@ -30,23 +30,21 @@ class WordSegment
         // std::size_t count;
     };
 
-    WordSegment() : content_(new std::u32string) { }
-    WordSegment(const char* word_freq_file);
-    WordSegment(const std::shared_ptr<std::u32string>& content, std::u32string);
-    WordSegment(const std::shared_ptr<std::u32string>& content,
-                std::map<std::u32string,
-                std::u32string::size_type> &&word_count);
+    WordSegment() = default;
+    explicit WordSegment(const char* word_freq_file);
+    // WordSegment(const std::shared_ptr<std::u32string>& content, std::u32string, bool is_article = true);
+    explicit WordSegment(std::map<std::u32string, std::u32string::size_type> &&word_count);
     ~WordSegment() = default;
 
-    void LoadContent(const std::string& file_path);
+//    void LoadContent(const std::string& file_path);
     void LoadWordCount(const std::string& file_path);
-    void SetContent(const std::string& content);
-    void SetContent(std::string&& content);
-    void SetContent(const std::shared_ptr<std::u32string>& content);
-    void SetWordCount(std::map<std::u32string, std::u32string::size_type> &&word_count);
-    void SetWordCount(const std::map<std::u32string, std::u32string::size_type>& word_count);
+//    void SetContent(const std::string& content);
+//    void SetContent(std::string&& content);
+//    void SetContent(const std::shared_ptr<std::u32string>& content);
+//    void SetWordCount(std::map<std::u32string, std::u32string::size_type> &&word_count);
+//    void SetWordCount(const std::map<std::u32string, std::u32string::size_type>& word_count);
 
-    std::vector<WordInfo> DoSegment() const;
+    std::vector<WordInfo> DoSegment(const std::u32string& content, bool is_article) const;
 
   private:
 
@@ -63,10 +61,9 @@ class WordSegment
     };
 
     std::vector<WordInfo> DoSegmentImpl(std::u32string_view sentence, size_t article_pos) const;
-
     std::multimap<std::size_t, WordPos> GetAllWords(std::u32string_view sentence) const;
 
-    std::shared_ptr<std::u32string> content_;
+//    std::shared_ptr<std::u32string> content_;
     std::map<std::u32string, size_t> word_count_;
 };
 

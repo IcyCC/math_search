@@ -40,8 +40,8 @@ class WordQuery
     void LoadContent();
     std::list<std::shared_ptr<std::u32string>> get_list(const Word& word) const;
 
-    mutable WordSegment word_segment_;
     std::vector<std::shared_ptr<std::u32string>> contents_;
+//    WordSegment word_segment_;
     mutable std::map<std::shared_ptr<std::u32string>, std::size_t> content_index_;
     std::map<Word, std::map<std::shared_ptr<Article>, std::vector<std::size_t>>> word_search_;
 };
