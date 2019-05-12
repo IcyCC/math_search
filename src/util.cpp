@@ -46,6 +46,6 @@ std::vector<std::string> GetAllFilenames(const std::string& dirname)
         if (strcmp(dirent->d_name, ".") != 0 && strcmp(dirent->d_name, "..") != 0)
             res.emplace_back(dirname + "/" + dirent->d_name);
     }
-
+    ::closedir(dir);
     return res;
 }
