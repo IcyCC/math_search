@@ -27,6 +27,14 @@ int ExercisesStore::Save(std::string path)
     return 1;
 }
 
+int ExampleStore::Save(std::string path)
+{
+    for (auto d : data){
+        WriteString2FileAppend(path + "/example/" + d.title, d.Dumps());
+    }
+    return 1;
+}
+
 int TextStore::Save(std::string path)
 {
     for (auto d : data)
