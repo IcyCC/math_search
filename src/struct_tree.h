@@ -5,15 +5,15 @@
 #include "lex.h"
 using namespace std;
 
-string fz_left[100];   // 左符号栈
-ExpNode *sz_left[100]; // 左数字栈
-int fhead_left = 0;	// 左符号栈指针
-int shead_left = 0;	// 左数字栈指针
+inline string fz_left[100];   // 左符号栈
+inline ExpNode *sz_left[100]; // 左数字栈
+inline int fhead_left = 0;	// 左符号栈指针
+inline int shead_left = 0;	// 左数字栈指针
 
-string fz_right[100];   // 右符号栈
-ExpNode *sz_right[100]; // 右数字栈
-int fhead_right = 0;	// 右符号栈指针
-int shead_right = 0;	// 右数字栈指针
+inline string fz_right[100];   // 右符号栈
+inline ExpNode *sz_right[100]; // 右数字栈
+inline int fhead_right = 0;	// 右符号栈指针
+inline int shead_right = 0;	// 右数字栈指针
 
 inline void mathRight(string f) // 从数字栈中取出栈顶的两个数字 进行 f 运算 结果继续放到一颗的树中，树的根节点基本保持在 sz[0]中
 {
