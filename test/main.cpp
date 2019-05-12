@@ -7,6 +7,6 @@
 #include "text.h"
 int main()
 {
-    auto r = ParseFromLatex("/Users/suchang/Code/homework/math_search/LaTexDoc/book56-60.tex");
+    auto r = ParseFromLatexCRE("/Users/suchang/Code/homework/math_search/LaTexDoc/book56-60.tex");
     return  0;
 }
