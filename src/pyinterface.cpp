@@ -12,5 +12,8 @@ namespace py = pybind11;
 PYBIND11_MODULE(pyinterface, m) {
 m.doc() = "pybind11 example plugin"; // optional module docstring
 
-m.def("GetAllStdFormulaWithSub", &GetAllStdFormulaWithSub, "get all");
+m.def("SegmentWords", &SegmentWords, "");
+m.def("QueryComm", &QueryComm, "");
+m.enum_<QueryType>("QueryType")
+.value("CONCEPT", )
 }
