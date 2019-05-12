@@ -1,17 +1,12 @@
 #include "lex.h"
 
-#include <string>
-#include <iostream>
-#include <cstring>
-
 #define NUM_DROP 6
 #define NUM_NORMAL 23
 #define NUM_SPECI 2
 #define SIZE 10
 
-using namespace std;
 
-string drop[NUM_DROP] = {"$$", "$", "\\!", "\\,", "\\quad", " "};
+string drop[NUM_DROP] = {"$$", "$", "\!", "\,", "\quad", " "};
 
 /*
 \neq,\ne=>neq
@@ -21,8 +16,8 @@ string drop[NUM_DROP] = {"$$", "$", "\\!", "\\,", "\\quad", " "};
 \vert=>|
 \approx=>appr
 */ 
-string normal[NUM_NORMAL]={"-", "+", "<", ">", "=", "\neq", "\\leq", "\\le", "\\geq", "\\ge", "\\times", "^", "\\approx", "\\div", "\\frac", "\\cdot", "\\pi", "\\vert", "|", "{", "}", "(", ")"};
-string speci[NUM_SPECI]={".", "\\%"};
+string normal[NUM_NORMAL]={"-", "+", "<", ">", "=", "\neq", "\leq", "\le", "\geq", "\ge", "\times", "^", "\approx", "\div", "\frac", "\cdot", "\pi", "\vert", "|", "{", "}", "(", ")"};
+string speci[NUM_SPECI]={".", "\%"};
 /*
 some rules:
 val+frac => val
@@ -40,28 +35,29 @@ int MatchWhere(string s, string match[], int len);//whether s start with one in 
 int StartWith(string s, string head);//whether s start with head:yes-1,no-0
 void TraverseDrop(string &s);//drop all-type useless
 void DropAllMark(string &s, const string &mark);//drop one-type useless
- 
+void HandleVert(vector<Token> &vec, string &temp);
  
 /*
 define vector<Token> vec;
 call HandleString(string s, vector<Token> &vec);
-*/
+
 int main(){
 	vector<Token> vec;
- 	string test="$$ 1.2 + 50\\% +a\\cdotb +mn + \\pi \\div1 +5\frac{\\frac{1}{2}}{11}  a\\leqb$$ a^5 a(ab)c";
+ 	string test="$$ 1.2 + 50\% +a\cdotb +|123|  + \pi \div1 +5\frac{\frac{1}{2}}{11}  a\leqb$$ a^5 a(ab)c |123|  \times \vert123\vert"; 
 //	string test="a(ab)c";
+//	string test="\vert123\vert nihaoa";
  	HandleString(test,vec);
 	for(int i=0;i<vec.size() ;i++){
 		cout << i << " : "<< vec[i].value << endl;
 	}
 }
- 
+ */
  
  
 //drop one-type useless
 void DropAllMark(string &s, const string &mark){
     size_t nSize = mark.size();
-    while(true){
+    while(1){
         size_t pos = s.find(mark);
         if(pos == string::npos) //dont't find
         {
@@ -203,11 +199,13 @@ void HandleString(string s, vector<Token> &vec){
 				continue;
 			}	
 			//\vert=>|
-			else if(mn<NUM_NORMAL && normal[mn]=="\vert"){
+			else if(mn<NUM_NORMAL && (normal[mn]=="\vert" || normal[mn]=="|")){
+				
 				temp.erase(0, normal[mn].size() );
-				CreateToken(vec, "|", OP, 15);
+				HandleVert(vec, temp);
 				continue;
 			}	
+		//	else if(StartWith)
 			else if(mn<NUM_NORMAL && normal[mn]=="\times"){
 				temp.erase(0, normal[mn].size() );
 				CreateToken(vec, "*", OP, 2);
@@ -249,6 +247,10 @@ void HandleString(string s, vector<Token> &vec){
 			while(temp.size()!=0 && temp.at(0)>=97 && temp.at(0)<=122){
 			//	printf("%c\n",temp.at(0));
 				if(mn=MatchWhere(temp, normal, NUM_NORMAL)<NUM_NORMAL){
+					break;
+				}
+				else if(StartWith(temp,"|")==1 || StartWith(temp,"\vert")==1 || StartWith(temp,"vert")==1 || StartWith(temp, "ert")){
+				//	HandleVert(vec, temp);
 					break;
 				}
 				
@@ -407,4 +409,34 @@ void HandleFrac(vector<Token> &vec, string &s, string number){
 	}
 	
 	CreateToken(vec, back, VAL, 17);
+}
+
+
+
+void HandleVert(vector<Token> &vec, string &temp){
+	string value;
+	value+="|";
+	string number;
+	
+	while(temp.size()!=0 && StartWith(temp,"|")!=1 && StartWith(temp,"\vert")!=1){
+		value+=temp.at(0);
+		temp.erase(0,1);
+	}
+
+	value+="|";
+	if(StartWith(temp,"|")){
+		temp.erase(0,sizeof("|")-1);
+	}
+	else{
+		temp.erase(0,sizeof("\vert")-1);
+	}
+	CreateToken(vec,value,VAL,17);
+	
+}
+
+
+vector<Token> Lexer::parser(string raw){
+	vector<Token> vec;
+	HandleString(raw, vec);
+	return vec;
 }
