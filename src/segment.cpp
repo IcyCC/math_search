@@ -19,25 +19,28 @@ int article_segmenter_init = [] () {
 } ();
 } // namespace
 
-std::vector<WordSegment::WordInfo> QuerySegment(const std::string& query_str)
+namespace query
+{
+std::vector<WordSegment::WordInfo> QuerySegment(const std::string &query_str)
 {
     return segmenter.DoSegment(utf::to_utf32(query_str), false);
 }
 
-std::vector<WordSegment::WordInfo> ArticleSegment(const std::string& article_str)
+std::vector<WordSegment::WordInfo> ArticleSegment(const std::string &article_str)
 {
     return segmenter.DoSegment(utf::to_utf32(article_str), true);
 }
 
-std::vector<WordSegment::WordInfo> QuerySegment(const std::u32string& query_str)
+std::vector<WordSegment::WordInfo> QuerySegment(const std::u32string &query_str)
 {
-    return segmenter.DoSegment(utf::to_utf32(query_str), false);
+    return segmenter.DoSegment(query_str, false);
 }
 
-std::vector<WordSegment::WordInfo> ArticleSegment(const std::u32string& article_str)
+std::vector<WordSegment::WordInfo> ArticleSegment(const std::u32string &article_str)
 {
-    return segmenter.DoSegment(utf::to_utf32(article_str), true);
+    return segmenter.DoSegment(article_str, true);
 }
+} // namespace query
 
 std::vector<std::string> SegmentWords(const std::string& str)
 {
