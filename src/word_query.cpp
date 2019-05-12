@@ -1,6 +1,5 @@
 #include "word_query.h"
 
-// #include <filesystem>
 #include <algorithm>
 #include <list>
 #include <fstream>
@@ -12,6 +11,7 @@
 
 #include "segment.h"
 #include "utf.h"
+#include "util.h"
 #include "file_path.h"
 
 using namespace query;
@@ -67,10 +67,10 @@ pair<size_t, size_t> GetSummary(const shared_ptr<u32string>& content, size_t pos
 
 } // namespace
 
-WordQuery::WordQuery()
+WordQuery::WordQuery(const std::string& dirpath)
 //    : word_segment_(WORD_FREQ_PATH)
 {
-    LoadContent();
+    LoadContent(dirpath);
 
     // for every content
     for (const auto &content : contents_)
@@ -84,20 +84,15 @@ WordQuery::WordQuery()
     }
 }
 
-void WordQuery::LoadContent()
+void WordQuery::LoadContent(const std::string& dirpath)
 {
-    // for (auto &entry : fs::directory_iterator(CONTENT_DIR_PATH))
-    // {
-    //     ifstream fin(entry.path());
-    //     string buf;
-    //     string content;
-    //     while (getline(fin, buf))
-    //     {
-    //         content.append(buf);
-    //         content.push_back('\n');
-    //     }
-    //     contents_.emplace_back(new u32string(to_utf32(content)));
-    // }
+    for (auto &entry : GetAllFilenames(dirpath))
+    {
+        TextBlock text(entry);
+        auto ptr = new u32string(to_utf32(text.raw));
+        contents_.emplace_back(ptr);
+        raw_textblock_.insert({ptr, text});
+    }
 }
 
 WordQuery::QueryResult WordQuery::Query(const string& sentence) const
@@ -130,7 +125,9 @@ WordQuery::QueryResult WordQuery::Query(const string& sentence) const
                 // std::cout << "range:" << pair.first << " " << pair.second << "\n";
                 if (auto it = summaries.find(pair); it == summaries.end())
                 {
-                    result[content][word_info.word].emplace_back(content->c_str() + pair.first, pair.second);
+                    result[raw_textblock_.find(content.get())->second.raw].insert(
+                            to_utf8(std::u32string(*content, pair.first, pair.second)));
+//                    result[content][word_info.word].emplace_back(content->c_str() + pair.first, pair.second);
                     summaries.insert(pair);
                 }
             }
