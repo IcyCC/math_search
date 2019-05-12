@@ -9,6 +9,7 @@ class AbcStore
 public:
   std::vector<TextBlock> data;
   virtual int Save(std::string path) = 0;
+  virtual int Read(std::string path) =0;
 };
 
 class NatureStore : public AbcStore

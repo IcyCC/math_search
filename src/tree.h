@@ -1,7 +1,7 @@
 #pragma once
 
 #include "word.h"
-
+#include<vector>
 enum TreeType
 {
     UNKNOW,
@@ -122,3 +122,5 @@ inline std::string OuputTree(ExpNode *node)
     }
     return res;
 }
+
+std::string GetSubTrees(ExpNode *node, std::vector<std::string >& v);

@@ -1,6 +1,6 @@
 #include "word_query.h"
 
-#include <filesystem>
+// #include <filesystem>
 #include <algorithm>
 #include <list>
 #include <fstream>
@@ -18,7 +18,7 @@ using namespace query;
 using namespace std;
 using namespace utf;
 
-namespace fs = std::filesystem;
+// namespace fs = std::filesystem;
 
 namespace
 {
@@ -89,18 +89,18 @@ WordQuery::WordQuery()
 
 void WordQuery::LoadContent()
 {
-    for (auto &entry : fs::directory_iterator(CONTENT_DIR_PATH))
-    {
-        ifstream fin(entry.path());
-        string buf;
-        string content;
-        while (getline(fin, buf))
-        {
-            content.append(buf);
-            content.push_back('\n');
-        }
-        contents_.emplace_back(new u32string(to_utf32(content)));
-    }
+    // for (auto &entry : fs::directory_iterator(CONTENT_DIR_PATH))
+    // {
+    //     ifstream fin(entry.path());
+    //     string buf;
+    //     string content;
+    //     while (getline(fin, buf))
+    //     {
+    //         content.append(buf);
+    //         content.push_back('\n');
+    //     }
+    //     contents_.emplace_back(new u32string(to_utf32(content)));
+    // }
 }
 
 WordQuery::QueryResult WordQuery::Query(const string& sentence) const
