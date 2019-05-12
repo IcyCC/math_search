@@ -3,22 +3,23 @@
 #include"interface.h"
 #include"struct_tree.h"
 
-void GetSubTrees(ExpNode *node, std::vector<std::string > v){
+std::string GetSubTrees(ExpNode *node, std::vector<std::string >& v){
     if (node == NULL)
     {
-        return;
+        return "";
     }
     std::string res;
     if (node->left_node != NULL || node->right_node != NULL){
         res = "(";
     }
-    res = res + OuputTree(node->left_node);
+    res = res + GetSubTrees(node->left_node, v);
     res = res + node->value;
-    res = res + OuputTree(node->right_node);
+    res = res + GetSubTrees(node->right_node, v);
     if (node->left_node != NULL || node->right_node != NULL){
         res = res + ")";
     }
     v.push_back(res);
+    return res;
 }
 std::vector<std::string> GetAllStdFormulaWithSub(std::string f) {
     

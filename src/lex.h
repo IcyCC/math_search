@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <map>
 #include <string>
@@ -42,15 +43,15 @@ enum TokenType
 class Token
 {
   public:
-    TokenType type;    //ÀàÐÍ
-    TokenMeta meta;    //ÔªÀàÐÍ
+    TokenType type;    //ï¿½ï¿½ï¿½ï¿½
+    TokenMeta meta;    //Ôªï¿½ï¿½ï¿½ï¿½
     std::string value; //Öµ
 };
 
 class Lexer
 {
   private:
-    	std::map<TokenType, std::string> rules; // ¹æÔò
+    	std::map<TokenType, std::string> rules; // ï¿½ï¿½ï¿½ï¿½
   public:
-    	std::vector<Token> parser(std::string raw); // ½âÎö
+    	std::vector<Token> parser(std::string raw); // ï¿½ï¿½ï¿½ï¿½
 };

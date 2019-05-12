@@ -123,4 +123,4 @@ inline std::string OuputTree(ExpNode *node)
     return res;
 }
 
-void GetSubTrees(ExpNode *node, std::vector<std::string > v);
+std::string GetSubTrees(ExpNode *node, std::vector<std::string >& v);
