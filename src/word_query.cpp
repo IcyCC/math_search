@@ -10,7 +10,7 @@
 #include <cassert>
 #include <map>
 
-#include "word_segment.h"
+#include "segment.h"
 #include "utf.h"
 #include "file_path.h"
 
@@ -25,10 +25,7 @@ namespace
 
 bool IsDelimiter(char32_t ch)
 {
-    if (ch == U'.' || ch == U'。' || ch == U'\r' || ch == U'\n' || ch == 0)
-        return true;
-    else
-        return false;
+    return ch == U'.' || ch == U'。' || ch == U'\r' || ch == U'\n' || ch == 0;
 }
 
 // merge two sorted list into lhs
@@ -71,15 +68,15 @@ pair<size_t, size_t> GetSummary(const shared_ptr<u32string>& content, size_t pos
 } // namespace
 
 WordQuery::WordQuery()
-    : word_segment_(WORD_FREQ_PATH)
+//    : word_segment_(WORD_FREQ_PATH)
 {
     LoadContent();
 
     // for every content
     for (const auto &content : contents_)
     {
-        word_segment_.SetContent(content);
-        auto word_infos = word_segment_.DoSegment();
+//        word_segment_.SetContent(content);
+        auto word_infos = ArticleSegment(*content);
         for (const auto &word_info : word_infos)
         {
             word_search_[word_info.word][content].push_back(word_info.index);
@@ -105,8 +102,8 @@ void WordQuery::LoadContent()
 
 WordQuery::QueryResult WordQuery::Query(const string& sentence) const
 {
-    word_segment_.SetContent(sentence);
-    auto word_infos = word_segment_.DoSegment();
+//    word_segment_.SetContent(sentence);
+    auto word_infos = QuerySegment(sentence);
     auto it = word_infos.begin();
     list<shared_ptr<u32string>> content_list = get_list(it->word);
 

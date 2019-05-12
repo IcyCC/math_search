@@ -11,6 +11,7 @@
 #include <queue>
 #include <map>
 
+#include "interface.h"
 #include "utf.h"
 
 namespace
@@ -32,8 +33,8 @@ bool IsAlpha(char32_t ch)
 
 using namespace query;
 
-WordSegment::WordSegment(const std::shared_ptr<std::u32string>& content, std::map<std::u32string, std::size_t> &&word_count)
-    : content_(content), word_count_(std::move(word_count))
+WordSegment::WordSegment(std::map<std::u32string, std::size_t> &&word_count)
+    : word_count_(std::move(word_count))
 {
 }
 
@@ -54,75 +55,92 @@ void WordSegment::LoadWordCount(const std::string& file_path)
     // std::cout << " " << word_count_.size() << std::endl;
 }
 
-void WordSegment::LoadContent(const std::string& file_path)
-{
-    std::ifstream fin(file_path);
-    std::string line;
-    while (std::getline(fin, line))
-    {
-        content_->append(utf::to_utf32(line));
-        content_->push_back(U' ');
-    }
-}
-
-void WordSegment::SetContent(const std::string& content)
-{
-    content_ = std::make_shared<std::u32string>(utf::to_utf32(content));
-}
-
-void WordSegment::SetContent(std::string&& content)
-{
-    content_ = std::make_shared<std::u32string>(utf::to_utf32(content));
-}
-
-void WordSegment::SetContent(const std::shared_ptr<std::u32string>& content)
-{
-    content_ = content;
-}
-
-void WordSegment::SetWordCount(const std::map<std::u32string, std::size_t> &word_count)
-{
-    word_count_ = word_count;
-}
-
-void WordSegment::SetWordCount(std::map<std::u32string, std::size_t> &&word_count)
-{
-    word_count_ = std::move(word_count);
-}
+//void WordSegment::LoadContent(const std::string& file_path)
+//{
+//    std::ifstream fin(file_path);
+//    std::string line;
+//    while (std::getline(fin, line))
+//    {
+//        content_->append(utf::to_utf32(line));
+//        content_->push_back(U' ');
+//    }
+//}
+//
+//void WordSegment::SetContent(const std::string& content)
+//{
+//    content_ = std::make_shared<std::u32string>(utf::to_utf32(content));
+//}
+//
+//void WordSegment::SetContent(std::string&& content)
+//{
+//    content_ = std::make_shared<std::u32string>(utf::to_utf32(content));
+//}
+//
+//void WordSegment::SetContent(const std::shared_ptr<std::u32string>& content)
+//{
+//    content_ = content;
+//}
+//
+//void WordSegment::SetWordCount(const std::map<std::u32string, std::size_t> &word_count)
+//{
+//    word_count_ = word_count;
+//}
+//
+//void WordSegment::SetWordCount(std::map<std::u32string, std::size_t> &&word_count)
+//{
+//    word_count_ = std::move(word_count);
+//}
 
 std::vector<WordSegment::WordInfo>
-WordSegment::DoSegment() const
+WordSegment::DoSegment(const std::u32string& content, bool is_article) const
 {
     std::vector<WordSegment::WordInfo> result;
     size_t begin = 0, i;
-    assert(!IsDividedChar((*content_)[0]));
 
-    for (i = 1; i < content_->size(); )
+    for (i = 1; i < content.size(); )
     {
-        // if ((*content_)[i] == U'$')
-        // {
-        //     TODO: add extention to formulan
-        // }
+        if (content[i] == U'$')
+        {
+            size_t start = i;
+            // TODO: add extension to formulan
+            do {
+                ++i;
+            } while (content[i] != U'$');
+            ++i;
+            std::u32string formula(content, start, i-start);
+            auto all_formulas = GetAllStdFormulaWithSub(utf::to_utf8(formula));
+            if (is_article)
+            {
+                for (const auto& f: all_formulas)
+                {
+                    result.emplace_back(utf::to_utf32(f), start);
+                }
+            }
+            else
+            {
+                result.emplace_back(utf::to_utf32(all_formulas.back()), start);
+            }
+        }
 
-        // it depedents on that alpha is the same represention in ascii and utf32
-        if (IsAlpha((*content_)[i]))
+        // it dependents on that alpha is the same representation in ascii and utf32
+        if (IsAlpha(content[i]))
         {
             begin = i;
             do
             {
                 ++i;
-            } while (i < content_->size() && isalpha((*content_)[i]));
-            result.emplace_back(std::u32string(*content_, begin, i - begin), begin);
+            } while (i < content.size() && isalpha(content[i]));
+            result.emplace_back(std::u32string(content, begin, i - begin), begin);
             begin = i;
             continue;
         }
-        if (IsDividedChar((*content_)[i]))
+        if (IsDividedChar(content[i]))
         {
-            auto to_add = DoSegmentImpl(std::u32string_view(content_->c_str() + begin, i - begin), begin);
+            auto to_add = DoSegmentImpl(std::u32string_view(content.c_str() + begin, i - begin), begin);
             using Iterator = decltype(to_add.begin());
             result.insert(result.end(), std::move_iterator<Iterator>(to_add.begin()),
                                         std::move_iterator<Iterator>(to_add.end()));
-            while (i < content_->size() && IsDividedChar((*content_)[i]))
+            while (i < content.size() && IsDividedChar(content[i]))
                 ++i;
             begin = i;
         }
@@ -132,7 +150,7 @@ WordSegment::DoSegment() const
 
     if (i > begin)
     {
-        auto to_add = DoSegmentImpl(std::u32string_view(content_->c_str() + begin, i - begin), begin);
+        auto to_add = DoSegmentImpl(std::u32string_view(content.c_str() + begin, i - begin), begin);
         using Iterator = decltype(to_add.begin());
         result.insert(result.end(), std::move_iterator<Iterator>(to_add.begin()),
                                     std::move_iterator<Iterator>(to_add.end()));
@@ -204,4 +222,3 @@ WordSegment::DoSegmentImpl(std::u32string_view sentence, size_t article_pos) con
 
     return result;
 }
-
