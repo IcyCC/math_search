@@ -124,7 +124,7 @@ inline ExpNode *GetTree(vector<Token> a) //这只能识别如 a+b = c 或者 a+b
 			continue;
 		}
 		// 读到数字直接放在数字栈顶就ok啦
-		if (a[i].meta == TokenMeta::VAR)
+		if (a[i].meta == TokenMeta::VAL)
 		{
 			if (flag == 0)
 			{
