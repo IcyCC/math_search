@@ -5,6 +5,8 @@
 #include "keyword.h"
 
 
+std::vector<std::string> KeyWordGather;
+
 void GetAllKeyWord(AbcStore *store)  //Get All keywords from the data
 {
 
@@ -14,7 +16,7 @@ void GetAllKeyWord(AbcStore *store)  //Get All keywords from the data
     }
 
 }
-void SetKeyWordPosition(std::vector<std::string> Key_word,TextBlock *data)
+void SetKeyWordPosition(std::vector<std::string>& Key_word,TextBlock *data)
 {
     KeyWord kw;
     int len,position;
@@ -42,6 +44,6 @@ void SetKeyWordPositionAll(AbcStore *store)
     int len = store->data.size();
     for(int i = 0;i<len;i++)
     {
-        SetKeyWordPosition(KeyWordGather,store->data[i]);
+        SetKeyWordPosition(KeyWordGather, &store->data[i]);
     }
 }

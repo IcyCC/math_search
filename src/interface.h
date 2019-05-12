@@ -4,7 +4,7 @@
 #include"query_result.h"
 
 enum QueryType {
-	
+    CONCEPT
 };
 
 // 获取公式以及其子公式
@@ -15,3 +15,6 @@ std::vector<query::QueryResult> QueryComm(std::string q, QueryType type);
 
 // 分词
 std::vector<std::string> SegmentWords(const std::string& str);
+
+// 标准化公式
+std::string StdFormula(std::string f);
