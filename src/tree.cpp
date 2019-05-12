@@ -31,3 +31,4 @@ std::vector<std::string> GetAllStdFormulaWithSub(std::string f) {
     GetSubTrees(node, res);
     return res;
 }
+
