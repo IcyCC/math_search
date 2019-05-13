@@ -3,7 +3,7 @@
 //
 
 #include "keyword.h"
-
+#include <sstream>
 
 std::vector<std::string> KeyWordGather;
 
@@ -45,5 +45,40 @@ void SetKeyWordPositionAll(AbcStore *store)
     for(int i = 0;i<len;i++)
     {
         SetKeyWordPosition(KeyWordGather, &store->data[i]);
+    }
+}
+
+
+void SetKeyWordBlockToFile(std::vector<std::string>& Key_word,TextBlock *data,const std::string file_string)
+{
+
+
+    std::ofstream OsWrite(file_string,std::ofstream::app);
+    int len,position;
+    char buf[1024];
+    len = Key_word.size();
+
+    for(int i = 0;i<len;i++)
+    {
+        position = data->raw.find(Key_word[i]);
+        if( position != data->raw.npos)
+        {
+            memset(buf,0,sizeof(buf));
+            sprintf(buf,"%s %d %d",Key_word[i], Key_word[i].length(),position);
+
+            OsWrite << buf;
+            OsWrite << std::endl;
+        }
+    }
+    OsWrite.close();
+}
+
+void KeyWordToFile(AbcStore *store,std::string path)  
+{
+    GetAllKeyWord(store);
+    int len = store->data.size();
+     for(int i = 0;i<len;i++)
+    {
+        SetKeyWordBlockToFile(KeyWordGather, &store->data[i], path + "/KeyWord/" + store->data[i].title);
     }
 }
