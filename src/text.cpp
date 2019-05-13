@@ -1,5 +1,6 @@
 #include "text.h"
 #include <utility>
+#include <fstream>
 
 std::regex EXERCISES_REGEX = std::regex(R"(\\begin\{exercise\}(.|\\r|\\n)*?end\{exercise\})", std::regex::extended|std::regex::nosubs);
 std::regex NATURE_REGEX = std::regex(R"(\\begin\{propertory\}(.|\\r|\\n)*?end\{propertory\})",std::regex::extended|std::regex::nosubs);
@@ -10,6 +11,11 @@ std::regex TEXT_REGEX = std::regex(R"(\\begin\{article\}(.|\\r|\\n)*?end\{articl
 //std::regex TITLE_BLOCK_REGEX = std::regex(R("defintion\}([\s\S]*/?)end"));//no test
 //std::regex CHAPTER_REGEX = std::regex(R("subsection\{([\s\S]*/?)\}"));//no test
 //std::regex TITLE_REGEX = std::regex(R("defintion\{([\s\S]*/?)\}"));//no test
+
+TextBlock::TextBlock(const std::string& path)
+{
+    Load(path);
+}
 
 std::string TextBlock::Dumps()
 {
@@ -23,6 +29,20 @@ std::string TextBlock::Dumps()
     res = res + this->raw;
     res = res + "\r\n\r\n";
     return res;
+}
+
+void TextBlock::Load(const std::string &file_path)
+{
+    std::ifstream fin(file_path);
+    fin >> id;
+    fin >> chapter;
+    fin >> title;
+    std::string buf;
+    while (getline(fin, buf))
+    {
+        raw.append(buf);
+        raw.push_back('\n');
+    }
 }
 
 std::vector<std::string> paserLatex2String(std::regex& re, std::string& raw) {

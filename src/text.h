@@ -18,22 +18,25 @@ class TextBlock
 {
 public:
 
+    enum BlockType
+    {
+        NATURE,
+        CONCEPT,
+        EXERCISES,
+        TEXT
+    };
 
-  enum BlockType
-  {
-    NATURE,
-    CONCEPT,
-    EXERCISES,
-    TEXT
-  };
-  int id;
-  std::string chapter;
-  std::string title;
-  std::string raw;
-  BlockType type;
-  std::string Dumps();
+    int id;
+    std::string chapter;
+    std::string title;
+    std::string raw;
+    BlockType type;
+    std::string Dumps();
+    void Load(const std::string& file_path);
 
-  std::vector<KeyWord> depot;    // text keyword gether
+    std::vector<KeyWord> depot;    // text keyword gether
+
+    TextBlock(const std::string& path);
 
     inline TextBlock(int _id, std::string _chapter, std::string _title, std::string _raw, BlockType _type) {
       id = _id;
@@ -41,7 +44,7 @@ public:
       title = _title;
       raw = _raw;
       type = _type;
-    };
+};
 };
 
 std::vector<std::string> paserLatex2String(std::regex& re, std::string& raw);
