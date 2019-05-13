@@ -5,7 +5,6 @@
 #include <fstream>
 #include <regex>
 #include "util.h"
-#include "yare.hpp"
 
 class KeyWord
 {
@@ -49,5 +48,3 @@ public:
 
 std::vector<std::string> paserLatex2String(std::regex& re, std::string& raw);
 std::vector<TextBlock> ParseFromLatex(std::string filepath);
-std::vector<std::string> paserLatex2StringCre(yare::Pattern &re, std::string &aw);
-std::vector<TextBlock> ParseFromLatexCRE(std::string filepath);
