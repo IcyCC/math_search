@@ -1,11 +1,11 @@
 #include "text.h"
 #include <utility>
 
-std::regex EXERCISES_REGEX = std::regex(R"(\\begin\{exercise\}([\s\S]*?)\\end\{exercise\})");
-std::regex NATURE_REGEX = std::regex(R"(\\begin\{propertory\}([\s\S]*?)\\end\{propertory\})");
-std::regex CONCEPT_REGEX = std::regex(R"(\\begin\{concept\}([\s\S]*?)\\end\{concept\})");
-std::regex EXAMPLE_REGEX = std::regex(R"(\\begin\{example\}([\s\S]*?)\\end\{example\})");
-std::regex TEXT_REGEX = std::regex(R"(\\begin\{article\}([\s\S]*?)\\end\{article\})");
+std::regex EXERCISES_REGEX = std::regex(R"(\\begin\{exercise\}(.|\\r|\\n)*?end\{exercise\})", std::regex::extended|std::regex::nosubs);
+std::regex NATURE_REGEX = std::regex(R"(\\begin\{propertory\}(.|\\r|\\n)*?end\{propertory\})",std::regex::extended|std::regex::nosubs);
+std::regex CONCEPT_REGEX = std::regex(R"(\\begin\{concept\}(.|\\r|\\n)*?end\{concept\})",std::regex::extended|std::regex::nosubs);
+std::regex EXAMPLE_REGEX = std::regex(R"(\\begin\{example\}(.|\\r|\\n)*?end\{example\})",std::regex::extended|std::regex::nosubs);
+std::regex TEXT_REGEX = std::regex(R"(\\begin\{article\}(.|\\r|\\n)*?end\{article\})",std::regex::extended|std::regex::nosubs);
 //std::regex CHAPTER_BLOCK_REGEX = std::regex(R("subsection\}([\s\S]*/?)end"));//no test
 //std::regex TITLE_BLOCK_REGEX = std::regex(R("defintion\}([\s\S]*/?)end"));//no test
 //std::regex CHAPTER_REGEX = std::regex(R("subsection\{([\s\S]*/?)\}"));//no test
@@ -38,58 +38,7 @@ std::vector<std::string> paserLatex2String(std::regex& re, std::string& raw) {
     return res;
 }
 
-std::vector<std::string> paserLatex2StringCre(yare::Pattern& re, std::string& raw) {
-    auto res = re.matches(raw);
-    return res;
-}
 
-
-std::vector<TextBlock> ParseFromLatexCRE(std::string filepath) {
-
-    auto  EXERCISES_REGEX_CRE = yare::Pattern(R"(\\begin\{exercise\}([\s\S]*?)\\end\{exercise\})");
-    auto NATURE_REGEX_CRE = yare::Pattern(R"(\\begin\{propertory\}([\s\S]*?)\\end\{propertory\})");
-    auto CONCEPT_REGEX_CRE = yare::Pattern(R"(\\begin\{concept\}([\s\S]*?)\\end\{concept\})");
-    auto  EXAMPLE_REGEX_CRE = yare::Pattern(R"(\\begin\{example\}([\s\S]*?)\\end\{example\})");
-    auto  TEXT_REGEX_CRE = yare::Pattern(R"(\\begin\{article\}([\s\S]*?)\\end\{article\})");
-    int i = 0;
-    auto res = std::vector<TextBlock>();
-    std::ifstream infile;
-    infile.open(filepath);
-    std::string raw;
-    std::string buffer;
-    while (std::getline(infile, buffer)) {
-        raw = raw + buffer;
-        raw.push_back('\n');
-    }
-    auto exercises_strings = paserLatex2StringCre(EXERCISES_REGEX_CRE, raw);
-    for (auto &e : exercises_strings){
-        res.push_back(std::move(TextBlock(++i,"", "", raw, TextBlock::BlockType::EXERCISES)));
-    }
-
-    auto nature_strings = paserLatex2StringCre(NATURE_REGEX_CRE, raw);
-    for (auto &e : nature_strings){
-        res.push_back(std::move(TextBlock(++i,"", "", raw,  TextBlock::BlockType::NATURE)));
-    }
-
-    auto concept_strings = paserLatex2StringCre(CONCEPT_REGEX_CRE, raw);
-    for (auto &e : concept_strings){
-        res.push_back(std::move(TextBlock(++i,"", "", raw, TextBlock::BlockType::CONCEPT)));
-    }
-
-
-    auto text_strings = paserLatex2StringCre(TEXT_REGEX_CRE, raw);
-    for (auto &e : text_strings){
-        res.push_back(std::move(TextBlock(++i,"", "", raw,  TextBlock::BlockType::TEXT)));
-    }
-
-
-/*		}
-
-	}
-*/
-
-    return res;
-}
 
 
 std::vector<TextBlock> ParseFromLatex(std::string filepath)
