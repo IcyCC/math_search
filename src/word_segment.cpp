@@ -108,9 +108,10 @@ WordSegment::DoSegment(const std::u32string& content, bool is_article) const
             } while (content[i] != U'$');
             ++i;
             std::u32string formula(content, start, i-start);
-            auto all_formulas = GetAllStdFormulaWithSub(utf::to_utf8(formula));
             if (is_article)
             {
+                auto all_formulas = GetAllStdFormulaWithSub(utf::to_utf8(formula));
+
                 for (const auto& f: all_formulas)
                 {
                     result.emplace_back(utf::to_utf32(f), start);
@@ -118,7 +119,7 @@ WordSegment::DoSegment(const std::u32string& content, bool is_article) const
             }
             else
             {
-                result.emplace_back(utf::to_utf32(all_formulas.back()), start);
+                result.emplace_back(utf::to_utf32(::StdFormula(utf::to_utf8(formula))), start);
             }
         }
 
