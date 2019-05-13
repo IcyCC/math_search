@@ -1,11 +1,11 @@
 #include "text.h"
 #include <utility>
 
-std::regex EXERCISES_REGEX = std::regex(R"(\\begin\{exercise\}([\s\S]*?)\\end\{exercise\})");
-std::regex NATURE_REGEX = std::regex(R"(\\begin\{propertory\}([\s\S]*?)\\end\{propertory\})");
-std::regex CONCEPT_REGEX = std::regex(R"(\\begin\{concept\}([\s\S]*?)\\end\{concept\})");
-std::regex EXAMPLE_REGEX = std::regex(R"(\\begin\{example\}([\s\S]*?)\\end\{example\})");
-std::regex TEXT_REGEX = std::regex(R"(\\begin\{article\}([\s\S]*?)\\end\{article\})");
+std::regex EXERCISES_REGEX = std::regex(R"(\\begin\{exercise\}([\s\S])\\end\{exercise\})");
+std::regex NATURE_REGEX = std::regex(R"(\\begin\{propertory\}([\s\S])\\end\{propertory\})");
+std::regex CONCEPT_REGEX = std::regex(R"(\\begin\{concept\}([\s\S])\\end\{concept\})");
+std::regex EXAMPLE_REGEX = std::regex(R"(\\begin\{example\}([\s\S])\\end\{example\})");
+std::regex TEXT_REGEX = std::regex(R"(\\begin\{article\}([\s\S])\\end\{article\})");
 //std::regex CHAPTER_BLOCK_REGEX = std::regex(R("subsection\}([\s\S]*/?)end"));//no test
 //std::regex TITLE_BLOCK_REGEX = std::regex(R("defintion\}([\s\S]*/?)end"));//no test
 //std::regex CHAPTER_REGEX = std::regex(R("subsection\{([\s\S]*/?)\}"));//no test
@@ -46,11 +46,11 @@ std::vector<std::string> paserLatex2StringCre(yare::Pattern& re, std::string& ra
 
 std::vector<TextBlock> ParseFromLatexCRE(std::string filepath) {
 
-    auto  EXERCISES_REGEX_CRE = yare::Pattern(R"(\\begin\{exercise\}([\s\S]*?)\\end\{exercise\})");
-    auto NATURE_REGEX_CRE = yare::Pattern(R"(\\begin\{propertory\}([\s\S]*?)\\end\{propertory\})");
-    auto CONCEPT_REGEX_CRE = yare::Pattern(R"(\\begin\{concept\}([\s\S]*?)\\end\{concept\})");
-    auto  EXAMPLE_REGEX_CRE = yare::Pattern(R"(\\begin\{example\}([\s\S]*?)\\end\{example\})");
-    auto  TEXT_REGEX_CRE = yare::Pattern(R"(\\begin\{article\}([\s\S]*?)\\end\{article\})");
+    auto  EXERCISES_REGEX_CRE = yare::Pattern(R"(\\begin\{exercise\}([\s\S])\\end\{exercise\})");
+    auto NATURE_REGEX_CRE = yare::Pattern(R"(\\begin\{propertory\}([\s\S])\\end\{propertory\})");
+    auto CONCEPT_REGEX_CRE = yare::Pattern(R"(\\begin\{concept\}([\s\S])\\end\{concept\})");
+    auto  EXAMPLE_REGEX_CRE = yare::Pattern(R"(\\begin\{example\}([\s\S])\\end\{example\})");
+    auto  TEXT_REGEX_CRE = yare::Pattern(R"(\\begin\{article\}([\s\S])\\end\{article\})");
     int i = 0;
     auto res = std::vector<TextBlock>();
     std::ifstream infile;
