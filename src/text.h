@@ -44,7 +44,5 @@ public:
     };
 };
 
-
-
 std::vector<std::string> paserLatex2String(std::regex& re, std::string& raw);
 std::vector<TextBlock> ParseFromLatex(std::string filepath);

@@ -40,7 +40,6 @@ void HandleVert(vector<Token> &vec, string &temp);
 /*
 define vector<Token> vec;
 call HandleString(string s, vector<Token> &vec);
-
 int main(){
 	vector<Token> vec;
  	string test="$$ 1.2 + 50\% +a\cdotb +|123|  + \pi \div1 +5\frac{\frac{1}{2}}{11}  a\leqb$$ a^5 a(ab)c |123|  \times \vert123\vert"; 
