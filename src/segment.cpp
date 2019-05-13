@@ -13,7 +13,7 @@ namespace
 WordSegment segmenter;
 
 
-int article_segmenter_init = [] () {
+auto article_segmenter_init = [] () {
     segmenter.LoadWordCount(WORD_FREQ_PATH);
     return 0;
 } ();
@@ -41,14 +41,3 @@ std::vector<WordSegment::WordInfo> ArticleSegment(const std::u32string &article_
     return segmenter.DoSegment(article_str, true);
 }
 } // namespace query
-
-std::vector<std::string> SegmentWords(const std::string& str)
-{
-    auto res = QuerySegment(str);
-    std::vector<std::string> words;
-    for (const auto& elem: res)
-    {
-        words.push_back(utf::to_utf8(elem.word));
-    }
-    return words;
-}

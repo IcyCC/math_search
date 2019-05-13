@@ -6,7 +6,7 @@
 #define SIZE 10
 
 
-string drop[NUM_DROP] = {"$$", "$", "\!", "\,", "\quad", " "};
+string drop[NUM_DROP] = {"$$", "$", "\\!", "\\,", "\\quad", " "};
 
 /*
 \neq,\ne=>neq
@@ -16,8 +16,9 @@ string drop[NUM_DROP] = {"$$", "$", "\!", "\,", "\quad", " "};
 \vert=>|
 \approx=>appr
 */ 
-string normal[NUM_NORMAL]={"-", "+", "<", ">", "=", "\neq", "\leq", "\le", "\geq", "\ge", "\times", "^", "\approx", "\div", "\frac", "\cdot", "\pi", "\vert", "|", "{", "}", "(", ")"};
-string speci[NUM_SPECI]={".", "\%"};
+string normal[NUM_NORMAL]={"-", "+", "<", ">", "=", "\\neq", "\\leq", "\\le", "\\geq", "\\ge", "\\times", "^",
+                           "\\approx", "\\div", "\\frac", "\\cdot", "\\pi", "\\vert", "|", "{", "}", "(", ")"};
+string speci[NUM_SPECI]={".", "\\%"};
 /*
 some rules:
 val+frac => val
@@ -31,8 +32,8 @@ void HandleFrac(vector<Token> &vec, string &s, string number);
 void SplitToTimes(vector<Token> &vec, string s);//ab=>a*b
 void CreateToken(vector<Token> &vec, string s, TokenMeta met, int typ);//mt: 0:val 1:opr
 void HandleString(string s, vector<Token> &vec);
-int MatchWhere(string s, string match[], int len);//whether s start with one in string[]
-int StartWith(string s, string head);//whether s start with head:yes-1,no-0
+int MatchWhere(const string& s, string match[], int len);//whether s start with one in string[]
+int StartWith(const string& s, const string& head);//whether s start with head:yes-1,no-0
 void TraverseDrop(string &s);//drop all-type useless
 void DropAllMark(string &s, const string &mark);//drop one-type useless
 void HandleVert(vector<Token> &vec, string &temp);
@@ -56,7 +57,7 @@ int main(){
 //drop one-type useless
 void DropAllMark(string &s, const string &mark){
     size_t nSize = mark.size();
-    while(1){
+    while(true){
         size_t pos = s.find(mark);
         if(pos == string::npos) //dont't find
         {
@@ -68,13 +69,13 @@ void DropAllMark(string &s, const string &mark){
 
 //drop all-type useless
 void TraverseDrop(string &s){
-	for(int i=0; i<NUM_DROP; i++){
-		DropAllMark(s, drop[i]);
+	for(const auto & i : drop){
+		DropAllMark(s, i);
 	}
 }
 
 //whether s start with head:yes-1,no-0
-int StartWith(string s, string head){
+int StartWith(const string& s, const string& head){
 	if(strncmp(s.c_str(), head.c_str(), head.length()) == 0)
 	{
 	 	return 1;
@@ -85,19 +86,20 @@ int StartWith(string s, string head){
 }
 
 //whether s start with one in string[]
-int MatchWhere(string s, string match[], int len){
+int MatchWhere(const string& s, string match[], int len){
 	int i=0;	
-	for(i; i<len; i++){
+	for(; i<len; i++){
 		if(StartWith(s, match[i])==1)
 			return i;
 	}
 	if(i==len)
 		return i;
+	throw std::logic_error("no return");
 }
 
 
 void HandleString(string s, vector<Token> &vec){
-	string temp=s; 
+    auto temp = s;
 	TraverseDrop(temp);
 	
 	string number;
@@ -119,7 +121,7 @@ void HandleString(string s, vector<Token> &vec){
 				ms=MatchWhere(temp, speci, NUM_SPECI);
 				// xx% or xx.xx
 				if(ms<NUM_SPECI){
-					if(speci[ms]=="\%"){
+					if(speci[ms]=="\\%"){
 						point+="%";
 						temp.erase(0, speci[ms].size() );
 						
@@ -174,54 +176,54 @@ void HandleString(string s, vector<Token> &vec){
 				continue;
 			}
 			//cdot=>/times
-			else if(mn<NUM_NORMAL && normal[mn]=="\cdot"){
+			else if(mn<NUM_NORMAL && normal[mn]=="\\cdot"){
 				temp.erase(0, normal[mn].size() );
 				CreateToken(vec, "*", OP, 2);
 				continue;
 			}
 			//pi=>val
-			else if(mn<NUM_NORMAL && normal[mn]=="\pi"){
+			else if(mn<NUM_NORMAL && normal[mn]=="\\pi"){
 				temp.erase(0, normal[mn].size() );
 				CreateToken(vec, "pi", VAL, 17);
 				continue;
 			}
 			//geq=>ge
-			else if(mn<NUM_NORMAL && (normal[mn]=="\ge" || normal[mn]=="\geq")){
+			else if(mn<NUM_NORMAL && (normal[mn]=="\\ge" || normal[mn]=="\\geq")){
 				temp.erase(0, normal[mn].size() );
 				CreateToken(vec, "ge", OP, 8);
 				continue;
 			}
 			//leq=>le
-			else if(mn<NUM_NORMAL && (normal[mn]=="\leq" || normal[mn]=="\le")){
+			else if(mn<NUM_NORMAL && (normal[mn]=="\\leq" || normal[mn]=="\\le")){
 				temp.erase(0, normal[mn].size() );
 				CreateToken(vec, "le", OP, 7);
 				continue;
 			}	
 			//\vert=>|
-			else if(mn<NUM_NORMAL && (normal[mn]=="\vert" || normal[mn]=="|")){
+			else if(mn<NUM_NORMAL && (normal[mn]=="\\vert" || normal[mn]=="|")){
 				
 				temp.erase(0, normal[mn].size() );
 				HandleVert(vec, temp);
 				continue;
 			}	
 		//	else if(StartWith)
-			else if(mn<NUM_NORMAL && normal[mn]=="\times"){
+			else if(mn<NUM_NORMAL && normal[mn]=="\\times"){
 				temp.erase(0, normal[mn].size() );
 				CreateToken(vec, "*", OP, 2);
 				continue;
 			}
-			else if(mn<NUM_NORMAL && normal[mn]=="\div"){
+			else if(mn<NUM_NORMAL && normal[mn]=="\\div"){
 				temp.erase(0, normal[mn].size() );
 				CreateToken(vec, "/", OP, 3);
 				continue;
 			}
-			else if(mn<NUM_NORMAL && normal[mn]=="\approx"){
+			else if(mn<NUM_NORMAL && normal[mn]=="\\approx"){
 				temp.erase(0, normal[mn].size() );
 				CreateToken(vec, "appr", OP, 10);
 				continue;
 			}
 			//neq
-			else if(mn<NUM_NORMAL && normal[mn]=="\neq"){
+			else if(mn<NUM_NORMAL && normal[mn]=="\\neq"){
 				temp.erase(0, normal[mn].size() );
 				CreateToken(vec, "neq", OP, 9);
 				continue;
@@ -245,10 +247,10 @@ void HandleString(string s, vector<Token> &vec){
 			//abc
 			while(temp.size()!=0 && temp.at(0)>=97 && temp.at(0)<=122){
 			//	printf("%c\n",temp.at(0));
-				if(mn=MatchWhere(temp, normal, NUM_NORMAL)<NUM_NORMAL){
+				if((mn = MatchWhere(temp, normal, NUM_NORMAL)) < NUM_NORMAL){
 					break;
 				}
-				else if(StartWith(temp,"|")==1 || StartWith(temp,"\vert")==1 || StartWith(temp,"vert")==1 || StartWith(temp, "ert")){
+				else if(StartWith(temp,"|")==1 || StartWith(temp,"\\vert")==1 || StartWith(temp,"vert")==1 || StartWith(temp, "ert")){
 				//	HandleVert(vec, temp);
 					break;
 				}
@@ -384,19 +386,19 @@ void HandleFrac(vector<Token> &vec, string &s, string number){
 			i+=1;
 			s.erase(0, normal[mn].size() );
 		}
-		else if(normal[mn]=="\times"){
+		else if(normal[mn]=="\\times"){
 			back+="*";
 			s.erase(0, normal[mn].size() );
 		}
-		else if(normal[mn]=="\div"){
+		else if(normal[mn]=="\\div"){
 			back+="/";
 			s.erase(0, normal[mn].size() );
 		}
-		else if(normal[mn]=="\vert"){
+		else if(normal[mn]=="\\vert"){
 			back+="|";
 			s.erase(0, normal[mn].size() );
 		}
-		else if(normal[mn]=="\pi"){
+		else if(normal[mn]=="\\pi"){
 			back+="pi";
 			s.erase(0, normal[mn].size() );
 		}
