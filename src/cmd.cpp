@@ -1,5 +1,4 @@
 #include "cmd.h"
-#include "store.h"
 #include <iostream>
 #include <string.h>
 #include <sys/types.h>
@@ -10,6 +9,61 @@
 #include <sstream>
 
 using namespace std;
+
+vector<TextBlock> vec;
+
+void HandleTex(std::string outpath){
+		vector<TextBlock> nature;
+		vector<TextBlock> concept;
+		vector<TextBlock> exercise;
+		vector<TextBlock> text;
+		vector<TextBlock> example;
+	
+		for(auto v: vec){
+			if(v.type==TextBlock::BlockType::NATURE){
+				nature.push_back(v);
+			}
+
+			else if(v.type==TextBlock::BlockType::CONCEPT){
+				concept.push_back(v);
+			}
+
+			else if(v.type==TextBlock::BlockType::EXERCISES){
+				exercise.push_back(v);
+			}
+
+			else if(v.type==TextBlock::BlockType::TEXT){
+				text.push_back(v);
+			}
+
+			else if(v.type==TextBlock::BlockType::EXAMPLE){
+				example.push_back(v);
+			}
+
+		}
+
+		
+		NatureStore nature_;
+		nature_.data=nature;
+		nature_.Save(outpath);
+
+		ConceptStore concept_;
+		concept_.data=concept;
+		concept_.Save(outpath);
+	
+		ExercisesStore exercise_;
+		exercise_.data=exercise;
+		exercise_.Save(outpath);		
+
+		TextStore text_;
+		text_.data=text;
+		text_.Save(outpath);		
+
+		ExampleStore example_;
+		example_.data=example;
+		example_.Save(outpath);
+
+}
 
 
 void DirList(std::string inpath, std::string outpath){
@@ -24,22 +78,25 @@ void DirList(std::string inpath, std::string outpath){
                 //cout << temp << endl;
                 //const char *p=temp.data();
 				
-				HandleTex(temp, outpath);
+				vector<TextBlock> t;
+				t=ParseFromLatexCRE(inpath);
+				vec.insert(vec.end(), t.begin(), t.end());
+
         }
-}
-    std::vector<int> src;
-    std::vector<int> dest;
-    dest.insert(dest.end(), src.begin(), src.end());
+		HandleTex(outpath);
 
-void HandleTex(std::string inpath, std::string outpath){
-		AbcStore temp=new AbcStore();
-		temp.data=ParseFromLatexCRE(inpath);
-		
-		//temp.Save(outpath);
 }
 
-
+ 
 void RunSpliteLatex(std::string inpath, std::string outpath){
 		DirList(inpath, outpath);
 }
 
+
+/* 
+int main(){
+    RunSpliteLatex("LatexDoc","textblock");
+   return 0;
+
+}
+*/ 
