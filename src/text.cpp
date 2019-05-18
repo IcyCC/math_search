@@ -94,6 +94,11 @@ std::vector<TextBlock> ParseFromLatex(std::string filepath)
         res.push_back(std::move(TextBlock(++i,"", "", raw,  TextBlock::BlockType::TEXT)));
     }
 
+	auto example_strings = paserLatex2String(EXAMPLE_REGEX, raw);
+    for (auto &e : example_strings){
+        res.push_back(std::move(TextBlock(++i,"", "", raw,  TextBlock::BlockType::EXAMPLE)));
+    }
+
 
 /*		}
 

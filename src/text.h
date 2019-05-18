@@ -23,7 +23,8 @@ public:
         NATURE,
         CONCEPT,
         EXERCISES,
-        TEXT
+        TEXT,
+        EXAMPLE
     };
 
     int id;

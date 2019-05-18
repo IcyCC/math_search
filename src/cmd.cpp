@@ -65,7 +65,7 @@ void HandleTex(std::string outpath){
 
 }
 
-
+/*
 void DirList(std::string inpath, std::string outpath){
         string temp;
         temp=(char *)malloc(sizeof(char)*50);
@@ -79,24 +79,33 @@ void DirList(std::string inpath, std::string outpath){
                 //const char *p=temp.data();
 				
 				vector<TextBlock> t;
-				t=ParseFromLatexCRE(inpath);
+				t=ParseFromLatex(inpath);
 				vec.insert(vec.end(), t.begin(), t.end());
 
         }
 		HandleTex(outpath);
 
 }
+*/
 
+
+void DirList(std::string inpath, std::string outpath){
+		vector<string> file=GetAllFilenames(inpath);
+		for(auto f: file){
+				vector<TextBlock> t;
+                t=ParseFromLatex(f);
+                vec.insert(vec.end(), t.begin(), t.end());
+
+		}
+}
  
 void RunSpliteLatex(std::string inpath, std::string outpath){
 		DirList(inpath, outpath);
 }
 
 
-/* 
-int main(){
-    RunSpliteLatex("LatexDoc","textblock");
-   return 0;
-
+void RunKeyWords(AbcStore *s, std::string outpath){
+		KeyWordToFile(s,outpath);
 }
-*/ 
+
+
