@@ -74,28 +74,28 @@ std::vector<TextBlock> ParseFromLatex(std::string filepath)
         raw = raw + buffer;
         raw.push_back('\n');
     }
-    auto exercises_strings = FindAllSub(raw,"\\begin{exercise}", "\\end{exercise}");
+    auto exercises_strings = FindAllSub(raw,"\\begin{exercise}", "\\end{exercise}", true);
     for (auto &e : exercises_strings){
         res.push_back(std::move(TextBlock(++i,"", "", raw, TextBlock::BlockType::EXERCISES)));
     }
 
-    auto nature_strings = FindAllSub(raw,"\\begin{propertory}", "\\end{propertory}");
+    auto nature_strings = FindAllSub(raw,"\\begin{propertory}", "\\end{propertory}", true);
     for (auto &e : nature_strings){
         res.push_back(std::move(TextBlock(++i,"测试", "测试", raw,  TextBlock::BlockType::NATURE)));
     }
 
-    auto concept_strings = FindAllSub(raw,"\\begin{concept}", "\\end{concept}");
+    auto concept_strings = FindAllSub(raw,"\\begin{concept}", "\\end{concept}", true);
     for (auto &e : concept_strings){
         res.push_back(std::move(TextBlock(++i,"测试", "测试", raw, TextBlock::BlockType::CONCEPT)));
     }
 
 
-    auto text_strings = FindAllSub(raw,"\\end{document}", "\\end{document}");
+    auto text_strings = FindAllSub(raw,"\\end{document}", "\\end{document}", true);
     for (auto &e : text_strings){
         res.push_back(std::move(TextBlock(++i,"", "", raw,  TextBlock::BlockType::TEXT)));
     }
 
-	auto example_strings = FindAllSub(raw,"\\begin{example}", "\\end{example}");
+	auto example_strings = FindAllSub(raw,"\\begin{example}", "\\end{example}", true);
     for (auto &e : example_strings){
         res.push_back(std::move(TextBlock(++i,"", "", raw,  TextBlock::BlockType::EXAMPLE)));
     }
