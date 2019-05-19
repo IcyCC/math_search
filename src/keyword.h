@@ -16,6 +16,6 @@ void SetKeyWordPosition(std::vector<std::string>& Key_word,TextBlock *data);
 
 void SetKeyWordPositionAll(AbcStore *store);//for all text block set keyword position
 
-
+void KeyWordToFile(AbcStore *store,std::string path);
 
 #endif //MATH_SEARCH_KEYWORD_H

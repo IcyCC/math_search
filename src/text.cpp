@@ -73,32 +73,32 @@ std::vector<TextBlock> ParseFromLatex(std::string filepath)
         raw = raw + buffer;
         raw.push_back('\n');
     }
-    auto exercises_strings = paserLatex2String(EXERCISES_REGEX, raw);
-    for (auto &e : exercises_strings){
-        res.push_back(std::move(TextBlock(++i,"", "", raw, TextBlock::BlockType::EXERCISES)));
-    }
+//    auto exercises_strings = paserLatex2String(EXERCISES_REGEX, raw);
+//    for (auto &e : exercises_strings){
+//        res.push_back(std::move(TextBlock(++i,"", "", raw, TextBlock::BlockType::EXERCISES)));
+//    }
 
     auto nature_strings = paserLatex2String(NATURE_REGEX, raw);
     for (auto &e : nature_strings){
-        res.push_back(std::move(TextBlock(++i,"", "", raw,  TextBlock::BlockType::NATURE)));
+        res.push_back(std::move(TextBlock(++i,"测试", "测试", raw,  TextBlock::BlockType::NATURE)));
     }
 
     auto concept_strings = paserLatex2String(CONCEPT_REGEX, raw);
     for (auto &e : concept_strings){
-        res.push_back(std::move(TextBlock(++i,"", "", raw, TextBlock::BlockType::CONCEPT)));
+        res.push_back(std::move(TextBlock(++i,"测试", "测试", raw, TextBlock::BlockType::CONCEPT)));
     }
 
 
-    auto text_strings = paserLatex2String(TEXT_REGEX, raw);
-    for (auto &e : text_strings){
-        res.push_back(std::move(TextBlock(++i,"", "", raw,  TextBlock::BlockType::TEXT)));
-    }
+//    auto text_strings = paserLatex2String(TEXT_REGEX, raw);
+//    for (auto &e : text_strings){
+//        res.push_back(std::move(TextBlock(++i,"", "", raw,  TextBlock::BlockType::TEXT)));
+//    }
 
-	auto example_strings = paserLatex2String(EXAMPLE_REGEX, raw);
-    for (auto &e : example_strings){
-        res.push_back(std::move(TextBlock(++i,"", "", raw,  TextBlock::BlockType::EXAMPLE)));
-    }
-
+//	auto example_strings = paserLatex2String(EXAMPLE_REGEX, raw);
+//    for (auto &e : example_strings){
+//        res.push_back(std::move(TextBlock(++i,"", "", raw,  TextBlock::BlockType::EXAMPLE)));
+//    }
+//
 
 /*		}
 

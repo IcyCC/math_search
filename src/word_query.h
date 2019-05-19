@@ -33,7 +33,7 @@ class WordQuery
     explicit WordQuery(const std::string& dirpath);
 
     ~WordQuery() = default;
-
+//
     void SaveToFile(const std::string& path) const;
     QueryResult Query(const std::string& sentence) const;
 

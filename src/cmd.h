@@ -1,5 +1,5 @@
 #include<string>
-#include"store.h"
+#include"keyword.h"
 
 void RunSpliteLatex(std::string inpath, std::string outpath);
 

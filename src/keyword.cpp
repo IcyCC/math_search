@@ -64,7 +64,7 @@ void SetKeyWordBlockToFile(std::vector<std::string>& Key_word,TextBlock *data,co
         if( position != data->raw.npos)
         {
             memset(buf,0,sizeof(buf));
-            sprintf(buf,"%s %d %d",Key_word[i], Key_word[i].length(),position);
+            sprintf(buf,"%s %d %d",Key_word[i].c_str(), Key_word[i].length(),position);
 
             OsWrite << buf;
             OsWrite << std::endl;

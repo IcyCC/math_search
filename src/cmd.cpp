@@ -10,9 +10,8 @@
 
 using namespace std;
 
-vector<TextBlock> vec;
 
-void HandleTex(std::string outpath){
+void HandleTex(vector<TextBlock> &vec, std::string outpath){
 		vector<TextBlock> nature;
 		vector<TextBlock> concept;
 		vector<TextBlock> exercise;
@@ -91,12 +90,13 @@ void DirList(std::string inpath, std::string outpath){
 
 void DirList(std::string inpath, std::string outpath){
 		vector<string> file=GetAllFilenames(inpath);
+		auto vec = vector<TextBlock>();
 		for(auto f: file){
 				vector<TextBlock> t;
                 t=ParseFromLatex(f);
                 vec.insert(vec.end(), t.begin(), t.end());
-
 		}
+		HandleTex(vec, outpath);
 }
  
 void RunSpliteLatex(std::string inpath, std::string outpath){
