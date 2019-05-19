@@ -20,7 +20,8 @@ namespace
 bool IsDividedChar(char32_t ch)
 {
     static const std::unordered_set<char32_t> kDividedChars{
-        U'，', U'。', U'：', U'.', U',', U'、', U'？', U'“', U'”', U'\t', U'\n', U' ', U'…'};
+        U'，', U'。', U'：', U'.', U',', U'、', U'？', U'“', U'”', U'\t', U'\n', U' ', U'…', U'(', U')',
+        U'（', U'）'};
     return kDividedChars.find(ch) != kDividedChars.end();
 }
 
@@ -97,15 +98,21 @@ WordSegment::DoSegment(const std::u32string& content, bool is_article) const
     std::vector<WordSegment::WordInfo> result;
     size_t begin = 0, i;
 
+    auto add_segments_to_result = [this, &result, &content] (size_t begin, size_t i) {
+        auto to_add = this->DoSegmentImpl(std::u32string_view(content.c_str() + begin, i - begin), begin);
+        using Iterator = decltype(to_add.begin());
+        result.insert(result.end(), std::move_iterator<Iterator>(to_add.begin()),
+                      std::move_iterator<Iterator>(to_add.end()));
+    };
+
     for (i = 1; i < content.size(); )
     {
         if (content[i] == U'$')
         {
             size_t start = i;
-            // TODO: add extension to formulan
             do {
                 ++i;
-            } while (content[i] != U'$');
+            } while (i < content.size() && content[i] != U'$');
             ++i;
             std::u32string formula(content, start, i-start);
             if (is_article)
@@ -121,11 +128,13 @@ WordSegment::DoSegment(const std::u32string& content, bool is_article) const
             {
                 result.emplace_back(utf::to_utf32(::StdFormula(utf::to_utf8(formula))), start);
             }
+            continue;
         }
 
         // it dependents on that alpha is the same representation in ascii and utf32
         if (IsAlpha(content[i]))
         {
+            add_segments_to_result(begin, i);
             begin = i;
             do
             {
@@ -137,10 +146,7 @@ WordSegment::DoSegment(const std::u32string& content, bool is_article) const
         }
         if (IsDividedChar(content[i]))
         {
-            auto to_add = DoSegmentImpl(std::u32string_view(content.c_str() + begin, i - begin), begin);
-            using Iterator = decltype(to_add.begin());
-            result.insert(result.end(), std::move_iterator<Iterator>(to_add.begin()),
-                                        std::move_iterator<Iterator>(to_add.end()));
+            add_segments_to_result(begin, i);
             while (i < content.size() && IsDividedChar(content[i]))
                 ++i;
             begin = i;
@@ -151,10 +157,7 @@ WordSegment::DoSegment(const std::u32string& content, bool is_article) const
 
     if (i > begin)
     {
-        auto to_add = DoSegmentImpl(std::u32string_view(content.c_str() + begin, i - begin), begin);
-        using Iterator = decltype(to_add.begin());
-        result.insert(result.end(), std::move_iterator<Iterator>(to_add.begin()),
-                                    std::move_iterator<Iterator>(to_add.end()));
+        add_segments_to_result(begin, i);
     }
 
     return result;
