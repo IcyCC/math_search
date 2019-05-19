@@ -37,6 +37,6 @@ std::string Int2String(int a);
 
 std::vector<std::string> GetAllFilenames(const std::string& dir);
 
-std::vector<std::string > FindAllSub(const std::string& raw,const std::string& start, const std::string &end);
+std::vector<std::string > FindAllSub(const std::string& raw,const std::string& start, const std::string &end, bool keep);
 
 #endif

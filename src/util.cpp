@@ -51,17 +51,24 @@ std::vector<std::string> GetAllFilenames(const std::string& dirname)
 }
 
 
-std::vector<std::string > FindAllSub(const std::string& raw,  const std::string& start, const std::string& end) {
+std::vector<std::string > FindAllSub(const std::string& raw,  const std::string& start, const std::string& end, bool keep) {
     bool is_read = false;
     std::string buffer;
     auto res = std::vector<std::string>();
     for (auto s : raw) {
         buffer.push_back(s);
         if(IsEndWith(buffer, start)) {
-            buffer = std::string(start);
+            if (keep) {
+                buffer = std::string(start);
+            } else {
+                buffer = "";
+            }
             is_read = true;
         }
         if (IsEndWith(buffer, end)) {
+            for(auto &i :end) {
+                buffer.pop_back();
+            }
             res.push_back(buffer);
             buffer = "";
         }
