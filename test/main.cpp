@@ -3,10 +3,9 @@
 //
 
 #include<iostream>
-#include "interface.h"
-#include "text.h"
+#include "cmd.h"
 int main()
 {
-    auto r = ParseFromLatexCRE("/Users/suchang/Code/homework/math_search/LaTexDoc/book56-60.tex");
+    RunSpliteLatex("/Users/suchang/Code/homework/math_search/LaTexDoc", "/Users/suchang/Code/homework/math_search/text_blocks");
     return  0;
 }
