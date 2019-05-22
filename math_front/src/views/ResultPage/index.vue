@@ -37,34 +37,50 @@
         </Card>
             <div style="padding-top: 30px"></div>
         <Card>
-            <Row style="padding-top: 15px" v-for="item in results" :key="'res'  + item.id">
-                <span> {{ item.title }}</span>
-                <div> {{ item.content }}</div>
+            <Row style="padding-top: 15px"
+                 v-for="item, index in results"
+                 :key="item.chapter + index"
+                 >
+                <div @click="onResultClick(item)" v-html="highLight(item.title)">
+                </div>
+                <div>
+                   <span v-for="abc in item.abstract" v-html="highLight(abc)"></span> ...
+                </div>
             </Row>
         </Card>
+        <Detail
+                :visible="show_detail"
+                :result="select_result"
+                :query_text="query_text"
+                @onClose="show_detail=false"
+        ></Detail>
     </div>
 </template>
 
 <script>
+    import {querySearch,getKeyWords} from '@/service/api'
+    import Detail from './components/detail'
     export default {
         name: "ResultPage",
+        components:{Detail},
         data: function () {
             return {
+                key_words: [],
                 query_text: '',
                 query_type: undefined,
-                results: [{
-                    id: 1,
-                    title: '测试',
-                    content: '测试内容'
-                },
-                    {
-                        id: 2,
-                        title: '测试2',
-                        content: '测试内容2'
-                    }]
+                results: [],
+                select_result : {},
+                show_detail: false
             }
         },
         methods: {
+            highLight: function(text){
+                let replaceReg = new RegExp(this.query_text, 'g');
+                // 高亮替换v-html值
+                let replaceString = '<span class="search-text" style="color: darkred;">' + this.query_text + '</span>';
+                // 开始替换
+                return text.replace(replaceReg, replaceString);
+            },
             onSearchClick: function () {
                 this.$router.push({
                     name: 'result',
@@ -73,10 +89,19 @@
                         query_type: this.query_type
                     }
                 })
+            },
+            onResultClick: function (item) {
+                this.select_result = item
+                this.show_detail = true
             }
         },
-        mounted: function () {
 
+        created: function () {
+            this.query_text = this.$route.query.query_text
+            this.query_type = this.$route.query.query_type
+                querySearch('', '').then((resp)=>{
+                    this.results = resp.data.data
+                })
         }
     }
 </script>
@@ -84,5 +109,8 @@
 <style scoped>
     .query-type-option{
         font-size: 12px;
+    }
+    .search-text{
+
     }
 </style>

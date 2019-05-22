@@ -1,0 +1,71 @@
+<template>
+    <v-chart :options="option" auto-resize ref="chart"></v-chart>
+</template>
+
+<script>
+    import {getGexf} from  '@/service/api'
+    import dataTool from 'echarts/extension/dataTool';
+    export default {
+        name: "graph",
+        data: function () {
+            return {
+                option: {}
+            }
+        },
+        mounted: function () {
+            getGexf().then((resp)=>{
+                let xml = resp.data
+                var graph = dataTool.gexf.parse(xml);
+                var categories = [];
+                graph.nodes.forEach(function (node) {
+                    node.itemStyle = null;
+                    node.symbolSize = 40;
+                    node.value = node.symbolSize;
+                    node.category = node.attributes.modularity_class;
+                    // Use random x, y
+                    node.x = node.y = null;
+                    node.draggable = true;
+                });
+                this.option = {
+                    title: {
+                        text: '课本知识',
+                        subtext: 'Default layout',
+                        top: 'bottom',
+                        left: 'center'
+                    },
+                    tooltip: {},
+                    legend: [{
+                        // selectedMode: 'single',
+                        data: categories.map(function (a) {
+                            return a.name;
+                        })
+                    }],
+                    animation: false,
+                    series : [
+                        {
+                            name: '课本知识',
+                            type: 'graph',
+                            layout: 'force',
+                            data: graph.nodes,
+                            links: graph.links,
+                            categories: categories,
+                            roam: true,
+                            label: {
+                                show: true,
+                            },
+                            force: {
+                                repulsion: 500,
+                                edgeLength: [30, 100]
+                            }
+                        }
+                    ]
+                };
+            })
+        }
+
+    }
+</script>
+
+<style scoped>
+
+</style>

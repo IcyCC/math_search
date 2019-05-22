@@ -1,10 +1,14 @@
 <template>
-    <h1>图</h1>
+    <div style="text-align: center;">
+        <grapha  style="width: 1000px; height: 800px"></grapha>
+    </div>
 </template>
 
 <script>
+    import grapha from './components/graph'
     export default {
-        name: "index"
+        name: "index",
+        components:{grapha}
     }
 </script>
 
