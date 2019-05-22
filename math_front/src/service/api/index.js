@@ -8,8 +8,15 @@ export const  querySearch = (query_text, query_type) => {
 }
 
 export const  getKeyWords = (query_text, query_type) => {
-    return axios.get('/api/getKeyWord', {
-        'query_text':query_type,
-        'query_type':query_type
+    return axios.get('/api/getKeyWord')
+}
+
+export const  segmentWords = (text) => {
+    return axios.post('/api/segmentWords', {
+       'text': text
     })
+}
+
+export const  getGexf = (text) => {
+    return axios.get('/api/static/book.gexf')
 }

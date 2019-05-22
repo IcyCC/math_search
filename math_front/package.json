@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "echarts": "^4.2.1",
     "iview": "^3.2.2",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",

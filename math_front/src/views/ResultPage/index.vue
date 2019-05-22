@@ -37,27 +37,40 @@
         </Card>
             <div style="padding-top: 30px"></div>
         <Card>
-            <Row style="padding-top: 15px" v-for="item, index in results" :key="item.chapter + index">
-                <div v-html="highLight(item.title)">
+            <Row style="padding-top: 15px"
+                 v-for="item, index in results"
+                 :key="item.chapter + index"
+                 >
+                <div @click="onResultClick(item)" v-html="highLight(item.title)">
                 </div>
                 <div>
                    <span v-for="abc in item.abstract" v-html="highLight(abc)"></span> ...
                 </div>
             </Row>
         </Card>
+        <Detail
+                :visible="show_detail"
+                :result="select_result"
+                :query_text="query_text"
+                @onClose="show_detail=false"
+        ></Detail>
     </div>
 </template>
 
 <script>
     import {querySearch,getKeyWords} from '@/service/api'
+    import Detail from './components/detail'
     export default {
         name: "ResultPage",
+        components:{Detail},
         data: function () {
             return {
                 key_words: [],
                 query_text: '',
                 query_type: undefined,
-                results: []
+                results: [],
+                select_result : {},
+                show_detail: false
             }
         },
         methods: {
@@ -76,6 +89,10 @@
                         query_type: this.query_type
                     }
                 })
+            },
+            onResultClick: function (item) {
+                this.select_result = item
+                this.show_detail = true
             }
         },
 
