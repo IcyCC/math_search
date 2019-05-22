@@ -24,13 +24,14 @@ std::string TextBlock::Dumps()
     res = res + Int2String(this->id);
     res = res + "\r\n";
     res = res + this->chapter;
-    res = res + "\r\n";
+    res = res + "\r\n"; 
     res = res + this->title;
     res = res + "\r\n";
     res = res + this->raw;
     res = res + "\r\n\r\n";
     return res;
 }
+
 
 void TextBlock::Load(const std::string &file_path)
 {
