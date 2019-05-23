@@ -16,7 +16,7 @@
         <Row style="padding-top: 10px" v-show="query_type === 'formulation'">
             公式预览:
             <div>
-                <span v-katex="query_text" style="background-color: #dcdee2"></span>
+                <span v-katex="query_text" style="background-color: #dcdee2; font-size: 30px"></span>
             </div>
         </Row>
         <Row style="padding-top: 30px">
