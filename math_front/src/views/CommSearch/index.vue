@@ -13,10 +13,16 @@
                 <Button type="primary" style="width: 100%" size="large" shape="circle" icon="ios-search" @click="onSearchClick">搜索一下</Button>
             </Col>
         </Row>
+        <Row style="padding-top: 10px" v-show="query_type === 'formulation'">
+            公式预览:
+            <div>
+                <span v-katex="query_text" style="background-color: #dcdee2"></span>
+            </div>
+        </Row>
         <Row style="padding-top: 30px">
             <RadioGroup v-model="query_type" style="width: 100%" >
                 <Col span="3" offset="6">
-                    <Radio value="formulation" label="formulation" class="query-type-option">
+                    <Radio label="formulation" class="query-type-option">
                         <Icon type="logo-apple"></Icon>
                         <span>公式</span>
                     </Radio>
