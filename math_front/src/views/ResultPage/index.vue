@@ -41,7 +41,8 @@
                  v-for="item, index in results"
                  :key="item.chapter + index"
                  >
-                <div @click="onResultClick(item)" v-html="highLight(item.title)">
+                <div @click="onResultClick(item)">
+                    <span style="color: #1a0dab">{{ item.chapter }}</span>
                 </div>
                 <div>
                    <span v-for="abc in item.abstract" v-html="highLight(abc)"></span> ...
