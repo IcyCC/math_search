@@ -36,7 +36,8 @@ class WordQuery
 //
     void SaveToFile(const std::string& path) const;
     QueryResult Query(const std::string& sentence) const;
-
+    void ReadFromFile(const std::string& path);
+    
     void LoadContent(const std::string& dirpath);
 
   private:

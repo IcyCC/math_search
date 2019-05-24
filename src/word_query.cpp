@@ -149,9 +149,92 @@ void WordQuery::SaveToFile(const std::string& path) const
         }
         has_visited = true;
     }
-
-    // TODO: save to file
+    ofstream openfile(path,ios::app);
+    map<Word, map<shared_ptr<Article>, vector<size_t>>>::iterator it=word_search_.begin();
+    while(it!=word_search_.end())
+    {
+        openfile<<it->first<<"~";
+        map<std::shared_ptr<Article>, std::vector<std::size_t>>::iterator files=(it->second).begin();
+        while(files!=(it->second).end())
+        {
+            openfile<<content_index_[files->first]<<"!";
+            for(int i=0;i<(files->second).size;i++)
+            {
+                ofstream<<files->second[i];
+                if(i!=(files->second).size-1)
+                ofstream<<"@";
+            }
+        }
+        openfile<<"&";
+        ++it;
+    }
+    openfile.close();
 }
+
+void WordQuery::ReadFromFile(const std::string& path)
+{
+    ifstream fin(path);
+    string buf;
+    string content;
+    while (getline(fin, buf))
+    {
+        content.append(buf);
+        content.push_back('\n');
+    }
+    contents_.emplace_back(new u32string(to_utf32(content)));
+    string token;
+    string KWord;
+    int n;
+    vector<std::size_t> v;
+    int wz;
+    char f;
+    shared_ptr<std::u32string>p;
+    map<std::shared_ptr<Article>, std::vector<std::size_t>>fils;
+    content_index_.clear();
+    word_search_.clear();
+    for(int i=0;i<content.size();i++)
+    {
+        f=content[i];
+        if(f=='~')
+        {
+            KWord=token;
+            token="";
+        }
+        else if(f=='!')
+        {
+            n=atoi(token.c_str());
+            p=contents_[n];
+            content_index_[p]=(size_t)n;
+            token="";
+        }
+        else if(f=='@')
+        {
+            wz=atoi(token.c_str());
+            v.push_back((size_t)wz);
+            token="";
+        }
+        else if(f=='&')
+        {
+            wz=atoi(token.c_str());
+            v.push_back((size_t)wz);
+            fils.insert(make_pair(p,v));
+            word_search_.insert(make_pair((Word)KWord,fils));
+            token="";
+            KWord="";
+            v.clear();
+            fils.clear();
+
+        }
+        else if(f=='\n')
+        {
+            token=token;
+        }
+        else  
+        token+=content[i];
+
+    }
+}
+
 
 std::list<std::shared_ptr<std::u32string>> WordQuery::get_list(const Word& word) const
 {
