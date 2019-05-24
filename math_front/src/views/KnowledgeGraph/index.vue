@@ -1,6 +1,6 @@
 <template>
     <div style="text-align: center;">
-        <grapha  style="width: 1000px; height: 800px"></grapha>
+        <grapha  style="width: 100%; height: 800px"></grapha>
     </div>
 </template>
 

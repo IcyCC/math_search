@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns:viz="http://www.gexf.net/1.2draft/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.gephi.org/gexf/1.2draft" xmlns:ns0="xsi" version="1.2" ns0:schemaLocation="http://www.gephi.org/gexf/1.1draft http://gephi.org/gexf/1.2draft.xsd">
+  <meta lastmodified="2019-05-22">
+    <creator>搜书网</creator>
+    <description>课本知识点图</description>
+  </meta>
+  <graph defaultedgetype="directed" label="课本知识图谱" mode="static" timeformat="double">
+    <attributes class="node" mode="static">
+      <attribute id="0" title="modularity_class" type="float"/>
+    </attributes>
+    <nodes>
+      <node id="data/圆形" label="data/圆形">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="data/实数" label="data/实数">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="data/有理数" label="data/有理数">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="几何" label="几何">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="圆形" label="圆形">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="实数" label="实数">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="整数" label="整数">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="无理数" label="无理数">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="面积" label="面积">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge id="0" source="data/圆形" target="几何"/>
+      <edge id="1" source="data/圆形" target="面积"/>
+      <edge id="2" source="data/实数" target="整数"/>
+      <edge id="3" source="data/实数" target="无理数"/>
+      <edge id="4" source="data/实数" target="圆形"/>
+      <edge id="5" source="data/有理数" target="实数"/>
+      <edge id="6" source="data/有理数" target="整数"/>
+      <edge id="7" source="data/有理数" target="无理数"/>
+    </edges>
+  </graph>
+</gexf>

@@ -3,10 +3,18 @@
             :value="visible"
             @on-cancel="handleClose"
     >
-        <template v-for="w in words">
-            <span v-if="key_words.includes(w)"> {{w}} </span>
-            <a v-else> {{w}} </a>
-        </template>
+            <div slot="header">
+                {{ result.chapter }}
+            </div>
+            <div>
+                <template v-for="w in words">
+                    <span @click="handleWordClick(w)" v-if="key_words.includes(w)" style="color: rgb(26, 13, 171)"> {{w}} </span>
+                    <span v-else> {{w}} s</span>
+                </template>
+            </div>
+            <div slot="footer">
+
+            </div>
     </Modal>
 </template>
 
@@ -29,7 +37,6 @@
         watch: {
             visible: function () {
                 if (this.visible) {
-                    debugger
                     segmentWords(this.result.raw).then((resp)=>{
                         this.words = resp.data.words
                     })
@@ -46,6 +53,15 @@
             },
             handleClose() {
                 this.$emit('onClose')
+            },
+            handleWordClick(w) {
+                this.$router.push({
+                    name: 'result',
+                    query: {
+                        query_text: w,
+                        query_type: 'concept'
+                    }
+                })
             }
 
         },

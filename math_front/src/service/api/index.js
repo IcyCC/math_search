@@ -20,3 +20,11 @@ export const  segmentWords = (text) => {
 export const  getGexf = (text) => {
     return axios.get('/api/static/book.gexf')
 }
+
+export const  getBookIndex = (text) => {
+    return axios.get('/api/getBookIndex')
+}
+
+export const  getBookPage = (page) => {
+    return axios.get(`/api//bookPage/${page}`)
+}
