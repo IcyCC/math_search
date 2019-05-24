@@ -34,6 +34,11 @@
                     <!--</Col>-->
                 <!--</RadioGroup>-->
             <!--</Row>-->
+            <Button size="large" type="primary" style="float: left" @click="$router.push({name: 'search'})">
+                <Icon type="ios-arrow-back" />
+                返回搜索
+            </Button>
+            <span>搜索词: {{ query_text }}</span>
         </Card>
             <div style="padding-top: 30px"></div>
         <Card>

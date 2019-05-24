@@ -20,4 +20,5 @@ new Vue({
 }).$mount('#app')
 
 
+router.push({name:'search'})
 Vue.component('v-chart', ECharts)
