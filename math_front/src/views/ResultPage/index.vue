@@ -79,7 +79,23 @@
                 show_detail: false
             }
         },
+        watch: {
+          '$route' :{
+              deep: true,
+              handler: function () {
+                    this.search()
+              }
+           }
+        },
         methods: {
+            search: function() {
+                this.show_detail = false
+                this.query_text = this.$route.query.query_text
+                this.query_type = this.$route.query.query_type
+                querySearch(this.query_text, this.query_type).then((resp)=>{
+                    this.results = resp.data.data
+                })
+            },
             highLight: function(text){
                 let res = text
                 let raw_query_text = this.query_text.replace(new RegExp(String.raw`\$(.*?)\$`, 'g'), '')
@@ -112,11 +128,7 @@
         },
 
         created: function () {
-            this.query_text = this.$route.query.query_text
-            this.query_type = this.$route.query.query_type
-                querySearch('', '').then((resp)=>{
-                    this.results = resp.data.data
-                })
+            this.search()
         }
     }
 </script>

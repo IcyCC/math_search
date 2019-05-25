@@ -111,6 +111,6 @@
                 },
                 deep: true
             }
-        },
+        }
     }
 </script>
