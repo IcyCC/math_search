@@ -13,6 +13,7 @@
 #include "word_segment.h"
 #include "file_path.h"
 #include "text.h"
+//#include "query_result.h"
 
 // #include "query_result.h"
 
@@ -28,21 +29,26 @@ class WordQuery
     // using QueryResult = std::map<std::shared_ptr<Article>, std::vector<std::size_t>>;
     // using Result = std::map<std::shared_ptr<Article>, std::vector<std::size_t>>;
     // using Content
-    using QueryResult = std::unordered_map<std::string, std::unordered_set<std::string>>;
+    using QueryResult = std::unordered_map<std::shared_ptr<TextBlock>, std::vector<std::string>>;
 
     explicit WordQuery(const std::string& dirpath);
 
     ~WordQuery() = default;
 //
     void SaveToFile(const std::string& path) const;
-    QueryResult Query(const std::string& sentence) const;
     void ReadFromFile(const std::string& path);
-    
+    QueryResult Query(const std::string& sentence) const;
+
     void LoadContent(const std::string& dirpath);
 
   private:
-    std::list<std::shared_ptr<std::u32string>> get_list(const Word& word) const;
-    std::unordered_map<Article*, TextBlock> raw_textblock_;
+    std::list<std::shared_ptr<std::u32string>> get_content_list(const Word &word) const;
+    std::list<std::u32string> get_summary_list(
+            const std::vector<WordSegment::WordInfo>& word_infos,
+            const std::shared_ptr<std::u32string>&) const;
+
+
+    std::unordered_map<Article*, std::shared_ptr<TextBlock>> raw_textblock_;
     std::vector<std::shared_ptr<std::u32string>> contents_;
 //    std::unordered_map<>
 //    WordSegment word_segment_;
