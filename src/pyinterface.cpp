@@ -9,17 +9,12 @@
 #include "interface.h"
 namespace py = pybind11;
 
-std::vector<query::QueryResult> QueryCommPy(std::string q, std::string type){
-    auto _type = QueryType::CONCEPT;
-    if (type == "concept") {
-        type = QueryType::CONCEPT;
-    }
-    return QueryComm(q, _type);
-}
-
 PYBIND11_MODULE(pyinterface, m) {
 m.doc() = "pybind11 example plugin"; // optional module docstring
 
+py::class_<query::QueryResult>(m, 'QueryResult');
+
 m.def("SegmentWords", &SegmentWords, "");
-m.def("QueryCommPy", &QueryCommPy, "");
+m.def("QueryCommPy", &QueryComm, "");
+
 }
