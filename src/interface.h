@@ -3,10 +3,14 @@
 #include<vector>
 #include"query_result.h"
 
-enum QueryType {
-    CONCEPT
+class QueryType
+{
+   static const int NATURE = 0;
+   static const int CONCEPT = 1;
+   static const int EXERCISES = 2;
+   static const int TEXT = 3;
+   static const int EXAMPLE = 4;
 };
-
 // 获取公式以及其子公式
 std::vector<std::string> GetAllStdFormulaWithSub(std::string f);
 
