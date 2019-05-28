@@ -3,7 +3,7 @@
 #include<vector>
 #include"query_result.h"
 
-class QueryType
+struct QueryType
 {
    static const int NATURE = 0;
    static const int CONCEPT = 1;
@@ -15,7 +15,7 @@ class QueryType
 std::vector<std::string> GetAllStdFormulaWithSub(std::string f);
 
 // 查询接口
-std::vector<query::QueryResult> QueryComm(std::string q, QueryType type);
+std::vector<query::QueryResult> QueryComm(std::string q, int type);
 
 // 分词
 std::vector<std::string> SegmentWords(const std::string& str);

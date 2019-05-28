@@ -34,4 +34,6 @@ add_executable(math_search
         src/word_query.cpp
         src/word_query.h
         src/word_segment.cpp
-        src/word_segment.h)
+        src/word_segment.h
+        src/segment_words_impl.cpp
+        src/query_comm_impl.cpp)

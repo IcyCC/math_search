@@ -4,9 +4,8 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include <cassert>
 
-#include <string>
-#include <vector>
 #include "text.h"
 
 namespace query
@@ -14,7 +13,7 @@ namespace query
 
 struct QueryResult
 {
-    enum BlockType
+    enum class BlockType
     {
         NATURE,
         CONCEPT,
@@ -22,6 +21,16 @@ struct QueryResult
         TEXT,
         EXAMPLE
     };
+    QueryResult(const TextBlock& text, const std::vector<std::string>& p_summary, QueryResult::BlockType type)
+    {
+        id = text.id;
+        chapter = text.chapter;
+        title = text.title;
+        raw = text.raw;
+        this->type = type;
+        summary = p_summary;
+    }
+
     int id;
     std::string chapter;
     std::string title;
