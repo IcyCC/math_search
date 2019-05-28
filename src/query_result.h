@@ -5,30 +5,31 @@
 #include <memory>
 #include <string>
 
+#include <string>
+#include <vector>
+#include "text.h"
+
 namespace query
 {
 
-class QueryResult
+struct QueryResult
 {
-  public:
-
-    QueryResult(const std::shared_ptr<std::u32string>& content,
-                std::vector<std::size_t>&& pos)
-        : content_(content),
-          pos_(std::move(pos))
+    enum BlockType
     {
-    }
-    
-
-
-  private:
-    std::shared_ptr<std::u32string> content_;
-    std::vector<std::size_t> pos_;
-    std::vector<std::u32string_view> sentence_;
-
+        NATURE,
+        CONCEPT,
+        EXERCISES,
+        TEXT,
+        EXAMPLE
+    };
+    int id;
+    std::string chapter;
+    std::string title;
+    std::string raw;
+    BlockType type;
+    std::vector<std::string> summary;
 };
 
 } // query
-
 
 #endif // __QUERY_RESULT
