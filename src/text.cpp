@@ -2,6 +2,7 @@
 #include "util.h"
 #include <utility>
 #include <fstream>
+#include <iostream>
 
 std::regex EXERCISES_REGEX = std::regex(R"(\\begin\{exercise\}(.|\\r|\\n)*?end\{exercise\})", std::regex::extended|std::regex::nosubs);
 std::regex NATURE_REGEX = std::regex(R"(\\begin\{propertory\}(.|\\r|\\n)*?end\{propertory\})",std::regex::extended|std::regex::nosubs);
@@ -42,9 +43,12 @@ void TextBlock::Load(const std::string &file_path)
     std::string buf;
     while (getline(fin, buf))
     {
+        if (buf.empty())
+            continue;
         raw.append(buf);
         raw.push_back('\n');
     }
+    std::cout << "raw:\n" << raw;
 }
 
 std::vector<std::string> paserLatex2String(std::regex& re, std::string& raw) {

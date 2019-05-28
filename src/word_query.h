@@ -43,7 +43,7 @@ class WordQuery
 
   private:
     std::list<std::shared_ptr<std::u32string>> get_content_list(const Word &word) const;
-    std::list<std::u32string> get_summary_list(
+    std::list<std::string> get_summary_list(
             const std::vector<WordSegment::WordInfo>& word_infos,
             const std::shared_ptr<std::u32string>&) const;
 
