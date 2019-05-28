@@ -29,7 +29,8 @@ bool IsDelimiter(char32_t ch)
 }
 
 // merge two sorted list into lhs
-void merge_list(list<shared_ptr<u32string>>& lhs, const list<shared_ptr<u32string>>& rhs)
+template<typename Elem>
+void merge_list(list<Elem>& lhs, const list<Elem>& rhs)
 {
     auto lhs_it = lhs.begin();
     auto rhs_it = rhs.begin();
@@ -88,22 +89,23 @@ void WordQuery::LoadContent(const std::string& dirpath)
 {
     for (auto &entry : GetAllFilenames(dirpath))
     {
-        TextBlock text(entry);
-        auto ptr = new u32string(to_utf32(text.raw));
-        contents_.emplace_back(ptr);
-        raw_textblock_.insert({ptr, text});
+        auto text_ptr = std::make_shared<TextBlock>(entry);
+        auto raw_ptr = new u32string(to_utf32(text_ptr->raw));
+        contents_.emplace_back(raw_ptr);
+        raw_textblock_.insert({raw_ptr, text_ptr});
     }
 }
 
 WordQuery::QueryResult WordQuery::Query(const string& sentence) const
 {
+    assert(word_search_.find(U"单项式") != word_search_.end());
 //    word_segment_.SetContent(sentence);
     auto word_infos = QuerySegment(sentence);
     auto it = word_infos.begin();
-    list<shared_ptr<u32string>> content_list = get_list(it->word);
+    list<shared_ptr<u32string>> content_list = get_content_list(it->word);
 
     for_each(++it, word_infos.end(), [&] (const query::WordSegment::WordInfo& word_info) {
-        list<shared_ptr<u32string>> tmp = get_list(word_info.word);
+        list<shared_ptr<u32string>> tmp = get_content_list(word_info.word);
         merge_list(content_list, tmp);
     });
 
@@ -112,28 +114,12 @@ WordQuery::QueryResult WordQuery::Query(const string& sentence) const
     if (content_list.empty())
         return result;
 
-    for (const auto& word_info: word_infos)
+    for (const auto& content_ptr: content_list)
     {
-        const auto& map = word_search_.find(word_info.word)->second;
-        for (const auto& content: content_list)
-        {
-            set<pair<size_t, size_t>> summaries;
-            auto& pos_vec = map.find(content)->second;
-            for (size_t pos: pos_vec)
-            {
-                auto pair = GetSummary(content, pos);
-                // std::cout << "range:" << pair.first << " " << pair.second << "\n";
-                if (auto it = summaries.find(pair); it == summaries.end())
-                {
-                    result[raw_textblock_.find(content.get())->second.raw].insert(
-                            to_utf8(std::u32string(*content, pair.first, pair.second)));
-//                    result[content][word_info.word].emplace_back(content->c_str() + pair.first, pair.second);
-                    summaries.insert(pair);
-                }
-            }
-        }
+        auto summary_list = get_summary_list(word_infos, content_ptr);
+        result[raw_textblock_.find(content_ptr.get())->second] =
+                vector<std::string>(summary_list.begin(), summary_list.end());
     }
-
     return result;
 }
 
@@ -150,19 +136,19 @@ void WordQuery::SaveToFile(const std::string& path) const
         has_visited = true;
     }
     ofstream openfile(path,ios::app);
-    map<Word, map<shared_ptr<Article>, vector<size_t>>>::iterator it=word_search_.begin();
-    while(it!=word_search_.end())
+    auto it = word_search_.begin();
+    while (it != word_search_.end())
     {
         openfile<<it->first<<"~";
-        map<std::shared_ptr<Article>, std::vector<std::size_t>>::iterator files=(it->second).begin();
+        auto files = (it->second).begin();
         while(files!=(it->second).end())
         {
             openfile<<content_index_[files->first]<<"!";
-            for(int i=0;i<(files->second).size;i++)
+            for(int i=0;i<files->second.size();i++)
             {
-                ofstream<<files->second[i];
-                if(i!=(files->second).size-1)
-                ofstream<<"@";
+                openfile << files->second[i];
+                if (i != (files->second).size()-1)
+                    openfile<<"@";
             }
         }
         openfile<<"&";
@@ -192,9 +178,9 @@ void WordQuery::ReadFromFile(const std::string& path)
     map<std::shared_ptr<Article>, std::vector<std::size_t>>fils;
     content_index_.clear();
     word_search_.clear();
-    for(int i=0;i<content.size();i++)
+    for(char i : content)
     {
-        f=content[i];
+        f=i;
         if(f=='~')
         {
             KWord=token;
@@ -218,7 +204,7 @@ void WordQuery::ReadFromFile(const std::string& path)
             wz=atoi(token.c_str());
             v.push_back((size_t)wz);
             fils.insert(make_pair(p,v));
-            word_search_.insert(make_pair((Word)KWord,fils));
+            word_search_.insert(make_pair(utf::to_utf32(KWord),fils));
             token="";
             KWord="";
             v.clear();
@@ -230,13 +216,13 @@ void WordQuery::ReadFromFile(const std::string& path)
             token=token;
         }
         else  
-        token+=content[i];
+        token+=i;
 
     }
 }
 
 
-std::list<std::shared_ptr<std::u32string>> WordQuery::get_list(const Word& word) const
+std::list<std::shared_ptr<std::u32string>> WordQuery::get_content_list(const Word& word) const
 {
     list<shared_ptr<u32string>> list;
     if (auto it = word_search_.find(word); it != word_search_.end())
@@ -248,4 +234,45 @@ std::list<std::shared_ptr<std::u32string>> WordQuery::get_list(const Word& word)
     }
     list.sort();
     return list;
+}
+
+std::list<std::string> WordQuery::get_summary_list(
+        const std::vector<WordSegment::WordInfo>& word_infos,
+        const std::shared_ptr<std::u32string> &content_ptr) const
+{
+    auto kGetList = [&] (const WordSegment::WordInfo& word_info) -> list<std::u32string> {
+        list<std::u32string> result;
+        set<pair<size_t, size_t>> summaries;
+        auto it = word_search_.find(word_info.word);
+        assert(it != word_search_.end());
+        const auto& map = it->second;
+
+        auto& pos_vec = map.find(content_ptr)->second;
+        for (size_t pos: pos_vec)
+        {
+            auto summary = GetSummary(content_ptr, pos);
+            if (auto it = summaries.find(summary); it == summaries.end())
+            {
+//                auto str = std::u32string(*content_ptr, summary.first, summary.second);
+//                std::cout << str << endl;
+                result.emplace_back(*content_ptr, summary.first, summary.second);
+                summaries.insert(summary);
+            }
+        }
+        result.sort();
+        return result;
+    };
+
+    auto it = word_infos.begin();
+    list<std::u32string> result = kGetList(*it);
+
+    for_each(++it, word_infos.end(), [&] (const WordSegment::WordInfo& word_info) {
+        auto tmp = kGetList(word_info);
+        merge_list(result, tmp);
+    });
+
+    list<std::string> real_result;
+    for (const auto& r: result)
+        real_result.push_back(utf::to_utf8(r));
+    return real_result;
 }
