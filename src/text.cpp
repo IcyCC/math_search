@@ -40,6 +40,7 @@ void TextBlock::Load(const std::string &file_path)
     fin >> id;
     fin >> chapter;
     fin >> title;
+
     std::string buf;
     while (getline(fin, buf))
     {
@@ -48,7 +49,7 @@ void TextBlock::Load(const std::string &file_path)
         raw.append(buf);
         raw.push_back('\n');
     }
-    std::cout << "raw:\n" << raw;
+//    std::cout << "raw:\n" << raw;
 }
 
 std::vector<std::string> paserLatex2String(std::regex& re, std::string& raw) {
