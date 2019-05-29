@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <sstream>
+#include "util.h"
 
 using namespace std;
 
@@ -89,13 +90,8 @@ void DirList(std::string inpath, std::string outpath){
 
 
 void DirList(std::string inpath, std::string outpath){
-		vector<string> file=GetAllFilenames(inpath);
-		auto vec = vector<TextBlock>();
-		for(auto f: file){
-				vector<TextBlock> t;
-                t=ParseFromLatex(f);
-                vec.insert(vec.end(), t.begin(), t.end());
-		}
+		File2One(inpath);
+		auto vec = ParseFromLatex("all.tex");
 		HandleTex(vec, outpath);
 }
  

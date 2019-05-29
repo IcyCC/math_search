@@ -62,11 +62,14 @@
                 }
                 this.book_index[0].children = resp.data.book_index.map((item)=>{
                     item.render = (h, params) => {
-                        let height = this.select_title === item.title ? '#38f': '#555'
+                        let height = this.select_title === item.title
+
                         return h('span', {
                             class: 'tree-font',
                             style: {
-                                color: height,
+                                color: height ? '#38f': '#555',
+                                cursor: 'pointer',
+                                textDecoration: height ? 'underline': 'none',
                             },
                             on: {
                                 click: () => {

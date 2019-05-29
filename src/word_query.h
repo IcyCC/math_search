@@ -13,6 +13,7 @@
 #include "word_segment.h"
 #include "file_path.h"
 #include "text.h"
+#include "util.h"
 //#include "query_result.h"
 
 // #include "query_result.h"

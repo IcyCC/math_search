@@ -7,23 +7,10 @@
 #include <dirent.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <ostream>
+#include <iostream>
 #include <cstring>
 
-void File2One(std::string inpath){
-	char c[10000];
-	ofstream ofile("all.tex");
-	vector<string> file=GetAllFilenames(inpath);
-	for(auto f: file){
-		ifstream ifile(f);
-		cout << f << endl;
-		while(!ifile.eof()){
-			ifile.getline(c,9999);
-			ofile << c << endl;
-		}
-		ifile.close();
-	}
-	ofile.close();
-}
 
 int WriteString2FileAppend(const std::string &file_string, const std::string& str)
 {
@@ -46,14 +33,34 @@ std::string Int2String(int a)
     return std::to_string(a);
 }
 
-std::vector<std::string> GetAllFilenames(std::string &inpath){
-        string temp;
+std::vector<std::string> GetAllFilenames(const std::string& dirname)
+{
+    std::vector<std::string> res;
+    DIR* dir;
+    struct dirent* dirent;
+    if ((dir = ::opendir(dirname.c_str())) == nullptr)
+    {
+        ::perror("open");
+        exit(EXIT_FAILURE);
+    }
+
+    while ((dirent = ::readdir(dir)) != nullptr)
+    {
+        if (strcmp(dirent->d_name, ".") != 0 && strcmp(dirent->d_name, "..") != 0)
+            res.emplace_back(dirname + "/" + dirent->d_name);
+    }
+    ::closedir(dir);
+    return res;
+}
+
+std::vector<std::string> GetAllFilenamesZZZ(std::string &inpath){
+        std::string temp;
 		std::vector<std::string> res;
         temp=(char *)malloc(sizeof(char)*50);
         int j;
         for(int i=6;i<82;i=i+5){
                 j=i+5;
-                ostringstream ostr;
+                std::ostringstream ostr;
                 ostr << inpath << "/book" << i << "-" << i+4 << ".tex";
                 temp=ostr.str();
                 //cout << temp << endl;
@@ -97,4 +104,20 @@ std::vector<std::string > FindAllSub(const std::string& raw,  const std::string&
 
     }
     return  res;
+}
+
+void File2One(std::string inpath){
+    char c[10000];
+    std::ofstream ofile("all.tex");
+    std::vector<std::string> file=GetAllFilenamesZZZ(inpath);
+    for(auto f: file){
+        std::ifstream ifile(f);
+        std::cout << f << std::endl;
+        while(!ifile.eof()){
+            ifile.getline(c,9999);
+            ofile << c << std::endl;
+        }
+        ifile.close();
+    }
+    ofile.close();
 }

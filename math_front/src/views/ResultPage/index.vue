@@ -39,6 +39,7 @@
                 返回搜索
             </Button>
             <span>搜索词: {{ query_text }}</span>
+            <span>(点击标题弹出详情)</span>
         </Card>
             <div style="padding-top: 30px"></div>
         <Card>
@@ -49,7 +50,7 @@
 
                 <Col span=16 offset="4">
                     <div @click="onResultClick(item)" style="font-size: 20px">
-                        <span style="color: #1a0dab">{{ item.chapter }}</span>
+                        <span style="color: #1a0dab;cursor:pointer;text-decoration:underline;">{{ item.chapter }}</span>
                     </div>
                     <div  style="font-size: 17px">
                         <span v-for="abc in item.abstract" v-html="highLight(abc)"></span> ......<br>
