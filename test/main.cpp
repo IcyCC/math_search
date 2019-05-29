@@ -3,9 +3,10 @@
 //
 
 #include<iostream>
+#include "interface.h"
 #include "cmd.h"
 int main()
 {
-    RunSpliteLatex("/Users/suchang/Code/homework/math_search/LaTexDoc", "/Users/suchang/Code/homework/math_search/text_blocks");
+    QueryComm("单项式", 1);
     return  0;
 }

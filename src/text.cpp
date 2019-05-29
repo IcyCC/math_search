@@ -100,6 +100,9 @@ std::vector<TextBlock> ParseFromLatex(std::string filepath)
             std::cout << "property title***********************************************" << prop_ << std::endl;
 		}
 
+		int defi_flag = 0;
+		int prop_flag = 0;
+
 	     auto exercises_strings = FindAllSub(st,"\\begin{exercise}", "\\end{exercise}", true);
     	 for (auto &e : exercises_strings){
         	 res.push_back(std::move(TextBlock(++i,cap, "", e, TextBlock::BlockType::EXERCISES)));
@@ -107,12 +110,14 @@ std::vector<TextBlock> ParseFromLatex(std::string filepath)
  
     	 auto nature_strings = FindAllSub(st,"\\begin{propertory}", "\\end{propertory}", true);
 	     for (auto &e : nature_strings){
-   	      res.push_back(std::move(TextBlock(++i,cap, "����", e,  TextBlock::BlockType::NATURE)));
+   	        res.push_back(std::move(TextBlock(++i,cap, prop[prop_flag], e,  TextBlock::BlockType::NATURE)));
+             prop_flag++;
 	   	  }
  
-    	 auto concept_strings = FindAllSub(st,"\\begin{concept}", "\\end{concept}", true);
+    	 auto concept_strings = FindAllSub(st,"\\begin{definition}", "\\end{definition}", true);
      	for (auto &e : concept_strings){
-        	 res.push_back(std::move(TextBlock(++i,cap, "����", e, TextBlock::BlockType::CONCEPT)));
+        	 res.push_back(std::move(TextBlock(++i,cap,defi[defi_flag], e, TextBlock::BlockType::CONCEPT)));
+            defi_flag++;
      	}
  
  
