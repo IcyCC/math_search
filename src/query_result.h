@@ -31,6 +31,15 @@ struct QueryResult
         summary = p_summary;
     }
 
+    QueryResult()
+    {
+        id = 0;
+        chapter = " ";
+        title = " ";
+        raw = " ";
+        this->type = BlockType::CONCEPT;
+        summary = std::vector<std::string>();
+    }
     int id;
     std::string chapter;
     std::string title;

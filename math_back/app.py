@@ -1,11 +1,18 @@
 import ctypes
 from flask import Flask, request, jsonify, redirect, make_response
 import os
+import mock
+import interface
 
-mock = True
+be_mock = False
+service = interface
+
+if be_mock:
+    service = mock
 
 path = os.path.split(os.path.abspath(__file__))[0]
 app = Flask(__name__, static_folder=os.path.join(path, 'static'))
+
 
 BOOK_INDEX = res = [{'title': '1.1 正数和负数', 'page': '8'},
                     {'title': '1.2 有理数', 'page': '12'},
@@ -68,26 +75,10 @@ book_map = [{'range': (111, 115), 'name': 'book111-115.tex'},
 
 @app.route("/search", methods=["POST"])
 def r_search():
-    res = [{
-        "id": 1,
-        "chapter": "1.1.1 有理数",
-        "title": "有理数的性质",
-        "raw": "有理数是一个数",
-        "abstract": [
-            "有理数是一个数",
-            "无线不循环的有理数"
-        ]
-    },
-        {
-            "id": 2,
-            "chapter": "1.1.1 无理数",
-            "title": "无理数",
-            "raw": "有无理数不好吃",
-            "abstract": [
-                "无理数是一个数",
-                "无线不循环的无理数"
-            ]
-        }]
+    body = request.json
+    query_text = body.get("query_text", '')
+    query_type = body.get("query_type", 'concept')
+    res = service.QueryCommPy(query_text, query_type)
 
     return jsonify(code=200, msg='', data=res)
 
@@ -103,11 +94,9 @@ def get_key_word():
 
 @app.route("/segmentWords", methods=["POST"])
 def segment_words():
-    d = [
-        "有理数",
-        "本质",
-        "物理"
-    ]
+    body = request.json
+    text = body.get('text', '')
+    d = service.SegmentWords(text=text)
     return jsonify(code=200, msg="", words=d)
 
 

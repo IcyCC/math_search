@@ -23,5 +23,11 @@ def QueryCommPy(q, t):
     ]
 }]
 
+
+def SegmentWords(text):
+    return [
+        "有理数",
+        "本质",
+        "物理"]
     
 

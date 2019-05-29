@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const  querySearch = (query_text, query_type) => {
     return axios.post('/api/search', {
-        'query_text':query_type,
+        'query_text':query_text,
         'query_type':query_type
     })
 }
