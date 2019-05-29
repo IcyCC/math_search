@@ -8,8 +8,8 @@
             </div>
             <div>
                 <template v-for="w in words">
-                    <span @click="handleWordClick(w)" v-if="key_words.includes(w)" style="color: rgb(26, 13, 171)"> {{w}} </span>
-                    <span v-else> {{w}} s</span>
+                    <span @click="handleWordClick(w)" v-if="key_words.includes(w)" style="color: rgb(26, 13, 171)">{{w}}</span>
+                    <span v-else>{{w}}</span>
                 </template>
             </div>
             <div slot="footer">
