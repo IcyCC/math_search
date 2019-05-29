@@ -65,6 +65,7 @@ std::vector<std::string> paserLatex2String(std::regex& re, std::string& raw) {
     return res;
 }
 
+
 std::vector<TextBlock> ParseFromLatex(std::string filepath)
 {
     int i = 0;
@@ -77,40 +78,65 @@ std::vector<TextBlock> ParseFromLatex(std::string filepath)
         raw = raw + buffer;
         raw.push_back('\n');
     }
-    auto exercises_strings = FindAllSub(raw,"\\begin{exercise}", "\\end{exercise}", true);
-    for (auto &e : exercises_strings){
-        res.push_back(std::move(TextBlock(++i,"", "", raw, TextBlock::BlockType::EXERCISES)));
+	
+	auto strings = FindAllSub(raw,"\\subsection", "\\subsection",false);
+    for (auto &st : strings){
+        //cout << "number: ******************************************************" << i  << endl << e << endl;
+		//i++;
+		int k1=st.find_first_of("{");
+		int k2=st.find_first_of("}");
+		auto cap=st.substr(k1+1,k2-2);
+		cout << "**************cap:****************" << cap << endl;
+
+//			cout << "******************cap*******************" << st << endl;
+		auto defi=FindAllSub(st,"\\definition{","}",false);
+		for (auto defi_:defi){
+			cout << "definition title*******************************************" << defi_ << endl;	
+		}
+		
+		auto prop=FindAllSub(st,"property{","}",false);
+		for (auto prop_:prop){
+			cout << "property title***********************************************" << prop_ << endl;
+		}
+
+	     auto exercises_strings = FindAllSub(st,"\\begin{exercise}", "\\end{exercise}", true);
+    	 for (auto &e : exercises_strings){
+        	 resu.push_back(std::move(TextBlock(++i,cap, "", e, TextBlock::BlockType::EXERCISES)));
+	     }
+ 
+    	 auto nature_strings = FindAllSub(st,"\\begin{propertory}", "\\end{propertory}", true);
+	     for (auto &e : nature_strings){
+   	      resu.push_back(std::move(TextBlock(++i,cap, "²âÊÔ", e,  TextBlock::BlockType::NATURE)));
+	   	  }
+ 
+    	 auto concept_strings = FindAllSub(st,"\\begin{concept}", "\\end{concept}", true);
+     	for (auto &e : concept_strings){
+        	 resu.push_back(std::move(TextBlock(++i,cap, "²âÊÔ", e, TextBlock::BlockType::CONCEPT)));
+     	}
+ 
+ 
+     	auto text_strings = FindAllSub(st,"\\end{document}", "\\end{document}", true);
+    	 for (auto &e : text_strings){
+        	 resu.push_back(std::move(TextBlock(++i,cap, "", e,  TextBlock::BlockType::TEXT)));
+     	}
+ 
+   	  auto example_strings = FindAllSub(st,"\\begin{example}", "\\end{example}", true);
+    	 for (auto &e : example_strings){
+        	 resu.push_back(std::move(TextBlock(++i,cap, "", e,  TextBlock::BlockType::EXAMPLE)));
+  	   }
+		
     }
-
-    auto nature_strings = FindAllSub(raw,"\\begin{propertory}", "\\end{propertory}", true);
-    for (auto &e : nature_strings){
-        res.push_back(std::move(TextBlock(++i,"æµ‹è¯•", "æµ‹è¯•", raw,  TextBlock::BlockType::NATURE)));
-    }
-
-    auto concept_strings = FindAllSub(raw,"\\begin{concept}", "\\end{concept}", true);
-    for (auto &e : concept_strings){
-        res.push_back(std::move(TextBlock(++i,"æµ‹è¯•", "æµ‹è¯•", raw, TextBlock::BlockType::CONCEPT)));
-    }
-
-
-    auto text_strings = FindAllSub(raw,"\\end{document}", "\\end{document}", true);
-    for (auto &e : text_strings){
-        res.push_back(std::move(TextBlock(++i,"", "", raw,  TextBlock::BlockType::TEXT)));
-    }
-
-	auto example_strings = FindAllSub(raw,"\\begin{example}", "\\end{example}", true);
-    for (auto &e : example_strings){
-        res.push_back(std::move(TextBlock(++i,"", "", raw,  TextBlock::BlockType::EXAMPLE)));
-    }
-//
-
-/*		}
-
+	/*
+	int j=0;
+	cout << "******************************************************************************************************************************************************************"<< endl;
+	for (auto te : resu){
+		cout << "num: " << resu[j].id  << "********" << "***" << resu[j].chapter <<"***"<< resu[j].title << "***"<< resu[j].type <<endl;
+	++j;
 	}
 */
-
     return res;
 }
+
 
 
 
