@@ -62,6 +62,17 @@ class WordSegment
 
     std::vector<WordInfo> DoSegmentImpl(std::u32string_view sentence, size_t article_pos) const;
     std::multimap<std::size_t, WordPos> GetAllWords(std::u32string_view sentence) const;
+    void AddSegmentsToResult(std::vector<WordSegment::WordInfo>& result,
+                                const std::u32string& content,
+                                size_t begin, size_t i) const;
+    void DoSegImplDfs(std::size_t sentence_pos,
+                      std::size_t count,
+                      std::size_t article_pos,
+                      std::size_t& min_count,
+                      std::u32string_view sentence,
+                      std::vector<WordSegment::WordInfo>& result,
+                      std::vector<WordSegment::WordInfo>& curr_res,
+                      const std::multimap<std::size_t, WordSegment::WordPos>& words) const;
 
 //    std::shared_ptr<std::u32string> content_;
     std::map<std::u32string, size_t> word_count_;

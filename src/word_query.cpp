@@ -98,12 +98,9 @@ void WordQuery::LoadContent(const std::string& dirpath)
 
 WordQuery::QueryResult WordQuery::Query(const string& sentence) const
 {
-    assert(word_search_.find(U"单项式") != word_search_.end());
-//    word_segment_.SetContent(sentence);
     auto word_infos = QuerySegment(sentence);
     auto it = word_infos.begin();
     list<shared_ptr<u32string>> content_list = get_content_list(it->word);
-
     for_each(++it, word_infos.end(), [&] (const query::WordSegment::WordInfo& word_info) {
         list<shared_ptr<u32string>> tmp = get_content_list(word_info.word);
         merge_list(content_list, tmp);
@@ -113,13 +110,17 @@ WordQuery::QueryResult WordQuery::Query(const string& sentence) const
 
     if (content_list.empty())
         return result;
-
+    size_t sss = content_list.size();
+//    std::cout << sss-- << "\n";
     for (const auto& content_ptr: content_list)
     {
+//        std::cout << sss-- << "\n";
         auto summary_list = get_summary_list(word_infos, content_ptr);
         result[raw_textblock_.find(content_ptr.get())->second] =
                 vector<std::string>(summary_list.begin(), summary_list.end());
     }
+//    std::cout << "Fuck\n";
+//    std::cout << result.size() << "\n";
     return result;
 }
 

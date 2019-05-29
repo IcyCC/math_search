@@ -98,13 +98,6 @@ WordSegment::DoSegment(const std::u32string& content, bool is_article) const
     std::vector<WordSegment::WordInfo> result;
     size_t begin = 0, i;
 
-    auto add_segments_to_result = [this, &result, &content] (size_t begin, size_t i) {
-        auto to_add = this->DoSegmentImpl(std::u32string_view(content.c_str() + begin, i - begin), begin);
-        using Iterator = decltype(to_add.begin());
-        result.insert(result.end(), std::move_iterator<Iterator>(to_add.begin()),
-                      std::move_iterator<Iterator>(to_add.end()));
-    };
-
     for (i = 1; i < content.size(); )
     {
         if (content[i] == U'$')
@@ -134,7 +127,7 @@ WordSegment::DoSegment(const std::u32string& content, bool is_article) const
         // it dependents on that alpha is the same representation in ascii and utf32
         if (IsAlpha(content[i]))
         {
-            add_segments_to_result(begin, i);
+            AddSegmentsToResult(result, content, begin, i);
             begin = i;
             do
             {
@@ -146,7 +139,7 @@ WordSegment::DoSegment(const std::u32string& content, bool is_article) const
         }
         if (IsDividedChar(content[i]))
         {
-            add_segments_to_result(begin, i);
+            AddSegmentsToResult(result, content, begin, i);
             while (i < content.size() && IsDividedChar(content[i]))
                 ++i;
             begin = i;
@@ -157,7 +150,7 @@ WordSegment::DoSegment(const std::u32string& content, bool is_article) const
 
     if (i > begin)
     {
-        add_segments_to_result(begin, i);
+        AddSegmentsToResult(result, content, begin, i);
     }
 
     return result;
@@ -192,37 +185,61 @@ WordSegment::DoSegmentImpl(std::u32string_view sentence, size_t article_pos) con
 
     auto words = GetAllWords(sentence);
 
-    std::function<void(std::size_t, std::size_t)> kDFS = 
-        [&] (std::size_t sentence_pos, std::size_t count) {
-        if (sentence_pos >= sentence.size())
-        {
-            if (count > min_count)
-            {
-                result = curr_res;
-                min_count = count;
-            }
-        }
-        if (sentence_pos > sentence.size())
-            return;
-        auto range = words.equal_range(sentence_pos);
-        if (range.first == range.second)
-        {
-            curr_res.emplace_back(std::u32string(sentence, sentence_pos, 1), article_pos + sentence_pos);
-            kDFS(sentence_pos + 1, count);
-            curr_res.pop_back();
-        }
-        else
-        {
-            for (auto it = range.first; it != range.second; ++it)
-            {
-                curr_res.emplace_back(it->second.word, article_pos + sentence_pos);
-                kDFS(it->second.end, count + word_count_.at(it->second.word));
-                curr_res.pop_back();
-            }
-        }
-    };
-
-    kDFS(0, 0);
+    DoSegImplDfs(0, 0, article_pos, min_count, sentence, result, curr_res, words);
 
     return result;
+}
+
+void WordSegment::AddSegmentsToResult(std::vector<WordSegment::WordInfo>& result,
+                         const std::u32string& content,
+                         size_t begin, size_t i) const
+{
+    auto to_add = DoSegmentImpl(std::u32string_view(content.c_str() + begin, i - begin), begin);
+    using Iterator = decltype(to_add.begin());
+    result.insert(result.end(), std::move_iterator<Iterator>(to_add.begin()),
+                  std::move_iterator<Iterator>(to_add.end()));
+//    for (const auto& word: result) {
+//        std::cout << "f " << word.word << std::endl;
+//    }
+}
+
+void WordSegment::DoSegImplDfs(std::size_t sentence_pos,
+                               std::size_t count,
+                               std::size_t article_pos,
+                               std::size_t& min_count,
+                               std::u32string_view sentence,
+                               std::vector<WordSegment::WordInfo>& result,
+                               std::vector<WordSegment::WordInfo>& curr_res,
+                               const std::multimap<std::size_t, WordSegment::WordPos>& words) const
+{
+    if (sentence_pos >= sentence.size())
+    {
+        if (count > min_count)
+        {
+            result = std::move(curr_res);
+            min_count = count;
+        }
+    }
+    if (sentence_pos > sentence.size())
+        return;
+    auto range = words.equal_range(sentence_pos);
+    if (range.first == range.second)
+    {
+//        std::cout << std::u32string(sentence, sentence_pos, 1) << "\n";
+        curr_res.emplace_back(std::u32string(sentence, sentence_pos, 1), article_pos + sentence_pos);
+        DoSegImplDfs(sentence_pos + 1, count, article_pos, min_count, sentence, result, curr_res, words);
+        if (!curr_res.empty())
+            curr_res.pop_back();
+    }
+    else
+    {
+        for (auto it = range.first; it != range.second; ++it)
+        {
+//            std::cout << "a " << WordSegment::WordInfo(it->second.word, article_pos + sentence_pos).word << "\n";
+            curr_res.emplace_back(it->second.word, article_pos + sentence_pos);
+            DoSegImplDfs(it->second.end, count + word_count_.at(it->second.word), article_pos, min_count, sentence, result, curr_res, words);
+            if (!curr_res.empty())
+                curr_res.pop_back();
+        }
+    }
 }

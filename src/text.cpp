@@ -4,11 +4,11 @@
 #include <fstream>
 #include <iostream>
 
-std::regex EXERCISES_REGEX = std::regex(R"(\\begin\{exercise\}(.|\\r|\\n)*?end\{exercise\})", std::regex::extended|std::regex::nosubs);
-std::regex NATURE_REGEX = std::regex(R"(\\begin\{propertory\}(.|\\r|\\n)*?end\{propertory\})",std::regex::extended|std::regex::nosubs);
-std::regex CONCEPT_REGEX = std::regex(R"(\\begin\{concept\}(.|\\r|\\n)*?end\{concept\})",std::regex::extended|std::regex::nosubs);
-std::regex EXAMPLE_REGEX = std::regex(R"(\\begin\{example\}(.|\\r|\\n)*?end\{example\})",std::regex::extended|std::regex::nosubs);
-std::regex TEXT_REGEX = std::regex(R"(\\begin\{article\}(.|\\r|\\n)*?end\{article\})",std::regex::extended|std::regex::nosubs);
+//std::regex EXERCISES_REGEX = std::regex(R"(\\begin\{exercise\}(.|\\r|\\n)*?end\{exercise\})", std::regex::extended|std::regex::nosubs);
+//std::regex NATURE_REGEX = std::regex(R"(\\begin\{propertory\}(.|\\r|\\n)*?end\{propertory\})",std::regex::extended|std::regex::nosubs);
+//std::regex CONCEPT_REGEX = std::regex(R"(\\begin\{concept\}(.|\\r|\\n)*?end\{concept\})",std::regex::extended|std::regex::nosubs);
+//std::regex EXAMPLE_REGEX = std::regex(R"(\\begin\{example\}(.|\\r|\\n)*?end\{example\})",std::regex::extended|std::regex::nosubs);
+//std::regex TEXT_REGEX = std::regex(R"(\\begin\{article\}(.|\\r|\\n)*?end\{article\})",std::regex::extended|std::regex::nosubs);
 //std::regex CHAPTER_BLOCK_REGEX = std::regex(R("subsection\}([\s\S]*/?)end"));//no test
 //std::regex TITLE_BLOCK_REGEX = std::regex(R("defintion\}([\s\S]*/?)end"));//no test
 //std::regex CHAPTER_REGEX = std::regex(R("subsection\{([\s\S]*/?)\}"));//no test
@@ -25,7 +25,7 @@ std::string TextBlock::Dumps()
     res = res + Int2String(this->id);
     res = res + "\r\n";
     res = res + this->chapter;
-    res = res + "\r\n"; 
+    res = res + "\r\n";
     res = res + this->title;
     res = res + "\r\n";
     res = res + this->raw;
@@ -64,9 +64,6 @@ std::vector<std::string> paserLatex2String(std::regex& re, std::string& raw) {
     }
     return res;
 }
-
-
-
 
 std::vector<TextBlock> ParseFromLatex(std::string filepath)
 {
