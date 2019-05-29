@@ -98,7 +98,7 @@ WordSegment::DoSegment(const std::u32string& content, bool is_article) const
     std::vector<WordSegment::WordInfo> result;
     size_t begin = 0, i;
 
-    for (i = 1; i < content.size(); )
+    for (i = 0; i < content.size(); )
     {
         if (content[i] == U'$')
         {
