@@ -29,6 +29,8 @@ inline bool IsEndWith(std::string s, std::string m) {
     return true;
 }
 
+void File2One(std::string inpath)£» 
+
 int WriteString2FileAppend(const std::string &file_string, const std::string& str);
 
 int WriteString2File(const std::string &file_string, const std::string& str);
