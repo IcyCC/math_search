@@ -9,7 +9,7 @@
         background: #f5f7f9;
         position: relative;
         border-radius: 4px;
-        overflow: scroll;
+        overflow: hidden;
         height: 100%;
     }
 
@@ -31,6 +31,7 @@
         left: 20px;
         color: #ffffff;
         size: 30px;
+        cursor: pointer;
     }
 
     .layout-nav {
@@ -52,10 +53,10 @@
 <template>
     <div class="layout">
         <Layout>
-            <Header :style="{position: 'fixed', width: '100%'}">
+            <Header :style="{ width: '100%'}">
                 <Menu mode="horizontal" theme="primary" :active-name="activity_name" @on-select="onMenuSelect">
-                    <div class="layout-logo">
-                        <Icon type="ios-book"/>
+                    <div class="layout-logo" @click="()=>{$router.push({name:'search'})}">
+                        <Icon type="ios-book" />
                         搜书网
                     </div>
                     <div class="layout-nav">
@@ -80,7 +81,7 @@
                     </div>
                 </Menu>
             </Header>
-            <Content :style="{margin: '88px 20px 0', minHeight: '820px'}">
+            <Content style="margin: 10px 20px 0; min-height: 620px; overflow: hidden;">
                 <div style="margin-top: 25px">
                     <router-view></router-view>
                 </div>

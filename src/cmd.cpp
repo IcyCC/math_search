@@ -7,66 +7,61 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <sstream>
+#include "util.h"
+
 #include "keyword.h"
+
 using namespace std;
 
 
-void HandleTex(vector<TextBlock> &vec, std::string outpath){
-		vector<TextBlock> nature;
-		vector<TextBlock> concept;
-		vector<TextBlock> exercise;
-		vector<TextBlock> text;
-		vector<TextBlock> example;
-	
-		for(auto v: vec){
-			if(v.type==TextBlock::BlockType::NATURE){
-				nature.push_back(v);
-			}
+void HandleTex(vector<TextBlock> &vec, std::string outpath) {
+    vector<TextBlock> nature;
+    vector<TextBlock> concept;
+    vector<TextBlock> exercise;
+    vector<TextBlock> text;
+    vector<TextBlock> example;
 
-			else if(v.type==TextBlock::BlockType::CONCEPT){
-				concept.push_back(v);
-			}
+    for (auto v: vec) {
+        if (v.type == TextBlock::BlockType::NATURE) {
+            nature.push_back(v);
+        } else if (v.type == TextBlock::BlockType::CONCEPT) {
+            concept.push_back(v);
+        } else if (v.type == TextBlock::BlockType::EXERCISES) {
+            exercise.push_back(v);
+        } else if (v.type == TextBlock::BlockType::TEXT) {
+            text.push_back(v);
+        } else if (v.type == TextBlock::BlockType::EXAMPLE) {
+            example.push_back(v);
+        }
 
-			else if(v.type==TextBlock::BlockType::EXERCISES){
-				exercise.push_back(v);
-			}
+    }
 
-			else if(v.type==TextBlock::BlockType::TEXT){
-				text.push_back(v);
-			}
 
-			else if(v.type==TextBlock::BlockType::EXAMPLE){
-				example.push_back(v);
-			}
+    NatureStore nature_;
+    nature_.data = nature;
 
-		}
+    ConceptStore concept_;
+    concept_.data = concept;
 
-		
-		NatureStore nature_;
-		nature_.data=nature;
-		nature_.Save(outpath);
+    ExercisesStore exercise_;
+    exercise_.data = exercise;
 
-		ConceptStore concept_;
-		concept_.data=concept;
-		concept_.Save(outpath);
-	
-		ExercisesStore exercise_;
-		exercise_.data=exercise;
-		exercise_.Save(outpath);		
+    TextStore text_;
+    text_.data = text;
 
-		TextStore text_;
-		text_.data=text;
-		text_.Save(outpath);		
+    ExampleStore example_;
+    example_.data = example;
 
-		ExampleStore example_;
-		example_.data=example;
-		example_.Save(outpath);
+    exercise_.Save(outpath);
+    text_.Save(outpath);
+    concept_.Save(outpath);
+    nature_.Save(outpath);
+    example_.Save(outpath);
 
-		GetAllKeyWordstd(nature);
-        GetAllKeyWordstd(concept);
-        KeyWordToFile(nature,"NatrureKey");
-        KeyWordToFile(concept,"ConceptKey");
-
+    GetAllKeyWordstd(nature);
+    GetAllKeyWordstd(concept);
+    KeyWordToFile(nature, "NatrureKey");
+    KeyWordToFile(concept, "ConceptKey");
 
 
 }
@@ -95,24 +90,18 @@ void DirList(std::string inpath, std::string outpath){
 */
 
 
-void DirList(std::string inpath, std::string outpath){
-		vector<string> file=GetAllFilenames(inpath);
-		auto vec = vector<TextBlock>();
-		for(auto f: file){
-				vector<TextBlock> t;
-                t=ParseFromLatex(f);
-                vec.insert(vec.end(), t.begin(), t.end());
-		}
-		HandleTex(vec, outpath);
+void DirList(std::string inpath, std::string outpath) {
+    File2One(inpath);
+    auto vec = ParseFromLatex("all.tex");
+    HandleTex(vec, outpath);
 }
- 
-void RunSpliteLatex(std::string inpath, std::string outpath){
-		DirList(inpath, outpath);
+
+void RunSpliteLatex(std::string inpath, std::string outpath) {
+    DirList(inpath, outpath);
 }
 
 
-void RunKeyWords(AbcStore *s, std::string outpath){
-		KeyWordToFile(s,outpath);
+void RunKeyWords(AbcStore *s, std::string outpath) {
 }
 
 

@@ -13,11 +13,11 @@ namespace
 //    TEXT,
 //    EXAMPLE
 
-query::WordQuery concept_query("./text_blocks/concept");
-query::WordQuery nature_query("./text_blocks/concept");
-query::WordQuery exercises_query("./text_blocks/concept");
-query::WordQuery text_query("./text_blocks/concept");
-query::WordQuery example_query("./text_blocks/concept");
+query::WordQuery concept_query("/Users/suchang/Code/homework/math_search/text_blocks/concept/");
+query::WordQuery nature_query("/Users/suchang/Code/homework/math_search/text_blocks/concept/");
+query::WordQuery exercises_query("/Users/suchang/Code/homework/math_search/text_blocks/concept/");
+query::WordQuery text_query("/Users/suchang/Code/homework/math_search/text_blocks/concept/");
+query::WordQuery example_query("/Users/suchang/Code/homework/math_search/text_blocks/concept/");
 
 } // namespace
 
