@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <sstream>
-
+#include "keyword.h"
 using namespace std;
 
 
@@ -61,6 +61,13 @@ void HandleTex(vector<TextBlock> &vec, std::string outpath){
 		ExampleStore example_;
 		example_.data=example;
 		example_.Save(outpath);
+
+		GetAllKeyWordstd(nature);
+        GetAllKeyWordstd(concept);
+        KeyWordToFile(nature,"NatrureKey");
+        KeyWordToFile(concept,"ConceptKey");
+
+
 
 }
 

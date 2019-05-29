@@ -5,12 +5,12 @@
 #include "keyword.h"
 #include <sstream>
 
-std::vector<std::string> KeyWordGather;
+static std::vector<std::string> KeyWordGather;
 
-void GetAllKeyWord(AbcStore *store)  //Get All keywords from the data
+void GetAllKeyWordstd(std::vector<TextBlock> store)  //Get All keywords from the data
 {
 
-    for(std::vector<TextBlock>::iterator it = store->data.begin();it!= store->data.end();it++)
+    for(std::vector<TextBlock>::iterator it = store.begin();it!= store.end();it++)
     {
         KeyWordGather.push_back(it->title);
     }
@@ -38,18 +38,9 @@ void SetKeyWordPosition(std::vector<std::string>& Key_word,TextBlock *data)
     }
 }
 
-void SetKeyWordPositionAll(AbcStore *store)
-{
-    GetAllKeyWord(store);
-    int len = store->data.size();
-    for(int i = 0;i<len;i++)
-    {
-        SetKeyWordPosition(KeyWordGather, &store->data[i]);
-    }
-}
 
 
-void SetKeyWordBlockToFile(std::vector<std::string>& Key_word,TextBlock *data,const std::string file_string)
+void SetKeyWordBlockToFile(std::vector<std::string>& Key_word,TextBlock data,const std::string file_string)
 {
 
 
@@ -60,11 +51,11 @@ void SetKeyWordBlockToFile(std::vector<std::string>& Key_word,TextBlock *data,co
 
     for(int i = 0;i<len;i++)
     {
-        position = data->raw.find(Key_word[i]);
-        if( position != data->raw.npos)
+        position = data.raw.find(Key_word[i]);
+        if( position != data.raw.npos)
         {
             memset(buf,0,sizeof(buf));
-            sprintf(buf,"%s %d %d",Key_word[i].c_str(), Key_word[i].length(),position);
+            sprintf(buf,"%s",Key_word[i].c_str());
 
             OsWrite << buf;
             OsWrite << std::endl;
@@ -73,12 +64,12 @@ void SetKeyWordBlockToFile(std::vector<std::string>& Key_word,TextBlock *data,co
     OsWrite.close();
 }
 
-void KeyWordToFile(AbcStore *store,std::string path)  
+void KeyWordToFile(std::vector<TextBlock> store,std::string path)
 {
-    GetAllKeyWord(store);
-    int len = store->data.size();
+
+    int len = store.size();
      for(int i = 0;i<len;i++)
     {
-        SetKeyWordBlockToFile(KeyWordGather, &store->data[i], path + "/KeyWord/" + store->data[i].title);
+        SetKeyWordBlockToFile(KeyWordGather,store[i], path + "/KeyWord/" + store[i].title);
     }
 }
