@@ -7,6 +7,6 @@
 #include "cmd.h"
 int main()
 {
-    QueryComm("单项式", 1);
+    auto res = GetAllStdFormulaWithSub("$a^n$");
     return  0;
 }
