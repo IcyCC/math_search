@@ -70,6 +70,6 @@ void KeyWordToFile(std::vector<TextBlock> store,std::string path)
     int len = store.size();
      for(int i = 0;i<len;i++)
     {
-        SetKeyWordBlockToFile(KeyWordGather,store[i], path + "/KeyWord/" + store[i].title);
+        SetKeyWordBlockToFile(KeyWordGather,store[i],"/Users/suchang/Code/homework/math_search/KeyWord/" + store[i].title+".q");
     }
 }

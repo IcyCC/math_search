@@ -1,4 +1,5 @@
 #include "lex.h"
+#include "util.h"
 
 #define NUM_DROP 6
 #define NUM_NORMAL 23
@@ -89,7 +90,7 @@ int StartWith(const string& s, const string& head){
 int MatchWhere(const string& s, string match[], int len){
 	int i=0;	
 	for(; i<len; i++){
-		if(StartWith(s, match[i])==1)
+		if(IsBeginWith(s, match[i]))
 			return i;
 	}
 	if(i==len)
@@ -235,6 +236,14 @@ void HandleString(string s, vector<Token> &vec){
 					CreateToken(vec, "*", OP, 2);	
 				}
 				continue;
+			}
+			else if(mn<NUM_NORMAL && normal[mn]=="{"){
+				temp.erase(0,normal[mn].size());
+				CreateToken(vec,"(",OP,11);
+			}
+			else if(mn<NUM_NORMAL && normal[mn]=="}"){
+				temp.erase(0,normal[mn].size());
+				CreateToken(vec,")",OP,12);
 			}
 			//normal symbol=>opr
 			else if(mn<NUM_NORMAL){
@@ -382,7 +391,7 @@ void HandleFrac(vector<Token> &vec, string &s, string number){
 			s.erase(0, normal[mn].size() );
 		}
 		else if(normal[mn]=="}"){
-			back+="}";
+			back+=")";
 			i+=1;
 			s.erase(0, normal[mn].size() );
 		}
@@ -401,6 +410,10 @@ void HandleFrac(vector<Token> &vec, string &s, string number){
 		else if(normal[mn]=="\\pi"){
 			back+="pi";
 			s.erase(0, normal[mn].size() );
+		}
+		else if(normal[mn]=="{"){
+			back+="(";
+			s.erase(0,normal[mn].size() );
 		}
 		else{
 			back+=normal[mn];

@@ -77,9 +77,10 @@ WordQuery::WordQuery(const std::string& dirpath)
     for (const auto &content : contents_)
     {
 //        word_segment_.SetContent(content);
-        auto word_infos = ArticleSegment(*content);
+        auto word_infos = QuerySegment(*content);
         for (const auto &word_info : word_infos)
         {
+            std::cout << word_info.word << "\n";
             word_search_[word_info.word][content].push_back(word_info.index);
         }
     }
