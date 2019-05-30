@@ -25,9 +25,10 @@ bool IsDividedChar(char32_t ch)
     return kDividedChars.find(ch) != kDividedChars.end();
 }
 
-bool IsAlpha(char32_t ch)
+bool IsAlphaOrDigit(char32_t ch)
 {
-    return (ch >= U'a' && ch <= U'z') || (ch >= U'A' && ch <= U'Z');
+    return (ch >= U'a' && ch <= U'z') || (ch >= U'A' && ch <= U'Z')
+        || (ch >= U'0' && ch <= U'9');
 }
 
 } // namespace
@@ -110,29 +111,29 @@ WordSegment::DoSegment(const std::u32string& content, bool is_article) const
             std::u32string formula(content, start, i-start);
             if (is_article)
             {
-                auto all_formulas = GetAllStdFormulaWithSub(utf::to_utf8(formula));
-
-                for (const auto& f: all_formulas)
-                {
-                    result.emplace_back(utf::to_utf32(f), start);
-                }
+//                auto all_formulas = GetAllStdFormulaWithSub(utf::to_utf8(formula));
+//
+//                for (const auto& f: all_formulas)
+//                {
+//                    result.emplace_back(utf::to_utf32(f), start);
+//                }
             }
             else
             {
-                result.emplace_back(utf::to_utf32(::StdFormula(utf::to_utf8(formula))), start);
+//                result.emplace_back(utf::to_utf32(::StdFormula(utf::to_utf8(formula))), start);
             }
             continue;
         }
 
         // it dependents on that alpha is the same representation in ascii and utf32
-        if (IsAlpha(content[i]))
+        if (IsAlphaOrDigit(content[i]))
         {
             AddSegmentsToResult(result, content, begin, i);
             begin = i;
             do
             {
                 ++i;
-            } while (i < content.size() && isalpha(content[i]));
+            } while (i < content.size() && IsAlphaOrDigit(content[i]));
             result.emplace_back(std::u32string(content, begin, i - begin), begin);
             begin = i;
             continue;
