@@ -18,55 +18,95 @@ inline int shead_right = 0;	// 右数字栈指针
 inline void mathRight(string f) // 从数字栈中取出栈顶的两个数字 进行 f 运算 结果继续放到一颗的树中，树的根节点基本保持在 sz[0]中
 {
 
-	ExpNode *Left, *Right;
-	Left = new ExpNode();
-	Right = new ExpNode();
-	--shead_right;
-	Left->value = sz_right[shead_right]->value;
-	Left->left_node = sz_right[shead_right]->left_node;
-	Left->right_node = sz_right[shead_right]->right_node;
+    ExpNode *Left, *Right;
+    Left = new ExpNode();
+    Right = new ExpNode();
+    int flag = 0;
+    --shead_right;
+    if(f == "-" && fz_right[fhead_right-1] =="(")
+    {
+        Left->value = "";
+        Left->left_node = NULL;
+        Left->right_node = NULL;
+        flag = 1;
+    }
+    if(!flag) {
+        Left->value = sz_right[shead_right]->value;
+        Left->left_node = sz_right[shead_right]->left_node;
+        Left->right_node = sz_right[shead_right]->right_node;
+    }
+    Right->value = sz_right[shead_right + 1]->value;
+    Right->left_node = sz_right[shead_right + 1]->left_node;
+    Right->right_node = sz_right[shead_right + 1]->right_node;
 
-	Right->value = sz_right[shead_right + 1]->value;
-	Right->left_node = sz_right[shead_right + 1]->left_node;
-	Right->right_node = sz_right[shead_right + 1]->right_node;
+    if(f == "-" && Left->value =="")
+        flag = 1;
 
-	sz_right[shead_right]->left_node = Left;
-	sz_right[shead_right]->right_node = Right;
-	sz_right[shead_right]->value = f;
-	Right->parent_node = sz_right[shead_right];
-	Left->parent_node = sz_right[shead_right];
+    if(flag == 1)
+        shead_right++;
 
-	--fhead_right;
-	sz_right[shead_right + 1]->value = "";
-	sz_right[shead_right + 1]->left_node = NULL;
-	sz_right[shead_right + 1]->right_node = NULL;
+    sz_right[shead_right]->left_node = Left;
+    sz_right[shead_right]->right_node = Right;
+    sz_right[shead_right]->value = f;
+    Right->parent_node = sz_right[shead_right];
+    Left->parent_node = sz_right[shead_right];
+
+    --fhead_right;
+    if(!flag) {
+        sz_right[shead_right + 1]->value = "";
+        sz_right[shead_right + 1]->left_node = NULL;
+        sz_right[shead_right + 1]->right_node = NULL;
+    }
 }
 
 inline void mathLeft(string f) // 从数字栈中取出栈顶的两个数字 进行 f 运算 结果继续放到一颗的树中，树的根节点基本保持在 sz[0]中
 {
 
-	ExpNode *Left, *Right;
-	Left = new ExpNode();
-	Right = new ExpNode();
-	--shead_left;
-	Left->value = sz_left[shead_left]->value;
-	Left->left_node = sz_left[shead_left]->left_node;
-	Left->right_node = sz_left[shead_left]->right_node;
+    ExpNode *Left, *Right;
+    Left = new ExpNode();
+    Right = new ExpNode();
+    int flag = 0;
 
-	Right->value = sz_left[shead_left + 1]->value;
-	Right->left_node = sz_left[shead_left + 1]->left_node;
-	Right->right_node = sz_left[shead_left + 1]->right_node;
+    --shead_left;
+    if(f == "-" && fz_left[fhead_left-1] =="(")
+    {
+        Left->value = "";
+        Left->left_node = NULL;
+        Left->right_node = NULL;
+        flag = 1;
+    }
+    if(!flag)
+    {
+        Left->value = sz_left[shead_left]->value;
+        Left->left_node = sz_left[shead_left]->left_node;
+        Left->right_node = sz_left[shead_left]->right_node;
+    }
 
-	sz_left[shead_left]->left_node = Left;
-	sz_left[shead_left]->right_node = Right;
-	sz_left[shead_left]->value = f;
-	Right->parent_node = sz_right[shead_left];
-	Left->parent_node = sz_right[shead_left];
-	
-	--fhead_left;
-	sz_left[shead_left + 1]->value = "";
-	sz_left[shead_left + 1]->left_node = NULL;
-	sz_left[shead_left + 1]->right_node = NULL;
+
+    Right->value = sz_left[shead_left + 1]->value;
+    Right->left_node = sz_left[shead_left + 1]->left_node;
+    Right->right_node = sz_left[shead_left + 1]->right_node;
+
+    if(f == "-" && Left->value =="")
+        flag = 1;
+
+    if(flag == 1)
+        shead_left++;
+    sz_left[shead_left]->left_node = Left;
+    sz_left[shead_left]->right_node = Right;
+    sz_left[shead_left]->value = f;
+    Right->parent_node = sz_right[shead_left];
+    Left->parent_node = sz_right[shead_left];
+
+    --fhead_left;
+    if(!flag)
+    {
+        sz_left[shead_left + 1]->value = "";
+        sz_left[shead_left + 1]->left_node = NULL;
+        sz_left[shead_left + 1]->right_node = NULL;
+        delete(sz_left[shead_left + 1]);
+    }
+
 }
 inline void InitRightTreeAndLeftTree()
 {
@@ -79,6 +119,11 @@ inline void InitRightTreeAndLeftTree()
 	sz_right[shead_right]->right_node = NULL;
 	sz_right[shead_right]->left_node = NULL;
 	sz_right[shead_right]->parent_node = NULL;
+
+    fhead_left = 0; // 左符号栈指针
+    shead_left = 0;    // 左数字栈指针
+    fhead_right = 0;   // 右符号栈指针
+    shead_right = 0;   // 右数字栈指针
 }
 
 inline ExpNode *GetTree(vector<Token> a) //这只能识别如 a+b = c 或者 a+b 只有一个符号作为连接左右两个式子的公式变为树 ，如果有多个 连接符，比如 a>b>c这样是无法识别的
