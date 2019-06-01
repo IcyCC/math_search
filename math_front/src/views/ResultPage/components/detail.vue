@@ -38,6 +38,7 @@
             visible: function () {
                 if (this.visible) {
                     segmentWords(this.result.raw).then((resp)=>{
+                        debugger
                         this.words = resp.data.words
                     })
                 }

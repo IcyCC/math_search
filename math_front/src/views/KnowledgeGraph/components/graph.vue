@@ -1,5 +1,5 @@
 <template>
-    <v-chart :options="option" auto-resize ref="chart"></v-chart>
+    <v-chart :options="option" @click="handleClick" auto-resize ref="chart"></v-chart>
 </template>
 
 <script>
@@ -10,6 +10,20 @@
         data: function () {
             return {
                 option: {}
+            }
+        },
+        methods:{
+            handleClick:function(e){
+                if (e.dataType === 'node') {
+                    this.$router.push({
+                        name: 'result',
+                        query:{
+                            query_text: e.data.name,
+                            query_type: 'concept'
+                        }
+
+                    })
+                }
             }
         },
         mounted: function () {
@@ -58,7 +72,7 @@
                                 edgeLength: [30, 100]
                             }
                         }
-                    ]
+                    ],
                 };
             })
         }

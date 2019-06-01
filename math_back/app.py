@@ -2,6 +2,7 @@ import ctypes
 from flask import Flask, request, jsonify, redirect, make_response
 import os
 import mock
+from relation import data as key_word_data
 import interface
 
 be_mock = False
@@ -85,10 +86,7 @@ def r_search():
 
 @app.route("/getKeyWord", methods=["GET"])
 def get_key_word():
-    d = [
-        "有理数",
-        "本质",
-    ]
+    d = list(key_word_data.keys())
     return jsonify(code=200, msg="", data=d)
 
 

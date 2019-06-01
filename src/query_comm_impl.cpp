@@ -14,10 +14,10 @@ namespace
 //    EXAMPLE
 
 query::WordQuery concept_query("/Users/suchang/Code/homework/math_search/text_blocks/concept/");
-query::WordQuery nature_query("/Users/suchang/Code/homework/math_search/text_blocks/concept/");
-query::WordQuery exercises_query("/Users/suchang/Code/homework/math_search/text_blocks/concept/");
-query::WordQuery text_query("/Users/suchang/Code/homework/math_search/text_blocks/concept/");
-query::WordQuery example_query("/Users/suchang/Code/homework/math_search/text_blocks/concept/");
+query::WordQuery nature_query("/Users/suchang/Code/homework/math_search/text_blocks/nature/");
+query::WordQuery exercises_query("/Users/suchang/Code/homework/math_search/text_blocks/exercises/");
+query::WordQuery text_query("/Users/suchang/Code/homework/math_search/text_blocks/text/");
+query::WordQuery example_query("/Users/suchang/Code/homework/math_search/text_blocks/example/");
 
 } // namespace
 
