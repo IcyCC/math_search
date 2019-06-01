@@ -39,23 +39,23 @@ void TraverseDrop(string &s);//drop all-type useless
 void DropAllMark(string &s, const string &mark);//drop one-type useless
 void HandleVert(vector<Token> &vec, string &temp);
 
-/*
 //define vector<Token> vec;
 //call HandleString(string s, vector<Token> &vec);
-int main(){
-	vector<Token> vec;
-// 	string test="$$ 1.2 + 50\% +a\cdotb +|123|  + \pi \div1 +5\frac{\frac{1}{2}}{11}  a\leqb$$ a^5 a(ab)c |123|  \times \vert123\vert";
-//	string test="a(ab)c";
-//	string test="\vert123\vert nihaoa";
-string test="$ \\mid-\\frac{2}{3}\\mid-\\mid-\\frac{1}{2}\\times\\frac{2}{3}\\mid-\\mid\\frac{1}{3}-\\frac{1}{4}\\mid-\\mid-3\\mid$";
-	//string test="$\\vert-b$";
-	HandleString(test,vec);
-	for (int i=0;i<vec.size();i++){
-	cout << i << " : "<< vec[i].value << endl;
-	}
-}
-*/
-
+//int main(){
+//    vector<Token> vec;
+//// 	string test="$$ 1.2 + 50\% +a\cdotb +|123|  + \pi \div1 +5\frac{\frac{1}{2}}{11}  a\leqb$$ a^5 a(ab)c |123|  \times \vert123\vert";
+////	string test="a(ab)c";
+////	string test="\vert123\vert nihaoa";
+////string test="$ \\mid-\\frac{2}{3}\\mid-\\mid-\\frac{1}{2}\\times\\frac{2}{3}\\mid-\\mid\\frac{1}{3}-\\frac{1}{4}\\mid-\\mid-3\\mid$";
+//    //string test="$\\vert-b$";
+////string test="$ (-36)\\div 9 = -(36 \\div 9) $";
+//    string test="$\\frac{-6}{-0.3}$";
+//    HandleString(test,vec);
+//    for (int i=0;i<vec.size();i++){
+//        cout << i << " : "<< vec[i].value << endl;
+//    }
+//}
+//
 
 //drop one-type useless
 void DropAllMark(string &s, const string &mark){
@@ -213,6 +213,12 @@ void HandleString(string s, vector<Token> &vec){
             HandleVert(vec, temp);
             continue;
         }
+        else if(mn<NUM_NORMAL && normal[mn]=="\\circ"){
+            temp.erase(0, normal[mn].size() );
+            CreateToken(vec, "circ", VAL, 17);
+            continue;
+
+        }
             //	else if(StartWith)
         else if(mn<NUM_NORMAL && normal[mn]=="\\times"){
             temp.erase(0, normal[mn].size() );
@@ -222,11 +228,6 @@ void HandleString(string s, vector<Token> &vec){
         else if(mn<NUM_NORMAL && normal[mn]=="\\div"){
             temp.erase(0, normal[mn].size() );
             CreateToken(vec, "/", OP, 3);
-            continue;
-        }
-        else if(mn<NUM_NORMAL && normal[mn]=="\\circ"){
-            temp.erase(0, normal[mn].size() );
-            CreateToken(vec, "circ", VAL, 17);
             continue;
         }
         else if(mn<NUM_NORMAL && normal[mn]=="\\approx"){
@@ -263,7 +264,7 @@ void HandleString(string s, vector<Token> &vec){
             continue;
         }
 
-        int flag = 0;
+        int flag=0;
         //abc
         while(temp.size()!=0 && temp.at(0)>=97 && temp.at(0)<=122){
             //	printf("%c\n",temp.at(0));
@@ -277,7 +278,7 @@ void HandleString(string s, vector<Token> &vec){
 
             symbol+=temp.at(0);
             temp.erase(0,1);
-            flag =1;
+            flag=1;
         }
 
         if(symbol.size()!=0){
@@ -285,8 +286,7 @@ void HandleString(string s, vector<Token> &vec){
         }
         symbol.clear() ;
 
-
-        if( flag == 1 && StartWith(temp, "(")){
+        if(flag && StartWith(temp, "(")){
             CreateToken(vec, "*", OP, 2);
         }
     }
