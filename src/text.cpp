@@ -38,11 +38,13 @@ std::string TextBlock::Dumps()
 void TextBlock::Load(const std::string &file_path)
 {
     std::ifstream fin(file_path);
-    fin >> id;
-    fin >> chapter;
-    fin >> title;
-
     std::string buf;
+
+    getline(fin, buf);
+    id = stoi(buf);
+    getline(fin, chapter);
+    getline(fin, title);
+
     while (getline(fin, buf))
     {
         if (buf.empty())
