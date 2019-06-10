@@ -1,3 +1,8 @@
+70
+2.1 整式
+
+\end{document}
+
 \documentclass{ctexart}
 \title{56-60}
 \begin{document}
@@ -125,7 +130,7 @@ v+2.5，v-2.5，3x+5y+2z,$\frac{1}{2}ab$-$\pir^{2}$,$x^{2}$+2x+18,\\
 3填表:
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline  % 在表格最上方绘制横线
-整式&-15ab&$4a^{2}b^{2}$ $\frac{3x^{2}y}{5}$ & $4x^{2}-3$ $a^{4}-2a^{2}b^{2}+b^{4}$\\
+整式&-15ab&$4a^{2}b^{2}$ $\frac{3x^{2}y}{5}$& $4x^{2}-3$&$a^{4}-2a^{2}b^{2}+b^{4}$\\
 \hline
 系数&&&&&\\
 \hline
@@ -175,3 +180,5 @@ L dp vwxghaw \rightarrow I am a student\\
 \end{ex}
 \end{article}
 \end{document}
+
+

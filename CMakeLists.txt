@@ -10,7 +10,6 @@ add_executable(math_search
         src/interface.h
         src/lex.cpp
         src/lex.h
-        test/main.cpp
         src/segment.cpp
         src/segment.h
         src/query_result.h
@@ -37,4 +36,6 @@ add_executable(math_search
         src/word_segment.h
         src/segment_words_impl.cpp
         src/query_comm_impl.cpp
+        test/main.cpp
+#        test/parser.cpp
         )

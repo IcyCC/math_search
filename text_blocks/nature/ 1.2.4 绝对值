@@ -1,0 +1,13 @@
+6
+ 1.2.4 绝对值
+绝对值
+\begin{propertory}
+	\indent由绝对值的定义可知：\\
+	\indent\textcolor{blue}{一个正数的绝对值是它本身；一个负数的绝对值是它的相反数；0的绝对值是0}。即\\
+	\indent（1） 如果a$>$0,那么$\vert a \vert$ = a;\\
+	\indent（2）如果a=0,那么$\vert a \vert$ = 0;\\
+	\indent（3）如果a$<$0,那么$\vert a \vert$ = -a;\\
+	\indent 这里的数a可以使正数、负数和0.\\
+	\end{propertory}
+
+
