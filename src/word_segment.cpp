@@ -111,16 +111,16 @@ WordSegment::DoSegment(const std::u32string& content, bool is_article) const
             std::u32string formula(content, start, i-start);
             if (is_article)
             {
-//                auto all_formulas = GetAllStdFormulaWithSub(utf::to_utf8(formula));
-//
-//                for (const auto& f: all_formulas)
-//                {
-//                    result.emplace_back(utf::to_utf32(f), start);
-//                }
+                auto all_formulas = GetAllStdFormulaWithSub(utf::to_utf8(formula));
+
+                for (const auto& f: all_formulas)
+                {
+                    result.emplace_back(utf::to_utf32(f), start);
+                }
             }
             else
             {
-//                result.emplace_back(utf::to_utf32(::StdFormula(utf::to_utf8(formula))), start);
+                result.emplace_back(utf::to_utf32(::StdFormula(utf::to_utf8(formula))), start);
             }
             continue;
         }
