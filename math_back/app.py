@@ -115,6 +115,14 @@ def book_page(page):
             return d, 200
     return '', 200
 
+def run():
+    import interface
+    service = interface
+    try:
+        app.run()
+    except Exception:
+        print("异常了!!!!!")
+        run()
 
 if __name__ == "__main__":
-    app.run()
+    run()
