@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <gexf xmlns:viz="http://www.gexf.net/1.2draft/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.gephi.org/gexf/1.2draft" xmlns:ns0="xsi" version="1.2" ns0:schemaLocation="http://www.gephi.org/gexf/1.1draft http://gephi.org/gexf/1.2draft.xsd">
-  <meta lastmodified="2019-05-30">
+  <meta lastmodified="2019-06-10">
     <creator>搜书网</creator>
     <description>课本知识点图</description>
   </meta>
@@ -9,7 +9,32 @@
       <attribute id="0" title="modularity_class" type="float"/>
     </attributes>
     <nodes>
+      <node id="一元一次方程" label="一元一次方程">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
       <node id="乘方" label="乘方">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="乘法交换律" label="乘法交换律">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="乘法分配律" label="乘法分配律">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="乘法结合律" label="乘法结合律">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="倒数" label="倒数">
         <attvalues>
           <attvalue for="0" value="1"/>
         </attvalues>
@@ -19,7 +44,42 @@
           <attvalue for="0" value="1"/>
         </attvalues>
       </node>
+      <node id="单项式次数" label="单项式次数">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="单项式系数" label="单项式系数">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="合并同类项" label="合并同类项">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="同类项" label="同类项">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
       <node id="多项式" label="多项式">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="多项式的次数" label="多项式的次数">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="幂" label="幂">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="指数和底数" label="指数和底数">
         <attvalues>
           <attvalue for="0" value="1"/>
         </attvalues>
@@ -29,7 +89,27 @@
           <attvalue for="0" value="1"/>
         </attvalues>
       </node>
+      <node id="整式" label="整式">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="方程" label="方程">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
       <node id="有理数" label="有理数">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="有理数乘法法则" label="有理数乘法法则">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="有理数减法法则" label="有理数减法法则">
         <attvalues>
           <attvalue for="0" value="1"/>
         </attvalues>
@@ -39,7 +119,27 @@
           <attvalue for="0" value="1"/>
         </attvalues>
       </node>
+      <node id="有理数加法交换律" label="有理数加法交换律">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="有理数加法结合律" label="有理数加法结合律">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="有理数除法法则" label="有理数除法法则">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
       <node id="科学计数法" label="科学计数法">
+        <attvalues>
+          <attvalue for="0" value="1"/>
+        </attvalues>
+      </node>
+      <node id="等式的性质1" label="等式的性质1">
         <attvalues>
           <attvalue for="0" value="1"/>
         </attvalues>
@@ -52,14 +152,55 @@
     </nodes>
     <edges>
       <edge id="0" source="绝对值" target="绝对值"/>
-      <edge id="1" source="有理数加法" target="绝对值"/>
-      <edge id="2" source="有理数加法" target="有理数加法"/>
-      <edge id="3" source="有理数加法" target="有理数"/>
-      <edge id="4" source="有理数" target="有理数"/>
-      <edge id="5" source="乘方" target="乘方"/>
-      <edge id="6" source="单项式" target="单项式"/>
-      <edge id="7" source="多项式" target="单项式"/>
-      <edge id="8" source="多项式" target="多项式"/>
+      <edge id="1" source="绝对值" target="绝对值"/>
+      <edge id="10" source="多项式" target="单项式"/>
+      <edge id="11" source="多项式" target="多项式"/>
+      <edge id="12" source="同类项" target="多项式"/>
+      <edge id="13" source="同类项" target="同类项"/>
+      <edge id="14" source="乘法交换律" target="乘法交换律"/>
+      <edge id="15" source="乘法交换律" target="有理数"/>
+      <edge id="16" source="乘方" target="乘方"/>
+      <edge id="17" source="乘法分配律" target="有理数"/>
+      <edge id="18" source="合并同类项" target="多项式"/>
+      <edge id="19" source="合并同类项" target="同类项"/>
+      <edge id="2" source="绝对值" target="数轴"/>
+      <edge id="20" source="合并同类项" target="合并同类项"/>
+      <edge id="21" source="单项式" target="单项式"/>
+      <edge id="22" source="多项式的次数" target="多项式"/>
+      <edge id="23" source="多项式的次数" target="多项式的次数"/>
+      <edge id="24" source="乘法结合律" target="乘法结合律"/>
+      <edge id="25" source="乘法结合律" target="有理数"/>
+      <edge id="26" source="幂" target="乘方"/>
+      <edge id="27" source="幂" target="幂"/>
+      <edge id="28" source="指数和底数" target="幂"/>
+      <edge id="29" source="有理数除法法则" target="绝对值"/>
+      <edge id="3" source="绝对值" target="绝对值"/>
+      <edge id="30" source="有理数除法法则" target="有理数除法法则"/>
+      <edge id="31" source="有理数除法法则" target="有理数"/>
+      <edge id="32" source="有理数除法法则" target="绝对值"/>
+      <edge id="33" source="有理数除法法则" target="倒数"/>
+      <edge id="34" source="倒数" target="倒数"/>
+      <edge id="35" source="有理数乘法法则" target="绝对值"/>
+      <edge id="36" source="有理数乘法法则" target="绝对值"/>
+      <edge id="37" source="单项式系数" target="单项式"/>
+      <edge id="38" source="整式" target="单项式"/>
+      <edge id="39" source="整式" target="多项式"/>
+      <edge id="4" source="绝对值" target="绝对值"/>
+      <edge id="40" source="整式" target="整式"/>
+      <edge id="41" source="方程" target="方程"/>
+      <edge id="42" source="一元一次方程" target="整式"/>
+      <edge id="43" source="一元一次方程" target="方程"/>
+      <edge id="44" source="一元一次方程" target="一元一次方程"/>
+      <edge id="45" source="有理数加法交换律" target="有理数"/>
+      <edge id="46" source="有理数减法法则" target="有理数减法法则"/>
+      <edge id="47" source="有理数减法法则" target="有理数"/>
+      <edge id="48" source="单项式次数" target="单项式"/>
+      <edge id="49" source="有理数加法结合律" target="有理数"/>
+      <edge id="5" source="有理数加法" target="绝对值"/>
+      <edge id="6" source="有理数加法" target="有理数加法"/>
+      <edge id="7" source="有理数加法" target="有理数"/>
+      <edge id="8" source="有理数加法" target="绝对值"/>
+      <edge id="9" source="有理数" target="有理数"/>
     </edges>
   </graph>
 </gexf>

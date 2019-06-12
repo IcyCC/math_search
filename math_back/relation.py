@@ -16,7 +16,7 @@ def get_all_file(path):
     return res
 
 
-for p in get_all_file('data'):
+for p in get_all_file('/Users/suchang/Code/homework/math_search/KeyWord'):
     with open(p, encoding='utf-8') as f:
         d = f.read()
         title = os.path.splitext( os.path.split(p)[1])[0]

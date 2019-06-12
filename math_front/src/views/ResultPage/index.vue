@@ -50,7 +50,7 @@
 
                 <Col span=16 offset="4">
                     <div @click="onResultClick(item)" style="font-size: 20px">
-                        <span style="color: #1a0dab;cursor:pointer;text-decoration:underline;">{{ item.chapter }}</span>
+                        <span style="color: #1a0dab;cursor:pointer;text-decoration:underline;">{{ item.chapter  }}</span>
                     </div>
                     <div  style="font-size: 17px">
                         <span v-for="abc in item.abstract" v-html="highLight(abc)"></span> ......<br>

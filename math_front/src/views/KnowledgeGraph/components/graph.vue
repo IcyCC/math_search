@@ -67,6 +67,15 @@
                             label: {
                                 show: true,
                             },
+                            focusNodeAdjacency: true,
+                            itemStyle: {
+                                normal: {
+                                    borderColor: '#fff',
+                                    borderWidth: 1,
+                                    shadowBlur: 10,
+                                    shadowColor: 'rgba(0, 0, 0, 0.3)'
+                                }
+                            },
                             force: {
                                 repulsion: 500,
                                 edgeLength: [30, 100]
