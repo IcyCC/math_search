@@ -21,7 +21,7 @@ bool IsDividedChar(char32_t ch)
 {
     static const std::unordered_set<char32_t> kDividedChars{
         U'，', U'。', U'：', U'.', U',', U'、', U'？', U'“', U'”', U'\t', U'\n', U' ', U'…', U'(', U')',
-        U'（', U'）'};
+        U'（', U'）', U'{', U'}'};
     return kDividedChars.find(ch) != kDividedChars.end();
 }
 
@@ -217,12 +217,11 @@ void WordSegment::DoSegImplDfs(std::size_t sentence_pos,
     {
         if (count > min_count)
         {
-            result = std::move(curr_res);
+            result = curr_res;
             min_count = count;
         }
-    }
-    if (sentence_pos > sentence.size())
         return;
+    }
     auto range = words.equal_range(sentence_pos);
     if (range.first == range.second)
     {
