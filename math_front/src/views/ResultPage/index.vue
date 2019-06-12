@@ -53,7 +53,7 @@
                         <span style="color: #1a0dab;cursor:pointer;text-decoration:underline;">{{ item.chapter  }}</span>
                     </div>
                     <div  style="font-size: 17px">
-                        <span v-for="abc in item.abstract" v-html="highLight(abc)"></span> ......<br>
+                        <template v-for="abc in item.abstract" ><LatexShow :text="highLight(abc)"></LatexShow></template> ......<br>
                     </div>
                 </Col>
             </Row>
@@ -70,9 +70,10 @@
 <script>
     import {querySearch,getKeyWords} from '@/service/api'
     import Detail from './components/detail'
+    import LatexShow from '@/views/components/latex_show.vue'
     export default {
         name: "ResultPage",
-        components:{Detail},
+        components:{Detail, LatexShow},
         data: function () {
             return {
                 key_words: [],

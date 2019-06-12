@@ -116,8 +116,6 @@ def book_page(page):
     return '', 200
 
 def run():
-    import interface
-    service = interface
     try:
         app.run()
     except Exception:

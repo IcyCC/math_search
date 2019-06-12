@@ -19,10 +19,11 @@
 </template>
 
 <script>
-
+    import LatexShow from '@/views/components/latex_show.vue'
     import {segmentWords,getKeyWords} from '@/service/api'
     export default {
         name: "detail.vue",
+        components:{LatexShow},
         props: {
             result: {type:Object},
             query_text: String,
