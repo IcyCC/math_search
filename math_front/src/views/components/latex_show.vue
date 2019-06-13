@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <span>
         <template v-for="(t) in text_blocks">
             <span v-if="t && t[0] === '$' " v-katex="replaceTex(t)" style="background-color: #dcdee2; "></span>
             <span v-else v-html="t">  </span>
         </template>
-    </div>
+    </span>
 </template>
 
 <script>

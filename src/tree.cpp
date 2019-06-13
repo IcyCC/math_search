@@ -26,7 +26,7 @@ std::vector<std::string> GetAllStdFormulaWithSub(std::string f) {
     auto lexer = Lexer();
     auto tokens = lexer.parser(f);
     auto node = GetTree(tokens);
-//    StdTree(node);
+    StdTree(node);
     auto res = std::vector<std::string >();
     GetSubTrees(node, res);
     return res;
@@ -38,7 +38,7 @@ std::string StdFormula(std::string f){
     auto lexer = Lexer();
     auto tokens = lexer.parser(f);
     auto node = GetTree(tokens);
-//    StdTree(node);
+    StdTree(node);
     auto res = OuputTree(node);
     return res;
 }

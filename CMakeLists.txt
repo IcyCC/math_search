@@ -36,6 +36,7 @@ add_executable(math_search
         src/word_segment.h
         src/segment_words_impl.cpp
         src/query_comm_impl.cpp
-        test/main.cpp
+#        test/main.cpp
 #        test/parser.cpp
+        test/test_latex.cpp
         )

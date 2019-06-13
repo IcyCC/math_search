@@ -25,6 +25,9 @@ inline bool CompareExpNode(ExpNode *a, ExpNode *b)
 
 inline TreeType GetNodeRelation(ExpNode *r, ExpNode *a)
 {
+    if (!r) {
+        return TreeType::UNKNOW;
+    }
     if (r->left_node == a)
     {
         return TreeType::LEFT_NODE;
@@ -43,49 +46,11 @@ inline TreeType GetNodeRelation(ExpNode *r, ExpNode *a)
     }
 }
 
-inline bool SwapTreeNode(ExpNode *a, ExpNode *b)
+inline bool SwapTreeNode(ExpNode* root, ExpNode *l, ExpNode *r)
 {   
-    TreeType a_type = GetNodeRelation(a->parent_node, a);
-    TreeType b_type = GetNodeRelation(b->parent_node, b);
-    if (a->parent_node->value == "/" || a->parent_node->value == "÷"){
-        return true;
-    }
-    if (a_type == TreeType::LEFT_NODE && b_type == TreeType::LEFT_NODE)
-    {
-        a->parent_node->left_node = b;
-        b->parent_node->left_node = a;
-        ExpNode *p = a->parent_node;
-        a->parent_node = b->parent_node;
-        return true;
-    }
-    else if (a_type == TreeType::LEFT_NODE && b_type == TreeType::RIGHT_NODE)
-    {
-        a->parent_node->left_node = b;
-        b->parent_node->right_node = a;
-        ExpNode *p = a->parent_node;
-        a->parent_node = b->parent_node;
-        return true;
-    }
-    else if (a_type == TreeType::RIGHT_NODE && b_type == TreeType::LEFT_NODE)
-    {
-        a->parent_node->right_node = b;
-        b->parent_node->left_node = a;
-        ExpNode *p = a->parent_node;
-        a->parent_node = b->parent_node;
-        return true;
-    }
-    else if (a_type == TreeType::RIGHT_NODE && b_type == TreeType::RIGHT_NODE)
-    {
-        a->parent_node->right_node = b;
-        b->parent_node->right_node = a;
-        ExpNode *p = a->parent_node;
-        a->parent_node = b->parent_node;
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+     root->left_node = r;
+     root->right_node =  l;
+    return true;
 }
 
 inline void StdTree(ExpNode *node)
@@ -96,7 +61,7 @@ inline void StdTree(ExpNode *node)
     // 按大于标准化树
     if (!CompareExpNode(node->left_node, node->right_node))
     {
-        SwapTreeNode(node->left_node, node->right_node);
+        SwapTreeNode(node, node->left_node, node->right_node);
     }
     StdTree(node->left_node);
     StdTree(node->right_node);
