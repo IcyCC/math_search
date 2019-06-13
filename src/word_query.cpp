@@ -91,6 +91,25 @@ void WordQuery::LoadContent(const std::string& dirpath)
     for (auto &entry : GetAllFilenames(dirpath))
     {
         auto text_ptr = std::make_shared<TextBlock>(entry);
+        auto chapter = text_ptr->chapter;
+        if (!chapter.empty() && isdigit(chapter[0]))
+        {
+            int i = 0;
+            while (isdigit(chapter[i]) || chapter[i] == '.' || chapter[i] == ' ')
+            {
+                ++i;
+            }
+//            std::cout << "chapter " << std::string(chapter, i, chapter.size() - i) << std::endl;
+            text_block_search_.insert({std::string(chapter, i, chapter.size() - i), text_ptr});
+        }
+        else
+        {
+//            std::cout << "chapter " << chapter << std::endl;
+            text_block_search_.insert({chapter, text_ptr});
+        }
+        if (!text_ptr->title.empty() && chapter != text_ptr->title)
+            text_block_search_.insert({text_ptr->title, text_ptr});
+//        std::cout << "title " << text_ptr->title << std::endl;
         auto raw_ptr = new u32string(to_utf32(text_ptr->raw));
         contents_.emplace_back(raw_ptr);
         raw_textblock_.insert({raw_ptr, text_ptr});
@@ -99,6 +118,7 @@ void WordQuery::LoadContent(const std::string& dirpath)
 
 WordQuery::QueryResult WordQuery::Query(const string& sentence) const
 {
+    QueryResult result;
     auto word_infos = QuerySegment(sentence);
     auto it = word_infos.begin();
     list<shared_ptr<u32string>> content_list = get_content_list(it->word);
@@ -107,11 +127,10 @@ WordQuery::QueryResult WordQuery::Query(const string& sentence) const
         merge_list(content_list, tmp);
     });
 
-    QueryResult result;
-
     if (content_list.empty())
-        return result;
-    size_t sss = content_list.size();
+    {
+        goto end;
+    }
 //    std::cout << sss-- << "\n";
     for (const auto& content_ptr: content_list)
     {
@@ -122,6 +141,13 @@ WordQuery::QueryResult WordQuery::Query(const string& sentence) const
     }
 //    std::cout << "Fuck\n";
 //    std::cout << result.size() << "\n";
+
+end:
+    auto range = text_block_search_.equal_range(sentence);
+    for (auto it = range.first; it != range.second; ++it)
+    {
+        result.insert({it->second, std::vector<std::string>{it->second->raw}});
+    }
     return result;
 }
 

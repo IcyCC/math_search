@@ -43,7 +43,11 @@ void TextBlock::Load(const std::string &file_path)
     getline(fin, buf);
     id = stoi(buf);
     getline(fin, chapter);
+    if (!chapter.empty() && chapter.back() == '\r')
+        chapter.pop_back();
     getline(fin, title);
+    if (!title.empty() && title.back() == '\r')
+        title.pop_back();
 
     while (getline(fin, buf))
     {
