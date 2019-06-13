@@ -3,8 +3,8 @@
         <Row>
             <Col span="5" offset="3">
                 <span style="font-size: 20px;font-weight: bold">目录</span>
-                <Card style="height: 780px;overflow: scroll;">
-                    <Tree  :data="book_index"></Tree>
+                <Card style="height: 780px;overflow: scroll; text-align: center">
+                    <Tree  :data="book_index" style="text-align: left;padding-left: 30px "></Tree>
                 </Card>
             </Col>
             <Col span="12" offset="1">

@@ -1,5 +1,7 @@
 <template>
-    <div>
+    <div
+            @keyup.enter="onSearchClick"
+    >
         <Row type="flex" style="padding-top: 20px">
             <Col span="10" offset="6">
                 <span style="font-size: 90px; font-weight: bold"><Icon type="ios-book"/> 搜书网 </span>
@@ -14,7 +16,9 @@
                        style="width: 100%" />
             </Col>
             <Col span="2" offset="1">
-                <Button type="primary" style="width: 100%" size="large" shape="circle" icon="ios-search" @click="onSearchClick">搜索一下</Button>
+                <Button type="primary" style="width: 100%" size="large" shape="circle" icon="ios-search"
+                        @click="onSearchClick"
+                >搜索一下</Button>
             </Col>
         </Row>
         <Row style="padding-top: 10px">

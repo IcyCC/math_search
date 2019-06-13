@@ -29,7 +29,7 @@ py::enum_<query::QueryResult::BlockType >(query_result, "BlockType")
 .value("EXAMPLE", query::QueryResult::BlockType::EXAMPLE)
 .export_values();
 
-m.def("SegmentWords", &SegmentWords, "");
+m.def("SegmentWords", &SegmentWordsWithoutStdFormula, "");
 m.def("QueryCommPy", &QueryComm, "");
 
 }
