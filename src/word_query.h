@@ -51,9 +51,9 @@ class WordQuery
 
     std::unordered_map<Article*, std::shared_ptr<TextBlock>> raw_textblock_;
     std::vector<std::shared_ptr<std::u32string>> contents_;
-//    std::unordered_map<>
-//    WordSegment word_segment_;
+
     mutable std::map<std::shared_ptr<std::u32string>, std::size_t> content_index_;
+    std::multimap<std::string, std::shared_ptr<TextBlock>> text_block_search_;
     std::map<Word, std::map<std::shared_ptr<Article>, std::vector<std::size_t>>> word_search_;
 };
 
