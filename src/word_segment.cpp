@@ -21,7 +21,7 @@ bool IsDividedChar(char32_t ch)
 {
     static const std::unordered_set<char32_t> kDividedChars{
         U'，', U'。', U'：', U'.', U',', U'、', U'？', U'“', U'”', U'\t', U'\n', U' ', U'…', U'(', U')',
-        U'（', U'）', U'{', U'}'};
+        U'（', U'）', U'{', U'}', U'\'', U'\\', U'"'};
     return kDividedChars.find(ch) != kDividedChars.end();
 }
 
@@ -94,7 +94,7 @@ void WordSegment::LoadWordCount(const std::string& file_path)
 //}
 
 std::vector<WordSegment::WordInfo>
-WordSegment::DoSegment(const std::u32string& content, bool is_article) const
+WordSegment::DoSegment(const std::u32string& content, SegmentType segment_type) const
 {
     std::vector<WordSegment::WordInfo> result;
     size_t begin = 0, i;
@@ -103,24 +103,38 @@ WordSegment::DoSegment(const std::u32string& content, bool is_article) const
     {
         if (content[i] == U'$')
         {
+            AddSegmentsToResult(result, content, begin, i);
             size_t start = i;
             do {
                 ++i;
             } while (i < content.size() && content[i] != U'$');
             ++i;
             std::u32string formula(content, start, i-start);
-            if (is_article)
+            begin = i;
+            switch (segment_type)
             {
-                auto all_formulas = GetAllStdFormulaWithSub(utf::to_utf8(formula));
-
-                for (const auto& f: all_formulas)
+                case AllFormula:
                 {
-                    result.emplace_back(utf::to_utf32(f), start);
+                    auto all_formulas = GetAllStdFormulaWithSub(utf::to_utf8(formula));
+
+                    for (const auto &f: all_formulas)
+                    {
+                        result.emplace_back(utf::to_utf32(f), start);
+                    }
+                    break;
                 }
-            }
-            else
-            {
-                result.emplace_back(utf::to_utf32(::StdFormula(utf::to_utf8(formula))), start);
+
+                case StdFormula:
+//                    std::cout << ::StdFormula(utf::to_utf8(formula)) << "\n";
+                    result.emplace_back(utf::to_utf32(::StdFormula(utf::to_utf8(formula))), start);
+                    break;
+
+                case WithoutFormula:
+                    result.emplace_back((utf::to_utf32(formula)), start);
+                    break;
+
+                default:
+                    assert(0);
             }
             continue;
         }
@@ -153,6 +167,13 @@ WordSegment::DoSegment(const std::u32string& content, bool is_article) const
     {
         AddSegmentsToResult(result, content, begin, i);
     }
+//    std::ofstream fout("log.txt", std::ofstream::app);
+//    fout << result.size() << std::endl;
+//    for (const auto& word_info: result)
+//    {
+//        fout << utf::to_utf8(word_info.word).data() << " ";
+//    }
+//    fout << std::endl;
 
     return result;
 }
@@ -195,6 +216,8 @@ void WordSegment::AddSegmentsToResult(std::vector<WordSegment::WordInfo>& result
                          const std::u32string& content,
                          size_t begin, size_t i) const
 {
+    if (begin == i)
+        return;
     auto to_add = DoSegmentImpl(std::u32string_view(content.c_str() + begin, i - begin), begin);
     using Iterator = decltype(to_add.begin());
     result.insert(result.end(), std::move_iterator<Iterator>(to_add.begin()),
@@ -227,7 +250,7 @@ void WordSegment::DoSegImplDfs(std::size_t sentence_pos,
     {
 //        std::cout << std::u32string(sentence, sentence_pos, 1) << "\n";
         curr_res.emplace_back(std::u32string(sentence, sentence_pos, 1), article_pos + sentence_pos);
-        DoSegImplDfs(sentence_pos + 1, count, article_pos, min_count, sentence, result, curr_res, words);
+        DoSegImplDfs(sentence_pos + 1, count + 1, article_pos, min_count, sentence, result, curr_res, words);
         if (!curr_res.empty())
             curr_res.pop_back();
     }
@@ -237,7 +260,7 @@ void WordSegment::DoSegImplDfs(std::size_t sentence_pos,
         {
 //            std::cout << "a " << WordSegment::WordInfo(it->second.word, article_pos + sentence_pos).word << "\n";
             curr_res.emplace_back(it->second.word, article_pos + sentence_pos);
-            DoSegImplDfs(it->second.end, count + word_count_.at(it->second.word), article_pos, min_count, sentence, result, curr_res, words);
+            DoSegImplDfs(it->second.end, count + word_count_.at(it->second.word) + 1, article_pos, min_count, sentence, result, curr_res, words);
             if (!curr_res.empty())
                 curr_res.pop_back();
         }

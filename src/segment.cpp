@@ -19,23 +19,33 @@ WordSegment& GetWordSegment()
 
 namespace query
 {
+std::vector<WordSegment::WordInfo> DefaultSegment(const std::string &query_str)
+{
+    return GetWordSegment().DoSegment(utf::to_utf32(query_str), WithoutFormula);
+}
+
+std::vector<WordSegment::WordInfo> DefaultSegment(const std::u32string &query_str)
+{
+    return GetWordSegment().DoSegment(query_str, WithoutFormula);
+}
+
 std::vector<WordSegment::WordInfo> QuerySegment(const std::string &query_str)
 {
-    return GetWordSegment().DoSegment(utf::to_utf32(query_str), false);
+    return GetWordSegment().DoSegment(utf::to_utf32(query_str), StdFormula);
 }
 
 std::vector<WordSegment::WordInfo> ArticleSegment(const std::string &article_str)
 {
-    return GetWordSegment().DoSegment(utf::to_utf32(article_str), true);
+    return GetWordSegment().DoSegment(utf::to_utf32(article_str), AllFormula);
 }
 
 std::vector<WordSegment::WordInfo> QuerySegment(const std::u32string &query_str)
 {
-    return GetWordSegment().DoSegment(query_str, false);
+    return GetWordSegment().DoSegment(query_str, StdFormula);
 }
 
 std::vector<WordSegment::WordInfo> ArticleSegment(const std::u32string &article_str)
 {
-    return GetWordSegment().DoSegment(article_str, true);
+    return GetWordSegment().DoSegment(article_str, AllFormula);
 }
 } // namespace query

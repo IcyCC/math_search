@@ -8,6 +8,14 @@
 
 namespace query
 {
+
+enum SegmentType
+{
+    AllFormula,
+    StdFormula,
+    WithoutFormula
+};
+
 // 分词
 class WordSegment
 {
@@ -44,7 +52,7 @@ class WordSegment
 //    void SetWordCount(std::map<std::u32string, std::u32string::size_type> &&word_count);
 //    void SetWordCount(const std::map<std::u32string, std::u32string::size_type>& word_count);
 
-    std::vector<WordInfo> DoSegment(const std::u32string& content, bool is_article) const;
+    std::vector<WordInfo> DoSegment(const std::u32string& content, SegmentType segment_type) const;
 
   private:
 
