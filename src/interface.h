@@ -17,8 +17,11 @@ std::vector<std::string> GetAllStdFormulaWithSub(std::string f);
 // 查询接口
 std::vector<query::QueryResult> QueryComm(std::string q, int type);
 
-// 分词
-std::vector<std::string> SegmentWords(const std::string& str);
+// 分词，公式保留原始形式
+std::vector<std::string> SegmentWordsWithoutStdFormula(const std::string& str);
+
+// 分词，公式转换成标准形式
+std::vector<std::string> SegmentWordsWithStdFormula(const std::string& str);
 
 // 标准化公式
 std::string StdFormula(std::string f);

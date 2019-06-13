@@ -7,6 +7,8 @@
 
 namespace query
 {
+std::vector<WordSegment::WordInfo> DefaultSegment(const std::string &query_str);
+std::vector<WordSegment::WordInfo> DefaultSegment(const std::u32string &query_str);
 std::vector<WordSegment::WordInfo> ArticleSegment(const std::string& article_str);
 std::vector<WordSegment::WordInfo> QuerySegment(const std::string& query_str);
 std::vector<WordSegment::WordInfo> ArticleSegment(const std::u32string& article_str);
