@@ -1,0 +1,536 @@
+<html>
+<head>
+<title>LaTeX4Web 1.4 OUTPUT</title>
+<style type="text/css">
+<!--
+ body {color: black;  background:"#FFCC99";  }
+ div.p { margin-top: 7pt;}
+ td div.comp { margin-top: -0.6ex; margin-bottom: -1ex;}
+ td div.comb { margin-top: -0.6ex; margin-bottom: -.6ex;}
+ td div.norm {line-height:normal;}
+ td div.hrcomp { line-height: 0.9; margin-top: -0.8ex; margin-bottom: -1ex;}
+ td.sqrt {border-top:2 solid black;
+          border-left:2 solid black;
+          border-bottom:none;
+          border-right:none;}
+ table.sqrt {border-top:2 solid black;
+             border-left:2 solid black;
+             border-bottom:none;
+             border-right:none;}
+-->
+</style>
+</head>
+<body>
+\documentclass[UTF8]article
+\usepackageCTEX
+\usepackagecolor
+\usepackageindentfirst
+\setlength<br>indent2em
+\usepackagetxfonts
+\usepackagetextcomp
+\usepackagegraphicx
+\begindocument
+	<p>\heiti 1.2.4 绝对值<br>
+
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;两辆汽车从同一处O出发，分别向东、西方向行驶10km，到达A,B两处（图1.2-6）.它们的行驶路线相同吗？它们的行驶路程相同？<br>
+
+	\beginfigure[ht]
+		\centering
+		 <font face=symbol>Î</font> cludegraphics[scale=0.5]1.png
+	\endfigure
+
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;一般地，数轴上表示数a的点与原点的距离叫做数a的\textcolorblue绝对值（absolute value），记作<font face=symbol>|</font> a <font face=symbol>|</font>.例如，图1.2-6中A,B两点分别表示10和-10,它们与原点的距离10个单位长度，所以10和-10的绝对值都是10，即<br>
+
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;<font face=symbol>|</font> 10 <font face=symbol>|</font> = 10,<font face=symbol>|</font> <font face=symbol>-</font>10 <font face=symbol>|</font> = 10.<br>
+
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;显然<font face=symbol>|</font> 0 <font face=symbol>|</font> = 0.<br>
+
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;由绝对值的定义可知：<br>
+
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;\textcolorblue一个正数的绝对值是它本身；一个负数的绝对值是它的相反数；0的绝对值是0。即<br>
+
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;（1） 如果a&gt;0,那么<font face=symbol>|</font> a <font face=symbol>|</font> = a;<br>
+
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;（2）如果a=0,那么<font face=symbol>|</font> a <font face=symbol>|</font> = 0;<br>
+
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;（3）如果a&lt;0,那么<font face=symbol>|</font> a <font face=symbol>|</font> = -a;<br>
+
+	<p>&nbsp;&nbsp;&nbsp;&nbsp; 这里的数a可以使正数、负数和0.<br>
+
+	\textcolorblue\heiti 练习<br>
+
+	1.写出下列个数的绝对值：<br>
+
+	
+<table cellspacing=0  border=0 align=center>
+<tr>
+  <td nowrap align=center>
+    6,<font face=symbol>-</font>8,<font face=symbol>-</font>3.9,
+  </td>
+  <td nowrap align="center">
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align="center">
+        5
+      </td>
+    </tr>
+    </table>
+    <div class=hrcomp><hr noshade size=1></div>
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align=center>
+        2
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td nowrap align=center>
+    ,<font face=symbol>-</font>
+  </td>
+  <td nowrap align="center">
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align="center">
+        2
+      </td>
+    </tr>
+    </table>
+    <div class=hrcomp><hr noshade size=1></div>
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align=center>
+        11
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td nowrap align=center>
+    ,100,0
+  </td>
+</tr>
+</table>
+
+	2.判断下列说法是否正确：
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;（1）符号相反的数互为相反数；<br>
+
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;（2）一个数的绝对值越大，表示它的点在数轴上越靠右；<br>
+
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;（3）一个数的绝对值越大，表示它的点在数轴上离原点越远；<br>
+
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;（4）当a <font face=symbol>¹</font> 0时，<font face=symbol>|</font> a <font face=symbol>|</font>总是大于0.<br>
+
+	3.判断下列各式是否正确：<br>
+
+	（1）<font face=symbol>|</font> 5 <font face=symbol>|</font>=<font face=symbol>|</font> <font face=symbol>-</font><font face=symbol>-</font>5 <font face=symbol>|</font>；（2）-<font face=symbol>|</font> 5 <font face=symbol>|</font>=<font face=symbol>|</font> <font face=symbol>-</font>5 <font face=symbol>|</font>；（3）-5=<font face=symbol>|</font> <font face=symbol>-</font>5 <font face=symbol>|</font>.
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;我们已知两个正数（或0）之间怎样比较大小，例如<br>
+
+	
+<table cellspacing=0  border=0 align=center>
+<tr>
+  <td nowrap align=center>
+    0&lt;1,1&lt;2,2&lt;3···.
+  </td>
+</tr>
+</table>
+
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;任意两个有理数（例如-4和-3，-2和0，-1和1）怎样比较大小呢？<br>
+
+	\textcolorblue\heiti 思考<br>
+
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;图1.2-7给出了未来一周中每天的最高气温和最低气温，其中最低气温是多少？最高气温呢？你能将这七天中每天的最低气温按从低到高的顺序排列吗？<br>
+
+	\beginfigure[ht]
+		\centering
+		 <font face=symbol>Î</font> cludegraphics[scale=0.5]2.png
+	\endfigure
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;这七天中每天的最低气温按从低到高排列为<br>
+
+	
+<table cellspacing=0  border=0 align=center>
+<tr>
+  <td nowrap align=center>
+    <font face=symbol>-</font>4,<font face=symbol>-</font>3,<font face=symbol>-</font>2,<font face=symbol>-</font>1,0,1,2
+  </td>
+</tr>
+</table>
+.
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;按照这个顺序排列的温度，在温度计上所对应的点事从下到上的，按照这个顺序把这些书表示在数轴上，表示它们的各点的顺序是从左到右的（图1.2-8）.
+	\beginfigure[ht]
+		\centering
+		 <font face=symbol>Î</font> cludegraphics[scale=1]3.png
+	\endfigure
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;数学中规定：在数轴上表示有理数，它们从左到右的顺序，就是从小到大的顺序，即左边的数小于右边的数.
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;由这个规定可知
+	
+<table cellspacing=0  border=0 align=center>
+<tr>
+  <td nowrap align=center>
+    <font face=symbol>-</font>6&lt;<font face=symbol>-</font>5,<font face=symbol>-</font>5&lt;<font face=symbol>-</font>4,<font face=symbol>-</font>4&lt;<font face=symbol>-</font>3,<font face=symbol>-</font>2&lt;0,<font face=symbol>-</font>1&lt;1,···.
+  </td>
+</tr>
+</table>
+
+	\textcolorblue思考
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;对于正数、0和负数这三类数，它们之间有什么大小关系？两个负数之间如何比较大小？前面最低气温由低到高的排列与你的结论一致吗？
+	一般地,<br>
+
+	\textcolorblue（1）正数大于0，0大于负数，正数大于负数；<br>
+
+	\textcolorblue（2）两个负数，绝对值大的反而小。<br>
+
+	例如，10,0-1,1-1,-1-2.<br>
+
+	\textcolorblue例 比较下列各对数的大小:<br>
+
+	(1) -(-1)和-(+2); <br>
+
+	(2) <font face=symbol>-</font>(8)/(21) 和 <font face=symbol>-</font>(3)/(7)<br>
+     
+	(3)-(-0.3)和 <font face=symbol>|</font> <font face=symbol>-</font>(1)/(3) <font face=symbol>|</font>.<br>
+
+	\textcolorblue解：(1)先化简,-(-1) = 1,-(+2) = -2.<br>
+
+	因为正数大于负数，所以1&gt; <font face=symbol>-</font>2,即<br>
+
+	
+<table cellspacing=0  border=0 align=center>
+<tr>
+  <td nowrap align=center>
+    <font face=symbol>-</font>(<font face=symbol>-</font>1)&gt;<font face=symbol>-</font>(+2).
+  </td>
+</tr>
+</table>
+
+	(2)这是两个负数比较大小，先求它们的绝对值.<br>
+
+	<font face=symbol>|</font> <font face=symbol>-</font>(8)/(21) <font face=symbol>|</font> = (8)/(12),<font face=symbol>|</font> <font face=symbol>-</font>(3)/(7) <font face=symbol>|</font> = (3)/(7)=(9)/(21).<br>
+
+	因为 (8)/(21) &lt; (9)/(21),<br>
+
+	即	<font face=symbol>|</font> <font face=symbol>-</font>(8)/(21) <font face=symbol>|</font>  &lt; <font face=symbol>|</font> <font face=symbol>-</font>(3)/(7) <font face=symbol>|</font>,<br>
+
+	所以 <font face=symbol>-</font>(8)/(21)   &lt;  <font face=symbol>-</font>(3)/(7).<br>
+
+	(3)先化简，-(-0.3) = 0.3,<font face=symbol>|</font> <font face=symbol>-</font>(1)/(3) <font face=symbol>|</font> = (1)/(3).<br>
+
+	因为 0.3  &lt; (1)/(3).<br>
+
+	所以 -(-0.3)  &lt;  <font face=symbol>|</font> <font face=symbol>-</font>(1)/(3) <font face=symbol>|</font>.<br>
+
+	<p>&nbsp;&nbsp;&nbsp;&nbsp; 异号两数比较大小，要考虑它们的正负：同号两数比较大小，要考虑它们的绝对值。<br>
+
+	\textcolorblue\heiti 练习<br>
+
+	比较下列各对数的大小:<br>
+
+	(1) 3和-5；                        (2) -3和-5；<br>
+
+	(3) -2.5和<font face=symbol>-</font><font face=symbol>|</font> <font face=symbol>-</font>2.25 <font face=symbol>|</font>;     (4) <font face=symbol>-</font>(3)/(5)和<font face=symbol>-</font>(3)/(4).<br>
+
+	\textcolorblue\heiti 习题1.2
+	\heiti 复习巩固
+	1.把下面的有理数填写在相应的大括号里(将各数用逗号分开)：
+	
+<table cellspacing=0  border=0 align=center>
+<tr>
+  <td nowrap align=center>
+     15,<font face=symbol>-</font>
+  </td>
+  <td nowrap align="center">
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align="center">
+        3
+      </td>
+    </tr>
+    </table>
+    <div class=hrcomp><hr noshade size=1></div>
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align=center>
+        8
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td nowrap align=center>
+    ,0,0.15,<font face=symbol>-</font>30,<font face=symbol>-</font>12.8,<font face=symbol>-</font>
+  </td>
+  <td nowrap align="center">
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align="center">
+        22
+      </td>
+    </tr>
+    </table>
+    <div class=hrcomp><hr noshade size=1></div>
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align=center>
+        5
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td nowrap align=center>
+    ,+20,<font face=symbol>-</font>60 
+  </td>
+</tr>
+</table>
+.
+	正数：               负数:                 
+	2.在数轴上表示下列各数：
+	
+<table cellspacing=0  border=0 align=center>
+<tr>
+  <td nowrap align=center>
+    <font face=symbol>-</font>5,+3,<font face=symbol>-</font>3.5,0,
+  </td>
+  <td nowrap align="center">
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align="center">
+        2
+      </td>
+    </tr>
+    </table>
+    <div class=hrcomp><hr noshade size=1></div>
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align=center>
+        3
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td nowrap align=center>
+    ,<font face=symbol>-</font>
+  </td>
+  <td nowrap align="center">
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align="center">
+        3
+      </td>
+    </tr>
+    </table>
+    <div class=hrcomp><hr noshade size=1></div>
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align=center>
+        2
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td nowrap align=center>
+    ,0.75 
+  </td>
+</tr>
+</table>
+.
+	3.在数轴上，点A表示-3，从点A出发,沿着数轴移动4个单位长到达点B，则点B表示的数是多少？
+	4.写出下列各数的相反数，并将这些数连同它们的相反数在数轴有上表示出来：
+	
+<table cellspacing=0  border=0 align=center>
+<tr>
+  <td nowrap align=center>
+     <font face=symbol>-</font>4,+2,<font face=symbol>-</font>1.5,0,
+  </td>
+  <td nowrap align="center">
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align="center">
+        1
+      </td>
+    </tr>
+    </table>
+    <div class=hrcomp><hr noshade size=1></div>
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align=center>
+        3
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td nowrap align=center>
+    ,<font face=symbol>-</font>
+  </td>
+  <td nowrap align="center">
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align="center">
+        9
+      </td>
+    </tr>
+    </table>
+    <div class=hrcomp><hr noshade size=1></div>
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align=center>
+        4
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td nowrap align=center>
+     
+  </td>
+</tr>
+</table>
+.
+	5.写出下列各数的绝对值：
+	
+<table cellspacing=0  border=0 align=center>
+<tr>
+  <td nowrap align=center>
+    <font face=symbol>-</font>125,+23,<font face=symbol>-</font>3.5,0,
+  </td>
+  <td nowrap align="center">
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align="center">
+        2
+      </td>
+    </tr>
+    </table>
+    <div class=hrcomp><hr noshade size=1></div>
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align=center>
+        3
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td nowrap align=center>
+    ,<font face=symbol>-</font>
+  </td>
+  <td nowrap align="center">
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align="center">
+        3
+      </td>
+    </tr>
+    </table>
+    <div class=hrcomp><hr noshade size=1></div>
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align=center>
+        2
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td nowrap align=center>
+    ,<font face=symbol>-</font>0.05
+  </td>
+</tr>
+</table>
+.
+	上面的数中哪个数的绝对值最大？那个数的绝对值最小？
+	6.将下列各数按从小到大的顺序排列，并用“&lt;”号连接：
+	
+<table cellspacing=0  border=0 align=center>
+<tr>
+  <td nowrap align=center>
+    <font face=symbol>-</font>0.25,+2.3,<font face=symbol>-</font>0.15,0,<font face=symbol>-</font>
+  </td>
+  <td nowrap align="center">
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align="center">
+        2
+      </td>
+    </tr>
+    </table>
+    <div class=hrcomp><hr noshade size=1></div>
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align=center>
+        3
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td nowrap align=center>
+    ,<font face=symbol>-</font>
+  </td>
+  <td nowrap align="center">
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align="center">
+        3
+      </td>
+    </tr>
+    </table>
+    <div class=hrcomp><hr noshade size=1></div>
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align=center>
+        2
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td nowrap align=center>
+    ,<font face=symbol>-</font>
+  </td>
+  <td nowrap align="center">
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align="center">
+        1
+      </td>
+    </tr>
+    </table>
+    <div class=hrcomp><hr noshade size=1></div>
+    <table cellspacing=0 border=0 >
+    <tr>
+      <td nowrap align=center>
+        2
+      </td>
+    </tr>
+    </table>
+  </td>
+  <td nowrap align=center>
+    ,0.05
+  </td>
+</tr>
+</table>
+.
+	\heiti 综合应用<br>
+
+	7.下面是我国几个城市某年一月份的平均气温，把它们按从高到低的顺序排列。<br>
+
+	北京  武汉  广州  哈尔滨   南京<br>
+
+	-4.6\textcelsius  3.8\textcelsius  13.1\textcelsius   -19.4\textcelsius  2.4\textcelsius  <br>
+
+	8.如图，检测5个球球，其中超过标准的克数记为正数，不足的克数记为负数，从轻重的角度，哪个球最接近标准？<br>
+
+		\beginfigure[ht]
+		\centering
+		 <font face=symbol>Î</font> cludegraphics[scale=0.5]4.png
+	\endfigure
+	9.某年我国人均水资源比上年的增幅是-5.6\%.后续三年各年比上年的增幅分别是-4.0\%,13.0\%，-9.6\%，这些增幅中哪个是最小？增幅是负数说明什么?<br>
+
+	10.在数轴上，表示哪个数的点与表示-2和4的点的距离相等？<br>
+
+	\heiti 拓广探索<br>
+
+	11.(1) -1和0之间还有负数吗？<font face=symbol>-</font>(1)/(2)与0之间呢？如有，请举例。<br>
+
+	(2)-3和-1之间有负整数吗?-2和2之间有哪些整数？<br>
+
+	(3)有比-1大的负整数吗？<br>
+
+	(4)写出3个小于-100并且大于-103的数。<br>
+
+	12.如果<font face=symbol>|</font> x <font face=symbol>|</font> = 2,那么x一定是2吗？如果<font face=symbol>|</font> x <font face=symbol>|</font> = 0，那么x等于几？如果x = -x，那么x等于几？<br>
+
+\enddocument</body>
+</html>

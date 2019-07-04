@@ -1,0 +1,8 @@
+57
+1.5.1 乘方
+指数和底数
+\begin{definition}
+在$a^n$中，a叫做底数(base number), n叫做指数(exponent), 当$a^n$看作a的n次方的结果时，也可读作“a的n次幂"。
+\end{definition}
+
+

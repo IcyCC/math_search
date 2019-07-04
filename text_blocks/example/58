@@ -1,0 +1,13 @@
+58
+1.5.1 乘方
+
+\begin{example}
+\paragraph{例1}计算:
+(1) $(-4)^3$;  (2) $(-2)^4$;  (3) $(-\frac{2}{3})^3$.
+\paragraph{解：}
+(1) $(-4)^3=(-4)\times(-4)\times(-4)=-64$;
+(2) $(-2)^4=(-2)\times(-2)\times(-2)\times(-2)=16$;
+(3) $(-\frac{2}{3})^3=(-\frac{2}{3})\times(-\frac{2}{3})\times(-\frac{2}{3})=-\frac{8}{27}$.
+\end{example}
+
+

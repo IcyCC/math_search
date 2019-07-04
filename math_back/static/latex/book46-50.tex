@@ -1,0 +1,762 @@
+<html>
+<head>
+<title>LaTeX4Web 1.4 OUTPUT</title>
+<style type="text/css">
+<!--
+ body {color: black;  background:"#FFCC99";  }
+ div.p { margin-top: 7pt;}
+ td div.comp { margin-top: -0.6ex; margin-bottom: -1ex;}
+ td div.comb { margin-top: -0.6ex; margin-bottom: -.6ex;}
+ td div.norm {line-height:normal;}
+ td div.hrcomp { line-height: 0.9; margin-top: -0.8ex; margin-bottom: -1ex;}
+ td.sqrt {border-top:2 solid black;
+          border-left:2 solid black;
+          border-bottom:none;
+          border-right:none;}
+ table.sqrt {border-top:2 solid black;
+             border-left:2 solid black;
+             border-bottom:none;
+             border-right:none;}
+-->
+</style>
+</head>
+<body>
+\documentclassarticle
+
+\setcountersecnumdepth2
+
+\title\LaTeX.js Showcase
+\authormade with \varheartsuit by Michael Brade
+\date2017--2018
+
+
+\begindocument
+
+\maketitle
+
+This document will show most of the supported features of \LaTeX.js.
+
+
+<p><a name="toc.1"><h1>1&nbsp;Characters</h1>
+
+It is possible to input any UTF-8 character either directly or by character code
+using one of the following:
+
+<ul>
+    
+<li> \texttt\textbackslash symbol{"00A9}: \symbol"00A9
+    
+<li> \verb|\char"A9|: \char"A9
+    
+<li> \verb|<sup>^</sup>A9 or <sup>^</sup><sup>^</sup>00A9|: <sup>^</sup>A9 or <sup>^</sup><sup>^</sup>00A9
+</ul>
+
+\bigskip
+
+<p>
+Special characters, like those:
+\begincenter
+\ \& \% \# \<sub> </sub>{ } &#126; \<sup></sup>
+</td>
+<td nowrap align=center>
+   \textbackslash \endcenter
+have to be escaped.
+
+More than 200 symbols are accessible through macros. For instance: 30&nbsp;\textcelsius is
+86&nbsp;\textdegreeF. See also Section&nbsp;<a href="#refsec:symbols">(0)</a>
+.
+
+
+
+<p><a name="toc.2"><h1>2&nbsp;Spaces and Comments</h1>
+
+Spaces and comments, of course, work just as they do in \LaTeX.
+This is an            example: Supercal              ifragilist    icexpialidocious
+
+It does not matter whether you enter one or several     spaces after a word, it
+will always be typeset as one space<font face=symbol>-</font><font face=symbol>-</font><font face=symbol>-</font>unless you force several spaces, like  now.
+
+New \TeX users may miss whitespaces after a command. Experienced \TeX users are \TeX perts, and know how to use whitespaces. 
+Longer comments can be embedded in the \textttcomment environment:
+This is another  \begin  comment
+rather stupid,
+but helpful
+\end
+comment
+example for embedding comments in your document.
+
+
+
+<p><a name="toc.3"><h1>3&nbsp;Dashes and Hyphens</h1>
+
+\LaTeX knows four kinds of dashes. Access three of them with different numbers
+of consecutive dashes. The fourth sign is actually not a dash at all<font face=symbol>-</font><font face=symbol>-</font><font face=symbol>-</font>it is the
+mathematical minus sign:
+
+\beginquote
+  daughter<font face=symbol>-</font>in<font face=symbol>-</font>law, X<font face=symbol>-</font>rated<br>
+
+  pages 13<font face=symbol>-</font><font face=symbol>-</font>67<br>
+
+  yes<font face=symbol>-</font><font face=symbol>-</font><font face=symbol>-</font>or no? <br>
+
+  0, 1 and -1
+\endquote
+The names for these dashes are: ‘<font face=symbol>-</font>’ hyphen, ‘<font face=symbol>-</font><font face=symbol>-</font>’ en<font face=symbol>-</font>dash, ‘<font face=symbol>-</font><font face=symbol>-</font><font face=symbol>-</font>’ em<font face=symbol>-</font>dash,
+and ‘-’ minus sign. \LaTeX.js outputs the actual true unicode character for those
+instead of using the hypen<font face=symbol>-</font>minus.
+
+
+
+<p><a name="toc.4"><h1>4&nbsp;Text and Paragraphs, Ligatures</h1>
+
+An empty line starts a new paragraph, and so does \verb|<br>|.
+<br> Like this. A new line usually starts automatically when the previous one is
+full. However, using \verb+\newline+ or \verb|<br>
+|,\newline one can force <br>
+ to start a new line.
+
+Ligatures are supported as well, for instance:
+
+\begincenter
+fi, fl, ff, ffi, ffl \dots instead of f\/i, f\/l, f\/f\/l \dots
+\endcenter
+
+Use \texttt\textbackslash<span style="position:relative;left:-7pt;"><b><font face=courier size=+2>/</font></b></span>sh to prevent a ligature.
+
+
+
+\beginmulticols2[<p><a name="toc.4.1"><h2>4.1&nbsp;Multicolumns</h2>]
+
+The multi<font face=symbol>-</font>column layout, using the \textttmulticols environment, allows easy
+definition of multiple columns of text<font face=symbol>-</font><font face=symbol>-</font><font face=symbol>-</font>just like in newspapers. The first
+and mandatoriy argument specifies the number of columns the text should be divided into.
+
+It is often convenient to spread some text over all columns, just before the multicolumn
+output. In \LaTeX, this was needed to prevent any page break in between. To achieve this,
+the \textttmulticols environment has an optional second argument which can be used for
+this purpose.
+
+For instance, this text you are reading now was started with the argument
+\texttt\textbackslash subsection{Multicolumns}.
+
+\endmulticols
+
+
+
+<p><a name="toc.5"><h1>5&nbsp;Boxes</h1>
+
+\LaTeX.js supports most of the standard \LaTeX boxes.
+
+\medbreak
+
+&lt;p&gt;\fbox\verb|\mbox|\emphtext\verb||
+
+<font size="-1">break
+
+We already know one of them: it<font face=symbol>¢</font>s called \verb|\mbox|. It simply packs up a series of boxes into another one, and
+can be used to prevent \LaTeX.js from breaking two words. As boxes can be put inside boxes, these horizontal box
+packers give you ultimate flexibility.
+
+\bigbreak
+
+&lt;p&gt;\fbox
+\verb|\makebox[|\emphwidth\verb|][|\emphpos\verb|]|\emphtext\verb||
+
+
+&lt;p&gt;\fbox
+\verb|\framebox[|\emphwidth\verb|][|\emphpos\verb|]|\emphtext\verb||
+
+
+<font size="-1">break
+
+&lt;p&gt;
+\emphwidth defines the width of the resulting box as seen from the outside.
+The \emphpos parameter takes a one letter value: \textbfcenter,
+flush\textbfleft, or flush\textbfright. \textbfspread is not really working
+in HTML.
+
+
+The command \verb|framebox| works exactly the same as \verb|makebox|, but it
+draws a box around the text.
+
+The following example shows you some things you could do with
+the \verb|makebox| and \verb|framebox| commands.
+
+\beginquote
+  \fbox\makebox[10cm][c]\textbfc e \textbfn t r a l<br>
+
+  \frameboxGuess I<font face=symbol>¢</font>m framed now! <br>
+  \framebox[2cm][r]Bummer, I am too wide <br>
+  \framebox[1cm][l]never mind, so am I
+  Can you read this?
+\endquote
+
+
+\bigbreak
+
+&lt;p&gt;\fbox
+\verb|<br>box[|\emphpos\verb|][|\emphheight\verb|][|\emphinner<font face=symbol>-</font>pos\verb|]|\emphwidth\verb||\emphtext\verb||
+
+
+<font size="-1">break
+
+&lt;p&gt;
+The \verb|<br>box| command produces a box the contents of which are created in paragraph mode. However, only small
+pieces of text should be used, paragraph<font face=symbol>-</font>making environments shouldn<font face=symbol>¢</font>t be used inside a \verb|<br>box| argument. For
+larger pieces of text, including ones containing a paragraph<font face=symbol>-</font>making environment, you should use a \verb|minipage|
+environment.
+
+By default LaTeX will position vertically a parbox so its center lines up with the center of the surrounding text line.
+When the optional position argument is present and equal either to ‘\verb|t|’ or ‘\verb|b|’, this allows you respectively
+to align either the top or bottom line in the parbox with the baseline of the surrounding text. You may also specify
+‘\verb|m|’ for position to get the default behaviour.
+
+The optional \emphheight argument overrides the natural height of the box.
+
+The \emphinner<font face=symbol>-</font>pos argument controls the placement of the text inside the box, as follows; if it is not specified, \emphpos is used.
+
+\verb|t| text is placed at the top of the box.
+
+\verb|c| text is centered in the box.
+
+\verb|b| text is placed at the bottom of the box.
+
+\verb|s| is not supported in HTML
+
+<font size="-1">break&lt;p&gt;
+The following examples demonstrate simple positioning:
+
+&lt;ul&gt;
+&lt;li&gt; simple alignment:
+
+Some text
+\fbox<br>box2cmparbox default alignment, parbox test text
+some text
+\fbox<br>box[t]2cmparbox top alignment, text parbox test text
+some text
+\fbox<br>box[b]2cmparbox bottom alignment, text parbox test text
+some text.
+
+
+&lt;li&gt; alignment with a given height:
+
+Some text
+\fbox<br>box[c][3cm]2cmparbox default alignment, parbox test text
+some text
+\fbox<br>box[t][3cm]2cmparbox top alignment, text parbox test text
+some text
+\fbox<br>box[b][3cm]2cmparbox bottom alignment, text parbox test text
+some text.
+&lt;/ul&gt;
+
+&lt;p&gt;
+The following examples demonstrate all explicit \emphpos/\emphinner<font face=symbol>-</font>pos combinations:
+&lt;ul&gt;
+&lt;li&gt; center alignment:
+
+&lt;p&gt;
+Some text
+\fbox<br>box[c][3cm][t]2cmparbox default alignment, parbox test text
+some text
+\fbox<br>box[c][3cm][c]2cmparbox top alignment, text parbox test text
+some text
+\fbox<br>box[c][3cm][b]2cmparbox bottom alignment, text parbox test text
+some text.
+
+
+&lt;li&gt; top alignment:
+
+&lt;p&gt;
+Some text
+\fbox<br>box[t][3cm][t]2cmparbox default alignment, parbox test text
+some text
+\fbox<br>box[t][3cm][c]2cmparbox top alignment, text parbox test text
+some text
+\fbox<br>box[t][3cm][b]2cmparbox bottom alignment, text parbox test text
+some text.
+
+&lt;li&gt; bottom alignment:
+
+&lt;p&gt;
+Some text
+\fbox<br>box[b][3cm][t]2cmparbox default alignment, parbox test text
+some text
+\fbox<br>box[b][3cm][c]2cmparbox top alignment, text parbox test text
+some text
+\fbox<br>box[b][3cm][b]2cmparbox bottom alignment, text parbox test text
+some text.
+
+
+&lt;li&gt; top/bottom in one line:
+
+&lt;p&gt;
+Some text
+\fbox<br>box[b][3cm][t]2cmparbox default alignment, parbox test text
+some text
+\fbox<br>box[t][3cm][c]2cmparbox top alignment, text parbox test text
+some text.
+&lt;/ul&gt;
+
+
+
+<p><a name="toc.5.1"><h2>5.1&nbsp;Low<font face=symbol>-</font>level box<font face=symbol>-</font>interface</h2>
+
+\LaTeX.js supports the following low<font face=symbol>-</font>level \TeX commands:
+  \verb|&lt;&lt;ap|\emphtext\verb||,
+  \verb|\rlap|\emphtext\verb||, and
+  \verb|\smash|\emphtext\verb||, as well as
+  \verb|\hphantom|\emphtext\verb||,
+  \verb|<font face=symbol>j</font>hantom|\emphtext\verb||, and
+  \verb|\phantom|\emphtext\verb||.
+
+A phantom looks like this: \phantomphantom yes, now the phantom is gone.
+
+&lt;p&gt;
+&lt;&lt;ap\verb|&lt;&lt;ap |could be used to put something in the margin. However, there are better alternatives for that.
+See \verb|\marginpar|. \marginpar<font size="+3"> test</font> in margin here
+
+
+<p><a name="toc.6"><h1>6&nbsp;Spacing</h1>
+
+The following horizontal spaces are supported:
+<br>
+[8pt]
+Negative thin space: |<font face=symbol>Ø</font>thinspace| <br>
+
+No space (natural): || <br>
+
+Thin space: |&nbsp;| or |\thinspace| <br>
+
+Normal space: | | <br>
+
+Normal space: | | <br>
+
+Non<font face=symbol>-</font>break space: |&nbsp;| <br>
+
+en<font face=symbol>-</font>space: |\enspace| <br>
+
+em<font face=symbol>-</font>space: |&nbsp;&nbsp;&nbsp;| <br>
+
+2x em<font face=symbol>-</font>space: |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+
+3cm horizontal space: |\hspace3cm| <br>
+
+
+
+
+<p><a name="toc.7"><h1>7&nbsp;Environments</h1>
+
+<p><a name="toc.7.1"><h2>7.1&nbsp;Lists: Itemize, Enumerate, and Description</h2>
+
+The \textttitemize environment is suitable for simple lists, the \textttenumerate environment for
+enumerated lists, and the \textttdescription environment for descriptions.
+
+&lt;ol&gt;
+    &lt;li&gt; You can nest the list environments to your taste:
+        &lt;ul&gt;
+            &lt;li&gt; But it might start to look silly.
+            &lt;br&gt;<font face=symbol>-</font>&nbsp; With a dash.
+        &lt;/ul&gt;
+    &lt;li&gt; Therefore remember: <a name="refremember">
+
+        \begindescription
+            &lt;br&gt;Stupid&nbsp; things will not become smart because they are in a list.
+            &lt;br&gt;Smart&nbsp; things, though, can be presented beautifully in a list.
+        \enddescription
+    &lt;br&gt;important&nbsp; Technical note: Viewing this in Chrome, however, will show too much vertical space
+        at the end of a nested environment (see above). On top of that, margin collapsing for inline<font face=symbol>-</font>block
+        boxes is not allowed. Maybe using \textttdl elements is too complicated for this and a simple nested
+        \textttdiv should be used instead.
+&lt;/ol&gt;
+Lists can be deeply nested:
+&lt;ul&gt;
+  &lt;li&gt; list text, level one
+    &lt;ul&gt;
+      &lt;li&gt; list text, level two
+        &lt;ul&gt;
+          &lt;li&gt; list text, level three
+
+            And a new paragraph can be started, too.
+            &lt;ul&gt;
+              &lt;li&gt; list text, level four
+
+                And a new paragraph can be started, too.
+                This is the maximum level.
+
+              &lt;li&gt; list text, level four
+            &lt;/ul&gt;
+
+          &lt;li&gt; list text, level three
+        &lt;/ul&gt;
+      &lt;li&gt; list text, level two
+    &lt;/ul&gt;
+  &lt;li&gt; list text, level one
+  &lt;li&gt; list text, level one
+&lt;/ul&gt;
+
+
+<p><a name="toc.7.2"><h2>7.2&nbsp;Flushleft, Flushright, and Center</h2>
+
+The \textttflushleft environment:
+\beginflushleft
+This text is<br>
+ left<font face=symbol>-</font>aligned.
+\LaTeX is not trying to make
+each line the same length.
+\endflushleft
+The \textttflushright environment:
+\beginflushright
+This text is right<font face=symbol>-</font><br>
+aligned.
+\LaTeX is not trying to make
+each line the same length.
+\endflushright
+And the \textttcenter environment:
+\begincenter
+At the centre<br>
+of the earth
+\endcenter
+
+
+
+<p><a name="toc.7.3"><h2>7.3&nbsp;Quote, Quotation, and Verse</h2>
+
+The \textttquote environment is useful for quotes, important phrases and examples.
+A typographical rule of thumb for the line length is:
+\beginquote
+On average, no line should be longer than 66 characters.
+\endquote
+
+There are two similar environments: the \textttquotation and the \textttverse environments.
+The \textttquotation environment is useful for longer quotes going over several paragraphs,
+because it indents the first line of each paragraph.
+
+The \textttverse environment is useful for poems where the line breaks are important.
+The lines are separated by issuing a \texttt\textbackslash\textbackslash at the end of a line
+and an empty line after each verse.
+
+\beginverse
+Humpty Dumpty sat on a wall:<br>
+
+Humpty Dumpty had a great fall.<br>
+
+All the King’s horses and all the King’s men<br>
+
+Couldn’t put Humpty together again.
+
+<font face=symbol>®</font>ggedleft <font face=symbol>-</font><font face=symbol>-</font><font face=symbol>-</font>J.W. Elliott<br>
+\endverse
+
+
+<p><a name="toc.7.4"><h2>7.4&nbsp;Picture</h2>
+
+\frame\setlength\unitlength20.4mm
+\beginpicture(3,2.1)(<font face=symbol>-</font>1.2,<font face=symbol>-</font>0.05)
+  \put(0,1)<span style="position:relative;top:-9pt;left:6pt;"><font face="symbol" size="-1">&#174;</font></span><span style="position:relative;left:-5pt;">t</span>or(1,0)1
+  \put(0,1)<font face=symbol>°</font>le2
+  \thicklines
+  \put(0,0)\line(1,0)1
+  \put(0,0.01)xxxxxxxxxxx
+  \put(0,0.1)XXXX
+\endpicture
+\frame\setlength\unitlength1mm
+\beginpicture(60, 50)
+  \put(20,30)<font face=symbol>°</font>le1
+  \put(20,30)<font face=symbol>°</font>le2
+  \put(20,30)<font face=symbol>°</font>le4
+  \put(20,30)<font face=symbol>°</font>le8
+  \put(20,30)<font face=symbol>°</font>le16
+  \put(20,30)<font face=symbol>°</font>le32
+  \put(40,30)<font face=symbol>°</font>le1
+  \put(40,30)<font face=symbol>°</font>le2
+  \put(40,30)<font face=symbol>°</font>le3
+  \put(40,30)<font face=symbol>°</font>le4
+  \put(40,30)<font face=symbol>°</font>le5
+  \put(40,30)<font face=symbol>°</font>le6
+  \put(40,30)<font face=symbol>°</font>le7
+  \put(40,30)<font face=symbol>°</font>le8
+  \put(40,30)<font face=symbol>°</font>le9
+  \put(40,30)<font face=symbol>°</font>le10
+  \put(40,30)<font face=symbol>°</font>le11
+  \put(40,30)<font face=symbol>°</font>le12
+  \put(40,30)<font face=symbol>°</font>le13
+  \put(40,30)<font face=symbol>°</font>le14
+  \put(15,10)<font face=symbol>°</font>le*1
+  \put(20,10)<font face=symbol>°</font>le*2
+  \put(25,10)<font face=symbol>°</font>le*3
+  \put(30,10)<font face=symbol>°</font>le*4
+  \put(35,10)<font face=symbol>°</font>le*5
+\endpicture
+
+\frame\setlength\unitlength0.75mm
+\beginpicture(60,40)
+  \put(30,20)<span style="position:relative;top:-9pt;left:6pt;"><font face="symbol" size="-1">&#174;</font></span><span style="position:relative;left:-5pt;">t</span>or(1,0)30
+  \put(30,20)<span style="position:relative;top:-9pt;left:6pt;"><font face="symbol" size="-1">&#174;</font></span><span style="position:relative;left:-5pt;">t</span>or(4,1)20
+  \put(30,20)<span style="position:relative;top:-9pt;left:6pt;"><font face="symbol" size="-1">&#174;</font></span><span style="position:relative;left:-5pt;">t</span>or(3,1)25
+  \put(30,20)<span style="position:relative;top:-9pt;left:6pt;"><font face="symbol" size="-1">&#174;</font></span><span style="position:relative;left:-5pt;">t</span>or(2,1)30
+  \put(30,20)<span style="position:relative;top:-9pt;left:6pt;"><font face="symbol" size="-1">&#174;</font></span><span style="position:relative;left:-5pt;">t</span>or(1,2)10
+  \thicklines
+  \put(30,20)<span style="position:relative;top:-9pt;left:6pt;"><font face="symbol" size="-1">&#174;</font></span><span style="position:relative;left:-5pt;">t</span>or(<font face=symbol>-</font>4,1)30
+  \put(30,20)<span style="position:relative;top:-9pt;left:6pt;"><font face="symbol" size="-1">&#174;</font></span><span style="position:relative;left:-5pt;">t</span>or(<font face=symbol>-</font>1,4)5
+  \thinlines
+  \put(30,20)<span style="position:relative;top:-9pt;left:6pt;"><font face="symbol" size="-1">&#174;</font></span><span style="position:relative;left:-5pt;">t</span>or(<font face=symbol>-</font>1,<font face=symbol>-</font>1)5
+  \put(30,20)<span style="position:relative;top:-9pt;left:6pt;"><font face="symbol" size="-1">&#174;</font></span><span style="position:relative;left:-5pt;">t</span>or(<font face=symbol>-</font>1,<font face=symbol>-</font>4)5
+\endpicture
+\setlength\unitlength5cm
+\beginpicture(1,1)
+  \put(0,0)\line(0,1)1
+  \put(0,0)\line(1,0)1
+  \put(0,0)\line(1,1)1
+  \put(0,0)\line(1,2).5
+  \put(0,0)\line(1,3).3333
+  \put(0,0)\line(1,4).25
+  \put(0,0)\line(1,5).2
+  \put(0,0)\line(1,6).1667
+  \put(0,0)\line(2,1)1
+  \put(0,0)\line(2,3).6667
+  \put(0,0)\line(2,5).4
+  \put(0,0)\line(3,1)1
+  \put(0,0)\line(3,2)1
+  \put(0,0)\line(3,4).75
+  \put(0,0)\line(3,5).6
+  \put(0,0)\line(4,1)1
+  \put(0,0)\line(4,3)1
+  \put(0,0)\line(4,5).8
+  \put(0,0)\line(5,1)1
+  \put(0,0)\line(5,2)1
+  \put(0,0)\line(5,3)1
+  \put(0,0)\line(5,4)1
+  \put(0,0)\line(5,6).8333
+  \put(0,0)\line(6,1)1
+  \put(0,0)\line(6,5)1
+\endpicture
+
+
+\frame
+  \setlength\unitlength1cm
+  \beginpicture(6,5)
+    \thicklines
+    \put(1,0.5)\line(2,1)3
+    \put(4,2)\line(<font face=symbol>-</font>2,1)2
+    \put(2,3)\line(<font face=symbol>-</font>2,<font face=symbol>-</font>5)1
+    \put(0.7,0.3)A
+    \put(4.05,1.9)B
+    \put(1.7,2.9)C
+    \put(3.1,2.5)a
+    \put(1.3,1.7)b
+    \put(2.5,1)c
+    \put(0.3,4)F=<font face=symbol>Ö</font><span style="border-top:1 solid black;">s(s-a)(s-b)(s-c)</span>
+    \put(3.5,0.4)\displaystyle s:=(a+b+c)/(2)
+  \endpicture
+
+
+\setlength\unitlength2mm
+\beginpicture(30,20)
+  \linethickness0.075mm
+  <font face=symbol>m</font>ltiput(0,0)(1,0)26\line(0,1)20
+  <font face=symbol>m</font>ltiput(0,0)(0,1)21\line(1,0)25
+  \linethickness0.15mm
+  <font face=symbol>m</font>ltiput(0,0)(5,0)6\line(0,1)20
+  <font face=symbol>m</font>ltiput(0,0)(0,5)5\line(1,0)25
+  \linethickness0.3mm
+  <font face=symbol>m</font>ltiput(5,0)(10,0)2\line(0,1)20
+  <font face=symbol>m</font>ltiput(0,5)(0,10)2\line(1,0)25
+\endpicture
+
+
+
+<p><a name="toc.8"><h1>8&nbsp;Labels and References</h1>
+
+Labels can be attached to parts, chapters, sections, items of enumerations, footnotes, tables and figures.
+For instance: item&nbsp;<a href="#refremember">(0)</a>
+ was important, and regarding fonts, read Section&nbsp;<a href="#refsec:advice">(0)</a>
+. And
+below, we can reference item&nbsp;<a href="#refkey-1">(0)</a>
+ and <a href="#refkey-2">(0)</a>
+.
+
+&lt;ol&gt;
+  &lt;li&gt; list text, level one
+    &lt;ol&gt;
+      &lt;li&gt; list text, level two
+        &lt;ol&gt;
+          &lt;li&gt; list text, level three
+
+            And a new paragraph can be started, too.
+            &lt;ol&gt;
+              &lt;li&gt; list text, level four
+
+                And a new paragraph can be started, too.
+                This is the maximum level.
+
+              &lt;li&gt; list text, level four <a name="refkey-1">
+
+            &lt;/ol&gt;
+
+          &lt;li&gt; list text, level three
+        &lt;/ol&gt;
+      &lt;li&gt;<a name="refkey-2">
+ list text, level two
+    &lt;/ol&gt;
+  &lt;li&gt; list text, level one
+  &lt;li&gt; list text, level one
+&lt;/ol&gt;
+
+
+<p><a name="toc.9"><h1>9&nbsp;Mathematical Formulae</h1>
+
+Math is typeset using KaTeX. Inline math:
+
+f(x) = <font face=symbol>ò</font>_-<font face=symbol>¥</font><sup><font face=symbol>¥</font></sup>
+</td>
+<td nowrap align=center>
+   <span style="position:relative;top:-7pt;left:4pt;">^</span><span style="position:relative;left:-4pt;">f</span>(<font face=symbol>x</font>)&nbsp;e<sup>2 <font face=symbol>p</font> i <font face=symbol>x</font> x</sup>
+</td>
+<td nowrap align=center>
+   &nbsp; d<font face=symbol>x</font>
+
+as well as display math is supported:
+
+  </td>
+</tr>
+</table>
+
+f(n) = \begincases (n)/(2), & \textif  n\text is even <br>
+ 3n+1, & \textif  n\text is odd \endcases
+
+<table cellspacing=0  border=0 align=center>
+<tr>
+  <td nowrap align=center>
+    
+
+
+<p><a name="toc.10"><h1>10&nbsp;Groups</h1>
+
+
+Today is \today.
+
+Actually, what about  some groups?  They&nbsp;are     nice.
+
+
+<p><a name="toc.11"><h1>11&nbsp;Symbols</h1>
+<a name="refsec:symbols">
+    
+
+&lt;p&gt;
+lowercase greek letters:
+\textalpha \textbeta \textgamma \textdelta \textepsilon \textzeta \texteta \texttheta \textiota \textkappa
+\textlambda \textmu \textnu \textxi \textomikron \textpi \textrho \textsigma \texttau \textupsilon \textphi \textchi
+\textpsi \textomega
+
+&lt;p&gt;
+uppercase greek letters:
+\textAlpha \textBeta \textGamma \textDelta \textEpsilon \textZeta \textEta \textTheta \textIota \textKappa
+\textLambda \textMu \textNu \textXi \textOmikron \textPi \textRho \textSigma \textTau \textUpsilon \textPhi \textChi
+\textPsi \textOmega
+
+&lt;p&gt;
+currencies:
+\texteuro \textcent \textsterling \pounds \textbaht \textcolonmonetary \textcurrency \textdong \textflorin \textlira
+\textnaira \textpeso \textwon \textyen
+
+&lt;p&gt;
+old<font face=symbol>-</font>style numerals:
+\textzerooldstyle \textoneoldstyle \texttwooldstyle \textthreeoldstyle \textfouroldstyle \textfiveoldstyle
+\textsixoldstyle \textsevenoldstyle \texteightoldstyle \textnineoldstyle
+
+&lt;p&gt;
+math:
+\textperthousand \perthousand \textpertenthousand \textonehalf \textthreequarters \textonequarter
+\textfractionsolidus \textdiv \texttimes \textminus \textpm \textsurd \textlnot \textasteriskcentered
+\textonesuperior \texttwosuperior \textthreesuperior
+
+&lt;p&gt;
+arrows:
+\textleftarrow \textuparrow \textrightarrow \textdownarrow
+
+&lt;p&gt;
+misc:
+\checkmark \textreferencemark \textordfeminine \textordmasculine \textmarried \textdivorced \textbar \textbardbl
+\textbrokenbar \textbigcircle \textcopyright \copyright \textcircledP \textregistered \textservicemark
+\texttrademark \textnumero \textrecipe \textestimated \textmusicalnote \textdiscount
+
+&lt;p&gt;
+non<font face=symbol>-</font>ASCII:
+\AE \ae \IJ <font face=symbol>i</font>j \OE \oe \TH \th \SS \ss \DH \dh \O \o \DJ \dj \L \l <font face=symbol>i</font> j \NG \ng
+
+
+<p><a name="toc.12"><h1>12&nbsp;Fonts</h1>
+
+Usually, \LaTeX.js chooses the right font<font face=symbol>-</font><font face=symbol>-</font><font face=symbol>-</font>just like \LaTeX.  In some cases,
+one might like to change fonts and sizes by hand. To do this, use the standard
+commands. The actual size of each font is a design issue and depends
+on the document class (in this case on the CSS file).
+
+<font size="-1"> The small and
+  \textbfbold Romans ruled</font>
+  <font size="+2"> all of great big
+  \textitItaly.</font>
+
+\textitYou can also
+  \emphemphasize text if
+  it is set in italics,
+  \textsfin a
+  \emphsans<font face=symbol>-</font>serif font,
+  \textttor in
+  \emphtypewriter style.
+
+The environment form of the font commands is available, too:
+
+\begincenter
+\beginitshape
+This whole paragraph is emphasized, for instance.
+\enditshape
+\endcenter
+
+
+<p><a name="toc.12.1"><h2>12.1&nbsp;An advice</h2>
+<a name="refsec:advice">
+    
+\begincenter
+  \underline\textbfRemember\Huge! \textitThe
+  \textsfM\textbf\LARGE O\textttR\textslE fonts \Huge you
+  \tiny use \footnotesize \textbfin a <font size="-1"> \textttdocument,
+  <font size="+1"> \textitthe <font size="+0"> more \textscreadable and
+  \textsl\textsfbeautiful it bec<font size="+1"> o<font size="+2"> m\LARGE e<font size="+3"> s</font></font></font>.
+\endcenter
+
+
+\appendix
+
+<p><a name="toc.13"><h1>13&nbsp;Source</h1>
+
+The source of \LaTeX.js is here on GitHub: \urlhttps://github.com/michael<font face=symbol>-</font>brade/LaTeX.js
+
+\enddocument
+
+  
+<hr>
+<p><h1>Table Of Contents</h1>
+<p><a href="#toc.1"><h1>1&nbsp;Characters</h1></a>
+<p><a href="#toc.2"><h1>2&nbsp;Spaces and Comments</h1></a>
+<p><a href="#toc.3"><h1>3&nbsp;Dashes and Hyphens</h1></a>
+<p><a href="#toc.4"><h1>4&nbsp;Text and Paragraphs, Ligatures</h1></a>
+<p><a href="#toc.4.1"><h2>4.1&nbsp;Multicolumns</h2></a>
+<p><a href="#toc.5"><h1>5&nbsp;Boxes</h1></a>
+<p><a href="#toc.5.1"><h2>5.1&nbsp;Low<font face=symbol>-</font>level box<font face=symbol>-</font>interface</h2></a>
+<p><a href="#toc.6"><h1>6&nbsp;Spacing</h1></a>
+<p><a href="#toc.7"><h1>7&nbsp;Environments</h1></a>
+<p><a href="#toc.7.1"><h2>7.1&nbsp;Lists: Itemize, Enumerate, and Description</h2></a>
+<p><a href="#toc.7.2"><h2>7.2&nbsp;Flushleft, Flushright, and Center</h2></a>
+<p><a href="#toc.7.3"><h2>7.3&nbsp;Quote, Quotation, and Verse</h2></a>
+<p><a href="#toc.7.4"><h2>7.4&nbsp;Picture</h2></a>
+<p><a href="#toc.8"><h1>8&nbsp;Labels and References</h1></a>
+<p><a href="#toc.9"><h1>9&nbsp;Mathematical Formulae</h1></a>
+<p><a href="#toc.10"><h1>10&nbsp;Groups</h1></a>
+<p><a href="#toc.11"><h1>11&nbsp;Symbols</h1></a>
+<p><a href="#toc.12"><h1>12&nbsp;Fonts</h1></a>
+<p><a href="#toc.12.1"><h2>12.1&nbsp;An advice</h2></a>
+<p><a href="#toc.13"><h1>13&nbsp;Source</h1></a>
+</body>
+</html>

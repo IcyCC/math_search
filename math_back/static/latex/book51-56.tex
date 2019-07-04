@@ -1,0 +1,202 @@
+<html>
+<head>
+<title>LaTeX4Web 1.4 OUTPUT</title>
+<style type="text/css">
+<!--
+ body {color: black;  background:"#FFCC99";  }
+ div.p { margin-top: 7pt;}
+ td div.comp { margin-top: -0.6ex; margin-bottom: -1ex;}
+ td div.comb { margin-top: -0.6ex; margin-bottom: -.6ex;}
+ td div.norm {line-height:normal;}
+ td div.hrcomp { line-height: 0.9; margin-top: -0.8ex; margin-bottom: -1ex;}
+ td.sqrt {border-top:2 solid black;
+          border-left:2 solid black;
+          border-bottom:none;
+          border-right:none;}
+ table.sqrt {border-top:2 solid black;
+             border-left:2 solid black;
+             border-bottom:none;
+             border-right:none;}
+-->
+</style>
+</head>
+<body>
+\documentclassarticle
+\usepackage[utf8]ctex
+
+\begindocument
+
+\maketitle
+
+<h3>1.5.3 近似数</h3>
+
+\beginarticle
+
+先看一个例子。对于参加同一个会议的人数，有两个报道。一个报道说：“会议秘书处宣布，参加今天会议的有513人。”这里数字513确切地反映了实际人数，它是一个准确数。另一报道说：“约有五百人参加了今天的会议。”五百这个数只是接近实际人数，但与实际人数还有差别，它是一个\begindefinition近似数\enddefinition（approximate number）。
+
+在许多情况下，很难取得准确数，或者不必使用准确数，而可以使用近似数。例如，宇宙现在的年龄约为200亿年，长江长约6300km，圆周率<font face=symbol>p</font>约为3.13，这里的数都是近似数。
+
+近似数与准确数的接近程度，可以用精确度表示。例如，前面的五百是精确到百位数的近似数，它与准确数513的误差为13。
+
+按四舍五入对圆周率<font face=symbol>p</font>取近似数时，有
+
+<font face=symbol>p</font>  <font face=symbol>»</font>  3（精确到个位），
+
+<font face=symbol>p</font>  <font face=symbol>»</font>  3.1（精确到0.1，或叫做精确到十分位），
+
+<font face=symbol>p</font>  <font face=symbol>»</font>  3.14（精确到0.01，或叫做精确到百分位），
+
+<font face=symbol>p</font>  <font face=symbol>»</font>  3.142（精确到\underline\hbox to 20mm，或叫做精确到\underline\hbox to 20mm），
+
+<font face=symbol>p</font>  <font face=symbol>»</font>  3.1416（精确到\underline\hbox to 20mm），或叫做精确到\underline\hbox to 20mm）。
+
+······
+
+\beginexample
+例6 按括号内的要求，用四舍五入法对下列各数取近似数：
+
+(1) 0.0158（精确到0.001）；
+
+(2) 304.35（精确到个位）；
+
+(3) 1.804（精确到0.1）；
+
+(4) 1.804（精确到0.01）。
+
+解：(1) 0.0158  <font face=symbol>»</font>  0.016；
+
+(2) 304.35  <font face=symbol>»</font>  304；
+
+(3) 1.804  <font face=symbol>»</font>  1.8；
+
+(4) 1.804  <font face=symbol>»</font>  1.80；
+
+\endexample
+
+\beginexeicise
+
+用四舍五入法对下列各数取近似数：
+
+(1) 0.00356（精确到万分位）；    (2) 61.235（精确到个位）；
+
+(3) 1.8935（精确到0.001）；      (4) 0.0571（精确到0.1）。
+
+习题1.5
+
+复习巩固
+
+1. 计算：
+
+    (1) (<font face=symbol>-</font>3)<sup>3</sup>；    (2) (<font face=symbol>-</font>2)<sup>4</sup>；
+
+    (3) (<font face=symbol>-</font>1.7)<sup>2</sup>；  (4) <font face=symbol>-</font>(4)/(3)<sup>3</sup>；
+
+    (5) <font face=symbol>-</font>(<font face=symbol>-</font>2)<sup>3</sup>；   (6) (<font face=symbol>-</font>2)<sup>2</sup> &times; (<font face=symbol>-</font>3)<sup>2</sup>。
+
+2. 用计算器计算：
+
+    (1) (<font face=symbol>-</font>12)<sup>8</sup>；    (2) 103<sup>4</sup>；
+
+    (3) 7.12<sup>3</sup>；       (4) <font face=symbol>-</font>45.7<sup>3</sup>；
+
+3. 计算：
+
+    (1) (<font face=symbol>-</font>1)<sup>1</sup>00 &times; 5 + (<font face=symbol>-</font>2)<sup>4</sup> <font face=symbol>¸</font> 4；
+
+    (2) (<font face=symbol>-</font>3)<sup>2</sup><font face=symbol>-</font>3&times; (<font face=symbol>-</font>(1)/(3))<sup>4</sup>；
+
+    (3) (7)/(6) &times; ((1)/(6)<font face=symbol>-</font>(1)/(3))&times; (3)/(14)<font face=symbol>¸</font> (3)/(5)；
+
+    (4) (<font face=symbol>-</font>10)<sup>3</sup>+[(<font face=symbol>-</font>4)<sup>2</sup><font face=symbol>-</font>(1<font face=symbol>-</font>3<sup>2</sup>)&times; 2]；
+
+    (5) <font face=symbol>-</font>2<sup>3</sup><font face=symbol>¸</font> (4)/(9) &times; (<font face=symbol>-</font>(2)/(3))<sup>2</sup>；
+
+    (6) 4+(<font face=symbol>-</font>2)<sup>3</sup>&times; 5<font face=symbol>-</font>(<font face=symbol>-</font>0.28)<font face=symbol>¸</font> 4。
+
+4. 用科学计数法表示下列各数：
+
+    (1) 235 000 000；       (2) 188 520 000；
+
+    (3) 701 000 000 000；   (4) -38 000 000；
+
+5. 下列用科学计数法表示的数，原来各是什么树？
+
+    3&times; 10<sup>2</sup>，1.3&times; 10<sup>3</sup>，8.05&times; 10<sup>6</sup>，2.004&times; 10<sup>5</sup>，<font face=symbol>-</font>1.96&times; 10<sup>4</sup>。
+
+6. 用四舍五入法对下列各数取近似值：
+
+    (1) 0.00356（精确到0.0001）；
+
+    (2) 566.1235（精确到个位）；
+
+    (3) 3.8963（精确到0.01）；
+
+    (4) 0.0571（精确到千分位）；
+
+综合运用
+
+7. 平方等于9的数是几？立方等于27的数是几？
+
+8. 一个长方体的长、宽都是a，高是b，它的体积和表面积怎样计算？当a=2cm，b=5cm时，它的体积和表面积是多少？
+
+9. 地球绕太阳公转的速度是1.1&times; 10<sup>5</sup>km/h，声音在空气中的传播速度是340m/s，试比较两个速度的大小。
+
+10. 一天有8.64 &times; 10<sup>4</sup>s，一年按365天计算，一年有多少秒（用科学计数法表示）？
+
+拓展探索
+
+11. (1) 计算0.1<sup>2</sup>，1<sup>2</sup>，10<sup>2</sup>，100<sup>2</sup>，观察这些结果，底数的小数点向左（右）移动一位时，平凡数小数点有什么移动规律？
+
+    (2) 计算0.1<sup>3</sup>，1<sup>3</sup>，10<sup>3</sup>，100<sup>3</sup>，观察这些结果，底数的小数点向左（右）移动一位时，平凡数小数点有什么移动规律？
+
+    (3) 计算0.1<sup>4</sup>，1<sup>4</sup>，10<sup>4</sup>，100<sup>4</sup>，观察这些结果，底数的小数点向左（右）移动一位时，平凡数小数点有什么移动规律？
+
+12。 计算(<font face=symbol>-</font>2)<sup>2</sup>，2<sup>2</sup>，(<font face=symbol>-</font>2)<sup>3</sup>，2<sup>3</sup>。联系这类具体的数的乘方，你认为当a<0时下列各式是否成立？
+
+    (1) a<sup>2</sup>&gt;0；       (2) a<sup>2</sup>=(<font face=symbol>-</font>a)<sup>2</sup>；
+
+    (3) a<sup>2</sup>=<font face=symbol>-</font>a<sup>2</sup>；    (4) a<sup>3</sup>=<font face=symbol>-</font>a<sup>3</sup>；
+
+\endexeicise
+
+数学活动
+
+活动1
+
+帮助家庭记录一个月（或一周）的生活收支账目，收入记为正数，支出记为负数，计算当月（周）的总收入、总支出、总节余以及每日平均支出等数据。
+
+妥善保存账目，作为日后家庭理财的参考资料。
+
+活动2
+
+熟悉你所用的计算器有关有理数运算的功能和操作方法，对于包含乘方、乘除与加减运算的算式，考虑怎样操作计算器最简便，实习这样的操作，并与同学进行交流。
+
+活动3
+
+收集现实生活中你认为非常大的数据的实例，体会科学记数法和近似数等在实际中的应用。
+
+小结
+
+一、本章知识结构图
+
+ <font face=symbol>Î</font> cludegraphics[width=3in]51-55小结.png
+
+二、回顾与思考
+
+本章我们在小学学习的基础上，进一步认识了负数，使数的范围扩充到有理数，引入负数不仅可以表示具有相反意义的量，而且还扩展了减法运算的范围，由此，类似于x+2=1的方程就可以解了。
+
+我们知道，有理数是整数与分数的统称，由于整数可以看成是分母为1的分数，因此有理数可以写成(p)/(q)(p, q是整数, q <font face=symbol>¹</font>  0)的形式；另一方面，形如(p)/(q)（p，q是整数，q <font face=symbol>¹</font> 0）的数都是有理数。所以，有理数可用(p)/(q)（p，q是整数,q  <font face=symbol>¹</font>  0）表示。
+
+本章我们研究了有理数的加、减、乘、除和乘方运算。实际上，与负数有关的运算，我们都借助绝对值，将它们转化为正数之间的运算。数轴不仅能直观表示数，而且还能帮助我们理解数的运算。在运算的过程中，数形结合、转化是很重要的思想方法。
+
+我们从具体数的加法和乘法中，扫纳出了交换律、结合律和分配律等运算律，运算律不仅能给数的运算带来方便，而且还是今后研究代数问题(如解方程、不等式等)的基础。
+
+    请你带着下面的问题，复习一下全章的内容吧。
+    1.你能举出一些实例，说明正数、负数在表示相反意义的量时的作用吗?
+    2.你能用一个图表示有理数的分类吗?引入负数后，减法中哪些原来不能进行的运算可以进行了?
+    3.怎样用数轴表示有理数?数轴与普通直线有什么不同?怎祥利用数轴
+
+\endarticle
+\enddocument
+</body>
+</html>

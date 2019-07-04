@@ -1,0 +1,345 @@
+<html>
+<head>
+<title>LaTeX4Web 1.4 OUTPUT</title>
+<style type="text/css">
+<!--
+ body {color: black;  background:"#FFCC99";  }
+ div.p { margin-top: 7pt;}
+ td div.comp { margin-top: -0.6ex; margin-bottom: -1ex;}
+ td div.comb { margin-top: -0.6ex; margin-bottom: -.6ex;}
+ td div.norm {line-height:normal;}
+ td div.hrcomp { line-height: 0.9; margin-top: -0.8ex; margin-bottom: -1ex;}
+ td.sqrt {border-top:2 solid black;
+          border-left:2 solid black;
+          border-bottom:none;
+          border-right:none;}
+ table.sqrt {border-top:2 solid black;
+             border-left:2 solid black;
+             border-bottom:none;
+             border-right:none;}
+-->
+</style>
+</head>
+<body>
+\documentclassarticle
+\usepackage[utf8]ctex
+
+\begindocument
+
+
+观察与猜想
+
+翻牌游戏中的数学道理
+
+桌上有9米正西向上的扑克牌，每次自动其中任意2张(包括已翻过的牌)。使它们从一面向上变为另一面向上，这样一直做下去，观察能否使所有的牌都反面向上?
+
+你不妨动手试一试，看看会不会出现所有牌都反面向上。
+
+事实上，不论你翻多少次，都不能使9张牌都反面向上，从这个结果，你能想到其中的数学道理吗?
+
+如果在每张牌的正西都写1.反面都写-1.考虑所有牌朝上一面的数的积开始9张牌都正面向上，上面的数的积是1.每次翻动2来。就是说有2张牌同时改变符号，这能改变朝上一面的数的积是1这一结果吗? 9张牌都反面向上时，上面的数的积是什么数?这种现象为什么不能出现?
+
+你能解释为什么不会使9张牌都反面向上了吗?如果桌上有任意奇数张牌，猜想结果会是怎样?
+
+
+
+<p><a name="toc.0.1"><h2>0.1&nbsp;1.5有理数的乘方</h2>
+<p><a name="toc.0.1.1"><h3>0.1.1&nbsp;1.5.1 乘方</h3>
+
+前面学了有理数的乘法，下面研究各个乘数都相同时的乘法运算，
+
+我们知道，边长为2cm的正方形的面积是2&times;2=4(cm<sup>2</sup>); 棱长为2cm的正方体的体积是2&times;2&times;2=8(cm<sup>2</sup>).
+
+2&times;2, 2&times;2&times;2都是相同因数的乘法.
+
+为了简便，我们将它们分别记作2<sup>2</sup>, 2<sup>3</sup>. 2<sup>2</sup>读作“2的平方”(或“2的二次方")，2<sup>3</sup>读作“2的立方”(或“2的三次方").
+
+同样:
+(<font face=symbol>-</font>2)&times;(<font face=symbol>-</font>2)&times;(<font face=symbol>-</font>2)&times;(<font face=symbol>-</font>2)记作(<font face=symbol>-</font>2)<sup>4</sup>，读作“-2的四次方";(<font face=symbol>-</font>(2)/(5))&times;(<font face=symbol>-</font>(2)/(5))&times;(<font face=symbol>-</font>(2)/(5))&times;(<font face=symbol>-</font>(2)/(5))&times;(<font face=symbol>-</font>(2)/(5))记作(<font face=symbol>-</font>(2)/(5))<sup>5</sup>，读作“<font face=symbol>-</font>(2)/(5)的五次方”。
+一般地，n个相同的因数a相乘，即a<font face=symbol>·</font> a<font face=symbol>·</font>&#183;s<font face=symbol>·</font> a<sub>\textn</sub> 记作a<sup>n</sup>",读作“a的n次方”。
+
+\begindefinition
+求n个相同因数的积的运算，叫做乘方，乘方  指数的结果叫做幂(power). 在a<sup>n</sup>中，a叫做底数(base number), n叫做指数(exponent), 当a<sup>n</sup>看作a的n次方的结果时，也可读作“a的n次幂"。
+\enddefinition
+
+例如，在9<sup>4</sup>中，底数是9,指数是4, 9<sup>4</sup>读作“9的4次方"，或“9的4次幂".
+
+一个数可以看作这个数本身的一次方例如，5就是5<sup>1</sup>.指数1通常省略不写。
+
+因为a<sup>n</sup>就是n个a相乘，所以可以利用有理数的乘法运算来进行有理数的乘方运算.
+
+\beginexample
+<br>agraph例1计算:
+(1) (<font face=symbol>-</font>4)<sup>3</sup>;  (2) (<font face=symbol>-</font>2)<sup>4</sup>;  (3) (<font face=symbol>-</font>(2)/(3))<sup>3</sup>.
+<br>agraph解：
+(1) (<font face=symbol>-</font>4)<sup>3</sup>=(<font face=symbol>-</font>4)&times;(<font face=symbol>-</font>4)&times;(<font face=symbol>-</font>4)=<font face=symbol>-</font>64;
+(2) (<font face=symbol>-</font>2)<sup>4</sup>=(<font face=symbol>-</font>2)&times;(<font face=symbol>-</font>2)&times;(<font face=symbol>-</font>2)&times;(<font face=symbol>-</font>2)=16;
+(3) (<font face=symbol>-</font>(2)/(3))<sup>3</sup>=(<font face=symbol>-</font>(2)/(3))&times;(<font face=symbol>-</font>(2)/(3))&times;(<font face=symbol>-</font>(2)/(3))=<font face=symbol>-</font>(8)/(27).
+\endexample
+
+\beginexercise
+<br>agraph思考
+从例1,你发现负数的暴的正负有什么规律?
+
+当指数是___数时，负数的幂是___数;
+
+当指数是___数时， 负数的幂是__数.
+\endexercise
+
+\beginprop
+根据有理数的乘法法则可以得出:
+
+负数的奇次幂是负数，负数的偶次幕是正数
+
+显然，正数的任何次幂都是正数，0的任何正整数次幂都是0.
+\endprop
+
+\beginexample
+例2 用计算器计算(<font face=symbol>-</font>8)<sup>5</sup>和(<font face=symbol>-</font>3)<sup>4</sup>.
+
+解:用带符号键"-"的计算器.
+
+((-)8)<sup>5</sup>=
+
+显示：(-8)<sup>5</sup>
+
+-32768
+
+((-)3)<sup>6</sup>=
+
+显示：(-3)<sup>6</sup>
+
+729.
+
+所以(<font face=symbol>-</font>8)<sup>5</sup>=<font face=symbol>-</font> 32768, (<font face=symbol>-</font>3)<sup>4</sup>=729.
+
+\endexample
+
+\beginexercise
+练习
+
+1. (1) (<font face=symbol>-</font>7)<sup>8</sup>中，底数、指数各是什么?
+
+(2) (<font face=symbol>-</font>10)<sup>8</sup>中-10叫做什么数? 8叫做什么数? (<font face=symbol>-</font>10)<sup>4</sup>是正数还是负数?
+
+2.计算:
+
+(1) (<font face=symbol>-</font>1)<sup>1</sup>0;  (2) (<font face=symbol>-</font>1)<sup>7</sup>:  (3) 8<sup>3</sup>;  (4) (<font face=symbol>-</font>5)<sup>3</sup>;
+
+(5) 0.1<sup>3</sup>;    (6) (<font face=symbol>-</font>(1)/(2))<sup>6</sup>; (7) (<font face=symbol>-</font>10)<sup>4</sup>; (8) (<font face=symbol>-</font>10)<sup>5</sup>;
+\endexercise
+
+做有理数的混合运算时，应注意以下运算顺序:
+
+1.先乘方，再乘除，最后加减:
+
+2.同级运算，从左到右进行
+
+3.如有括号，先做括号内的运算，按小括号、中话号、大括号依次进行.
+
+\beginexample
+
+例3 计算:
+
+(1) 2&times;(<font face=symbol>-</font>3)<sup>3</sup><font face=symbol>-</font>4&times;(<font face=symbol>-</font>3)+15;
+
+(2) (<font face=symbol>-</font>2)<sup>3</sup>+(<font face=symbol>-</font>3)&times;[(<font face=symbol>-</font>4)<sup>2</sup>+2]<font face=symbol>-</font>(<font face=symbol>-</font>3)<sup>2</sup><font face=symbol>¸</font>(<font face=symbol>-</font>2).
+
+解: (1)原式\beginalign
+        &=2&times;(-27)-(-12)+15 <br>
+
+        &=-54+12+15     <br>
+
+        &=-27;
+\endalign
+
+(2)原式\beginalign
+    &=-8+(-3)&times;(16+2)-9+(-2) <br>
+
+    &=-8+(-3)&times;18-(-4.5) <br>
+
+    &=-8-54+4.5 <br>
+
+    &=-57.5.
+    \endalign
+
+例4 观察下面三行数:
+
+-2, 4, -8, 16, -32, 64, \dots ①
+
+0, 6, -6, 18, -30, 66, \dots  ②
+
+-1, 2, -4, 8，-16, 32, \dots  ③
+
+(1)第①行数按什么规律排列?
+
+(2)第②③行数与第①行数分别有什么关系?
+
+(3)取每行数的第10个数，计算这三个数的和
+
+分析:观察①,发现各数均为2的倍数.联系数的乘方，从符号和绝对值两方面考虑，可发现持列的规律.
+
+解: (1)第①行数是
+
+-2, (<font face=symbol>-</font>2)<sup>2</sup>, (<font face=symbol>-</font>2)<sup>3</sup>, (<font face=symbol>-</font>2)<sup>4</sup>, \dots.
+
+(2)对比①②两行中位置对应的数，可以发现:
+
+第②行数是第①行相应的数加2,即
+
+-2+2, (<font face=symbol>-</font>2)<sup>2</sup>+2,  (<font face=symbol>-</font>2)<sup>2</sup>+2, (<font face=symbol>-</font>2)<sup>4</sup>+2, \dots;
+
+对比①③两行中位置对应的数，可以发现:
+
+第③行数是第①行相应的数的0.5倍，即
+
+<font face=symbol>-</font>2&times;0.5, (<font face=symbol>-</font>2)<sup>2</sup>&times;0.5, (<font face=symbol>-</font>2)<sup>3</sup>&times;0.5, (<font face=symbol>-</font>2)<sup>4</sup>&times;0.5, \dots.
+
+(3)每行数中的第10个数的和是
+
+\beginalign
+    &(-2)<sup>10</sup>
+</td>
+<td nowrap align=center>
+  +[(-2)<sup>10</sup>
+</td>
+<td nowrap align=center>
+  +2]+(-2)<sup>10</sup>
+</td>
+<td nowrap align=center>
+  &times;0.5 <br>
+
+    &=1024+(1024+2)+1024&times;0.5 <br>
+
+    &=1024+1026+512 <br>
+
+    &=2562.
+\endalign
+
+\beginexercise
+    计算：
+
+    (1) (<font face=symbol>-</font>1)<sup>20</sup>
+</td>
+<td nowrap align=center>
+  &times;2+(<font face=symbol>-</font>2)<sup>3</sup><font face=symbol>¸</font>4;
+
+    (2)  (<font face=symbol>-</font>5)<sup>3</sup><font face=symbol>-</font>3&times;(<font face=symbol>-</font>(1)/(2))<sup>4</sup>;
+
+    (3)  (11)/(5)&times;((1)/(3)<font face=symbol>-</font>(1)/(2))&times;(3)/(11)<font face=symbol>¸</font>(5)/(4);
+    
+    (4)  (<font face=symbol>-</font>10)<sup>4</sup>+[(<font face=symbol>-</font>4)<sup>2</sup><font face=symbol>-</font>(3+3<sup>2</sup>)&times;2] .
+\endexercise
+
+<p><a name="toc.0.1.2"><h3>0.1.2&nbsp;1.5.2 科学记数法</h3>
+
+现实中，我们会遇到一些比较大的数。 例如，太阳的半径、光的速度、目前世界人口等。读、写这样大的数有一定困难。
+观察10的乘方有如下特点：
+
+10<sup>2</sup>=100,  10<sup>3</sup>=1000 ,  10<sup>4</sup>=10000 , &#183;s.
+
+一般地，10的n次幂等于10\dots 0(在1的后面有n个0)，所以可以利用10的乘方表示一些大数，例如
+
+567000000=5.67&times;100000000=5.67&times;10<sup>8</sup>
+</td>
+<td nowrap align=center>
+  
+
+读作“5.67乘10的8次方（幂）”。
+
+这样不仅可以使书写简短，同时还便于读数。
+
+\begindefinition
+
+像上面这样，把一个大于10的数表示成a&times;10<sup>n</sup>
+</td>
+<td nowrap align=center>
+  的形式(其中a大于或等于1且小于10. n是正整数)，使用的是科学记数法.
+
+\enddefinition   
+
+对于小于-10的数也可以类似表示，例如：
+
+ <font face=symbol>-</font>567000000=<font face=symbol>-</font>5.67&times;10<sup>8</sup>
+</td>
+<td nowrap align=center>
+   .
+
+\beginexample
+
+例5 用科学记数法表示下列各数：
+
+1000000, 57000000, -123000000000.
+
+解：
+
+1000000=10<sup>6</sup>
+</td>
+<td nowrap align=center>
+  ,
+
+ 57000000=5.7&times;10<sup>7</sup>
+</td>
+<td nowrap align=center>
+   ,
+
+ <font face=symbol>-</font>123000000000=<font face=symbol>-</font>1.23&times;10<sup>11</sup>
+</td>
+<td nowrap align=center>
+   .
+
+\endexample
+
+\beginexercise
+思考：
+
+上面的式子中，等号左边整数的位数与右边10的指数有什么关系?用科学记数法表示一个n位整数，其中10的指数是__.
+\endexercise
+
+\beginexercise
+1.用科学记数法写出下列各数:
+
+10000, 800000, 56 000 000, -7400 000.
+
+2.下列用科学记数法写出的数，原来分别是什么数?
+
+1&times;10<sup>7</sup>
+</td>
+<td nowrap align=center>
+  , 4&times;10<sup>9</sup>
+</td>
+<td nowrap align=center>
+  , 8.5&times;10<sup>6</sup>
+</td>
+<td nowrap align=center>
+  , 7.04&times;10<sup>5</sup>
+</td>
+<td nowrap align=center>
+  , <font face=symbol>-</font>3.96&times;10<sup>4</sup>
+</td>
+<td nowrap align=center>
+  .
+
+3.中国的陆地面积约为9600000km<sup>2</sup>
+</td>
+<td nowrap align=center>
+  ,领水面积约为370000km<sup>2</sup>
+</td>
+<td nowrap align=center>
+  ,用科学记数法表示上述两个数字.
+
+\endexercise
+
+<p><a name="toc.0.1.3"><h3>0.1.3&nbsp;1.5.3 近似数</h3>
+
+先看一个例子，对于参加同一个会议的人数，有两个报道。一个报道说:“会议秘书处宣布，参加今天会议的有513人”这里数字513确切地反映了实际人数，它是一个准确数。另一报道说: 
+
+\enddocument
+<hr>
+<p><h1>Table Of Contents</h1>
+<p><a href="#toc.0.1"><h2>0.1&nbsp;1.5有理数的乘方</h2></a>
+<p><a href="#toc.0.1.1"><h3>0.1.1&nbsp;1.5.1 乘方</h3></a>
+<p><a href="#toc.0.1.2"><h3>0.1.2&nbsp;1.5.2 科学记数法</h3></a>
+<p><a href="#toc.0.1.3"><h3>0.1.3&nbsp;1.5.3 近似数</h3></a>
+</body>
+</html>

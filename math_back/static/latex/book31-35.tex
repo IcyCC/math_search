@@ -1,0 +1,304 @@
+<html>
+<head>
+<title>LaTeX4Web 1.4 OUTPUT</title>
+<style type="text/css">
+<!--
+ body {color: black;  background:"#FFCC99";  }
+ div.p { margin-top: 7pt;}
+ td div.comp { margin-top: -0.6ex; margin-bottom: -1ex;}
+ td div.comb { margin-top: -0.6ex; margin-bottom: -.6ex;}
+ td div.norm {line-height:normal;}
+ td div.hrcomp { line-height: 0.9; margin-top: -0.8ex; margin-bottom: -1ex;}
+ td.sqrt {border-top:2 solid black;
+          border-left:2 solid black;
+          border-bottom:none;
+          border-right:none;}
+ table.sqrt {border-top:2 solid black;
+             border-left:2 solid black;
+             border-bottom:none;
+             border-right:none;}
+-->
+</style>
+</head>
+<body>
+\documentclass[11pt]article
+\usepackageamsmath
+\usepackageCJKutf8
+\usepackagectex
+\newtheoremexercise
+\newtheoremarticle
+\newtheoremnature
+\newtheoremtip
+\begindocument
+
+多个有理数相乘，可以把它们按顺序依次相乘。
+
+\beginexercise
+思考<br>
+
+观察下列各式，它们的积是正的还是负的？<br>
+
+2 &times; 3 &times; 4 &times; (<font face=symbol>-</font>5)，<br>
+
+2 &times; 3 &times; (<font face=symbol>-</font>4) &times; (<font face=symbol>-</font>5)，<br>
+
+2 &times;( <font face=symbol>-</font>3) &times; (<font face=symbol>-</font>4) &times; (<font face=symbol>-</font>5)，<br>
+
+(<font face=symbol>-</font>2) &times; (<font face=symbol>-</font>3) &times; (<font face=symbol>-</font>4) &times; (<font face=symbol>-</font>5).<br>
+
+几个不是0的数相乘，积的符号为负因数的个数之间有什么关系？<br>
+
+\endexercise
+\beginarticle
+归纳<br>
+
+	几个不是0的数相乘，负因数的个数是偶数时，积是正数；负因数的个数是奇数时，积是负数。<br>
+
+\endarticle
+\beginexercise
+例3 计算：<br>
+
+(1)
+ (<font face=symbol>-</font>3) &times; (5)/(6) &times; (<font face=symbol>-</font>(9)/(5)) &times; (<font face=symbol>-</font>(1)/(4)) <br>
+
+(2)
+ (<font face=symbol>-</font>5) &times; 6 &times; (<font face=symbol>-</font>(4)/(5)) &times; (1)/(4)
+
+解：(1)<br>
+
+ (<font face=symbol>-</font>3) &times; (5)/(6) &times; (<font face=symbol>-</font>(9)/(5)) &times; (<font face=symbol>-</font>(1)/(4)) <br>
+
+ = <font face=symbol>-</font>3 &times; (5)/(6) &times; (9)/(5) &times; (1)/(4) = <font face=symbol>-</font>(9)/(8) <br>
+
+(2)<br>
+
+ (<font face=symbol>-</font>5) &times; 6 &times; (<font face=symbol>-</font>(4)/(5)) &times; (1)/(4) <br>
+
+ = 5 &times; 6 &times; (4)/(5) &times; (1)/(4) = 6 <br>
+
+\endexercise
+
+\beginexercise
+思考<br>
+
+你能看出下式的结果吗？如果能，请说明理由.<br>
+
+7.8 &times; (<font face=symbol>-</font>8.1) &times; 0 &times; (<font face=symbol>-</font>19.6)，<br>
+
+
+几个数相乘，如果其中有因数为0，那么积等于0<br>
+
+\endexercise
+
+\beginexercise
+练习<br>
+
+1、口算：<br>
+
+(1) (<font face=symbol>-</font>2) &times; 3 &times; 4 &times; (<font face=symbol>-</font>1);  (2) (<font face=symbol>-</font>5) &times; (<font face=symbol>-</font>3) &times; 4 &times; (<font face=symbol>-</font>2);<br>
+
+(3) (<font face=symbol>-</font>2) &times; (<font face=symbol>-</font>2) &times; (<font face=symbol>-</font>2) &times; (<font face=symbol>-</font>2);  (4) (<font face=symbol>-</font>3) &times; (<font face=symbol>-</font>3) &times; (<font face=symbol>-</font>3) &times; (<font face=symbol>-</font>3).<br>
+
+
+2、计算：<br>
+
+(1) (<font face=symbol>-</font>5) &times; 8 &times; (<font face=symbol>-</font>7) &times; (<font face=symbol>-</font>0.25);<br>
+
+(2)  (<font face=symbol>-</font>(5)/(12)) &times; (8)/(15) &times; (1)/(2) &times; (<font face=symbol>-</font>(2)/(3)) ;<br>
+
+(3) (<font face=symbol>-</font>1) &times; (<font face=symbol>-</font>(5)/(4)) &times; (8)/(15) &times; (3)/(2) &times; (<font face=symbol>-</font>(2)/(3)) &times; 0 &times; (<font face=symbol>-</font>1) ;<br>
+
+\endexercise
+\beginnature
+    像前面那样规定有理数乘法法则后，就可以使交换律、结合律与分配律在有理数乘法中仍然成立.<br>
+
+    例如,<br>
+
+         5&times;(<font face=symbol>-</font>6)=<font face=symbol>-</font>30 <br>
+
+         (<font face=symbol>-</font>6)&times; 5 = <font face=symbol>-</font>30 <br>
+
+    即,<br>
+
+         5&times; (<font face=symbol>-</font>6) = (<font face=symbol>-</font>6) &times; 5 <br>
+
+    一般地，在有理数乘法中，两个数相乘，交换因数地位置，积相等。<br>
+
+        乘法交换律:ab=ba.<br>
+
+        又如,      [3&times; (<font face=symbol>-</font>4)] &times; (<font face=symbol>-</font>5) = (<font face=symbol>-</font>12) &times; (<font face=symbol>-</font>5) = 60.<br>
+
+         3&times; [(<font face=symbol>-</font>4) &times; (<font face=symbol>-</font>5)] = 3 &times; 20 = 60 .
+        即<br>
+
+        [3&times; (<font face=symbol>-</font>4)] &times; (<font face=symbol>-</font>5) =3&times; [(<font face=symbol>-</font>4) &times; (<font face=symbol>-</font>5)]<br>
+
+        一般地，有理数乘法中，三个数相乘，先把前两个数相乘，或者先把后两个数相乘，积相乘。<br>
+
+            乘法结合律：(a b)c = a(bc).<br>
+
+        再如,<br>
+
+            5 &times; [3+(<font face=symbol>-</font>7)] = 5 &times; (<font face=symbol>-</font>4) = <font face=symbol>-</font>20, <br>
+
+            5 &times; 3+5&times;(<font face=symbol>-</font>7) = 15<font face=symbol>-</font>35 = <font face=symbol>-</font>20 .<br>
+
+        即<br>
+
+             5 &times; [3+(<font face=symbol>-</font>7)] = 5 &times; 3+5&times;(<font face=symbol>-</font>7)<br>
+
+        一般地，有理数乘法中，一个数同两个数地和相乘，等于把这个数分别同这两个数相乘，再把积相加。<br>
+
+            分配律：a(b+c) = ab+ac.<br>
+
+\endnature
+
+\beginexercise
+例 4 用两种方法计算 ((1)/(4) + (1)/(6) <font face=symbol>-</font>(1)/(2))&times; 12 .<br>
+
+解法1: ((1)/(4) + (1)/(6) <font face=symbol>-</font>(1)/(2))&times; 12 .<br>
+
+=((3)/(12) + (2)/(12) <font face=symbol>-</font>(6)/(12))&times; 12 <br>
+
+=<font face=symbol>-</font>(1)/(12) &times; 12=<font face=symbol>-</font>1 .<br>
+
+解法2: ((1)/(4) + (1)/(6) <font face=symbol>-</font>(1)/(2))&times; 12 .<br>
+
+ =(1)/(4) &times; 12 +(1)/(6) &times; 12 <font face=symbol>-</font> (1)/(2) &times; 12 <br>
+
+ =3+2<font face=symbol>-</font>6 = <font face=symbol>-</font>1 .
+\endexercise
+
+\beginexercise
+思考<br>
+
+    比较上面两种解法，它们再运算顺序上有什么区别？解法2用了什么运算律？哪种解法运算量小？<br>
+
+\endexercise
+
+\beginexercise
+练习<br>
+
+
+计算：<br>
+
+(1) (<font face=symbol>-</font>85) &times; (<font face=symbol>-</font>25) &times; (<font face=symbol>-</font>4);
+(2)  ((9)/(10) <font face=symbol>-</font> (1)/(15)) &times; 30 ;<br>
+
+(3)  (<font face=symbol>-</font>(7)/(8)) &times; 15 &times; (<font face=symbol>-</font>1(1)/(7)) ;
+(4) (<font face=symbol>-</font>(6)/(5)) &times; (<font face=symbol>-</font>(2)/(3)) + (<font face=symbol>-</font>(6)/(5)) &times; (+(17)/(3)) ;<br>
+
+\endexercise
+
+\beginarticle
+1.4.2 有理数的除法 <br>
+
+怎么计算  8<font face=symbol>¸</font>(<font face=symbol>-</font>4) 呢？<br>
+
+根据除法是乘法的逆运算，就是要求一个数，使它与-4相乘得8.<br>
+
+因为   (<font face=symbol>-</font>2)&times;(<font face=symbol>-</font>4) = 8 .<br>
+
+所以   8<font face=symbol>¸</font>(<font face=symbol>-</font>4) = <font face=symbol>-</font>2.  ①<br>
+
+另一方面，我们有  <br>
+
+      8&times; (<font face=symbol>-</font>(1)/(4))=<font face=symbol>-</font>2  ②<br>
+
+于是有 <br>
+
+     8 <font face=symbol>¸</font> (<font face=symbol>-</font>4) = 8&times; (<font face=symbol>-</font>(1)/(4))  ③<br>
+
+③式表明，一个数除以-4可以转化为乘 <font face=symbol>-</font>(1)/(4)来进行，即一个数除以-4，等于乘于-4的倒数  <font face=symbol>-</font>(1)/(4).<br>
+
+    与小学学过的除法一样，对于有理数除法，我们有如下法则；<br>
+
+    除以一个不等于0的数，等于乘于这个数的倒数。<br>
+
+    这个法则也可以表示成<br>
+
+         a<font face=symbol>¸</font> b=a &#183; (1)/(b).(b！= 0) <br>
+
+        从有理数除法法则，很容易得出：<br>
+
+        两数相除，同号得正，异号得负，并把绝对值相除，0除以任何一个不等于0的数，都得0.<br>
+
+\endarticle
+
+
+\beginexercise
+例5 计算：<br>
+
+(1)  (<font face=symbol>-</font>36)<font face=symbol>¸</font> 9 . (2)  (<font face=symbol>-</font> (12)/(25) <font face=symbol>¸</font> (<font face=symbol>-</font> (3)/(5))) .<br>
+
+解:(1)  (<font face=symbol>-</font>36)<font face=symbol>¸</font> 9 = <font face=symbol>-</font>(36 <font face=symbol>¸</font> 9) = <font face=symbol>-</font>4 .<br>
+
+
+(2): <font face=symbol>-</font> (12)/(25) <font face=symbol>¸</font> (<font face=symbol>-</font> (3)/(5))) = (<font face=symbol>-</font> (12)/(25)) &times; (<font face=symbol>-</font> (5)/(3)) = (4)/(5) .<br>
+
+\endexercise
+
+\beginexercise
+练习<br>
+
+
+计算：<br>
+
+(1) (<font face=symbol>-</font>18) <font face=symbol>¸</font> 6 ;
+(2)(<font face=symbol>-</font>63) <font face=symbol>¸</font> (<font face=symbol>-</font>7);
+(3)  1 <font face=symbol>¸</font> (<font face=symbol>-</font>9) ; <br>
+
+(4) 0 <font face=symbol>¸</font> (<font face=symbol>-</font>8) ;
+(5)(<font face=symbol>-</font>6.5) <font face=symbol>¸</font> 0.13;
+(6)(<font face=symbol>-</font>(6)/(5)) <font face=symbol>¸</font> (<font face=symbol>-</font>(2)/(5)).
+\endexercise
+
+\beginexercise
+例6 化简下列分数：<br>
+
+(1)  (<font face=symbol>-</font>12)/(3) ; (2)  (<font face=symbol>-</font>45)/(<font face=symbol>-</font>12) .<br>
+
+解:(1)  (<font face=symbol>-</font>12)/(3) = (<font face=symbol>-</font>12) <font face=symbol>¸</font> 3 = <font face=symbol>-</font>4 ;<br>
+
+
+(2): (<font face=symbol>-</font>45)/(<font face=symbol>-</font>12) = (<font face=symbol>-</font>45) <font face=symbol>¸</font> (<font face=symbol>-</font>12) = 45 <font face=symbol>¸</font> 12 = (15)/(4) .<br>
+
+\endexercise
+
+\begintip
+分数可以理解为分子除以分母<br>
+
+\endtip
+
+\beginarticle
+因为有理数得除法可以化为乘法，所以可以利用乘法的运算性质简化运算.乘除混合运算往往先将除法化为乘法，然后确定积的符号，最后求出结果.<br>
+
+\endarticle
+
+\beginexercise
+例7 计算：<br>
+
+(1)  (<font face=symbol>-</font>125(5)/(7)) <font face=symbol>¸</font> (<font face=symbol>-</font>5) ; (2)  <font face=symbol>-</font>2.5 <font face=symbol>¸</font> (5)/(8) &times; (<font face=symbol>-</font>(1)/(4)) .<br>
+
+解:(1)  (<font face=symbol>-</font>125(5)/(7)) <font face=symbol>¸</font> (<font face=symbol>-</font>5) ;<br>
+
+ =(125+ (5)/(7)) &times; (1)/(5)  <br>
+
+ =125 &times; (1)/(5) + (5)/(7) &times; (1)/(5) <br>
+
+ =25 + (1)/(7) <br>
+
+ =25(1)/(7) <br>
+
+
+(2) <font face=symbol>-</font>2.5 <font face=symbol>¸</font> (5)/(8) &times; (<font face=symbol>-</font>(1)/(4)) .<br>
+
+ (5)/(2) &times; (8)/(5) &times; (1)/(4) <br>
+
+ =1
+\endexercise
+
+
+\enddocument
+</body>
+</html>
