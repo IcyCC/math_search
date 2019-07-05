@@ -116,11 +116,7 @@ def book_page(page):
     return '', 200
 
 def run():
-    try:
-        app.run()
-    except Exception:
-        print("异常了!!!!!")
-        run()
+    app.run(port=5001)
 
 if __name__ == "__main__":
     run()
