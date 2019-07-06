@@ -7,6 +7,6 @@
 #include "cmd.h"
 int main()
 {
-    auto res = QueryComm("$a^n$", 1);
+    auto res = QueryComm("c", 4);
     return  0;
 }

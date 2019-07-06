@@ -38,5 +38,6 @@ add_executable(math_search
         src/query_comm_impl.cpp
 #        test/main.cpp
 #        test/parser.cpp
-        test/test_latex.cpp
+       test/test_latex.cpp
+       # test/main.cpp
         )
