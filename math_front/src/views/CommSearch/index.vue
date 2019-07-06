@@ -31,7 +31,7 @@
         </Row>
         <Row style="padding-top: 30px">
             <RadioGroup v-model="query_type" style="width: 100%" >
-                <Col span="3"  offset="6">
+                <Col span="3"  offset="4">
                     <Radio label="text" class="query-type-option">
                         <Icon type="md-text"></Icon>
                         <span>文本</span>
@@ -53,6 +53,12 @@
                     <Radio label="example" class="query-type-option">
                         <Icon type="md-help-circle" />
                         <span>例题</span>
+                    </Radio>
+                </Col>
+                <Col span="3">
+                    <Radio label="excries" class="query-type-option">
+                        <Icon type="md-help-circle" />
+                        <span>习题</span>
                     </Radio>
                 </Col>
             </RadioGroup>

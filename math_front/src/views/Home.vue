@@ -81,7 +81,7 @@
                     </div>
                 </Menu>
             </Header>
-            <Content style="margin: 10px 20px 0; min-height: 620px; overflow: hidden;">
+            <Content style="margin: 10px 20px 0; min-height: 620px; overflow: hidden;height:100%">
                 <div style="margin-top: 25px">
                     <router-view></router-view>
                 </div>

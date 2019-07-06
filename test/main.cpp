@@ -7,6 +7,6 @@
 #include "cmd.h"
 int main()
 {
-    auto res = QueryComm("c", 4);
+    auto res = QueryComm("$5.4+9010$", 4);
     return  0;
 }

@@ -3,6 +3,7 @@ import pyinterface
 QueryTypeMap = {
     "text": 3,
     "nature": 0,
+    "excries": 2,
     "concept": 1,
     "example": 4
 }

@@ -59,6 +59,7 @@ inline void StdTree(ExpNode *node)
         return;
     }
     // 按大于标准化树
+    if(node->token!=NULL&&node->token->type!=TokenType::DIV &&node->token->type!=TokenType::SUB )
     if (!CompareExpNode(node->left_node, node->right_node))
     {
         SwapTreeNode(node, node->left_node, node->right_node);
