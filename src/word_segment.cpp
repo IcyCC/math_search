@@ -125,9 +125,11 @@ WordSegment::DoSegment(const std::u32string& content, SegmentType segment_type) 
                 }
 
                 case StdFormula:
+                {
 //                    std::cout << ::StdFormula(utf::to_utf8(formula)) << "\n";
                     result.emplace_back(utf::to_utf32(::StdFormula(utf::to_utf8(formula))), start);
                     break;
+                }
 
                 case WithoutFormula:
                     result.emplace_back((utf::to_utf32(formula)), start);
