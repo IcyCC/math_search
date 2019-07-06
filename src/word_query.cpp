@@ -25,7 +25,7 @@ namespace
 
 bool IsDelimiter(char32_t ch)
 {
-    return ch == U'.' || ch == U'。' || ch == U'\r' || ch == U'\n' || ch == 0;
+    return ch ==' ' || ch == U'。' || ch == U'\r' || ch == U'\n' || ch == 0;
 }
 
 // merge two sorted list into lhs
@@ -77,9 +77,11 @@ WordQuery::WordQuery(const std::string& dirpath)
     for (const auto &content : contents_)
     {
 //        word_segment_.SetContent(content);
-        auto word_infos = QuerySegment(*content);
+        auto word_infos = ArticleSegment(*content);
         for (const auto &word_info : word_infos)
         {
+            if (word_info.word == U"9015.4")
+                std::cout << "Find 9015.4" << std::endl;
 //            std::cout << word_info.word << "\n";
             word_search_[word_info.word][content].push_back(word_info.index);
         }
@@ -120,6 +122,7 @@ WordQuery::QueryResult WordQuery::Query(const string& sentence) const
 {
     QueryResult result;
     auto word_infos = QuerySegment(sentence);
+//    word_infos[0].word = U"9015.4";
     auto it = word_infos.begin();
     list<shared_ptr<u32string>> content_list = get_content_list(it->word);
     for_each(++it, word_infos.end(), [&] (const query::WordSegment::WordInfo& word_info) {
