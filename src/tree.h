@@ -64,6 +64,13 @@ inline void StdTree(ExpNode *node)
     {
         SwapTreeNode(node, node->left_node, node->right_node);
     }
+
+    if(node->token == NULL){
+        if (!CompareExpNode(node->left_node, node->right_node))
+        {
+            SwapTreeNode(node, node->left_node, node->right_node);
+        }
+    }
     StdTree(node->left_node);
     StdTree(node->right_node);
 }
